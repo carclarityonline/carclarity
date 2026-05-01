@@ -28,6 +28,10 @@
   --amber-lt:  #fff4e0;
   --red:       #c8432b;
   --red-lt:    #fdf0ed;
+  --blue:      #2563eb;
+  --blue-lt:   #eff6ff;
+  --purple:    #7c3aed;
+  --purple-lt: #f5f3ff;
   --radius:    10px;
   --radius-lg: 18px;
   --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
@@ -128,29 +132,14 @@ small { font-size: .8rem; color: var(--ink-muted); }
   cursor: pointer;
   border: none;
 }
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-}
+.btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-dk); }
 .btn-primary:active { transform: scale(.98); }
-.btn-outline {
-  background: transparent;
-  color: var(--ink);
-  border: 1.5px solid var(--border);
-}
+.btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
 .btn-outline:hover { background: var(--white); border-color: #c0bdb5; }
-.btn-ghost {
-  background: transparent;
-  color: var(--ink-soft);
-  padding: 8px 14px;
-  font-size: .85rem;
-}
+.btn-ghost { background: transparent; color: var(--ink-soft); padding: 8px 14px; font-size: .85rem; }
 .btn-ghost:hover { background: var(--border); }
-.btn-green {
-  background: var(--green);
-  color: #fff;
-}
+.btn-green { background: var(--green); color: #fff; }
 .btn-green:hover { background: #165f3c; }
 .btn-lg { padding: 14px 30px; font-size: 1rem; border-radius: 12px; }
 .btn-sm { padding: 7px 14px; font-size: .82rem; }
@@ -171,22 +160,13 @@ small { font-size: .8rem; color: var(--ink-muted); }
    ============================================================ */
 .form-group { margin-bottom: 16px; }
 .form-label {
-  display: block;
-  font-size: .82rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 5px;
-  letter-spacing: .02em;
-  text-transform: uppercase;
+  display: block; font-size: .82rem; font-weight: 600; color: var(--ink);
+  margin-bottom: 5px; letter-spacing: .02em; text-transform: uppercase;
 }
 .form-input, .form-select, .form-textarea {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  font-size: .93rem;
-  color: var(--ink);
-  background: var(--white);
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: var(--radius);
+  font-size: .93rem; color: var(--ink); background: var(--white);
   transition: border-color var(--transition);
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
@@ -222,9 +202,7 @@ small { font-size: .8rem; color: var(--ink-muted); }
   color: var(--ink-muted); font-size: .78rem;
   margin: 18px 0;
 }
-.divider::before, .divider::after {
-  content: ''; flex: 1; height: 1px; background: var(--border);
-}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
 /* ============================================================
    BADGE
@@ -237,6 +215,8 @@ small { font-size: .8rem; color: var(--ink-muted); }
 .badge-red    { background: var(--red-lt);   color: var(--red);   }
 .badge-amber  { background: var(--amber-lt); color: var(--amber); }
 .badge-green  { background: var(--green-lt); color: var(--green); }
+.badge-blue   { background: var(--blue-lt);  color: var(--blue);  }
+.badge-purple { background: var(--purple-lt); color: var(--purple); }
 
 /* ============================================================
    NAVBAR
@@ -250,11 +230,7 @@ small { font-size: .8rem; color: var(--ink-muted); }
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 20px; max-width: 1100px; margin: 0 auto;
 }
-.brand {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem; color: var(--ink);
-  display: flex; align-items: center; gap: 8px;
-}
+.brand { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); display: flex; align-items: center; gap: 8px; }
 .brand-dot { color: var(--accent); }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 .token-chip {
@@ -266,7 +242,7 @@ small { font-size: .8rem; color: var(--ink-muted); }
 .token-chip:hover { background: #f5d3cb; }
 
 /* ============================================================
-   PAGES (visibility)
+   PAGES
    ============================================================ */
 .page { display: none; flex-direction: column; flex: 1; animation: fadeIn .25s ease; }
 .page.active { display: flex; }
@@ -274,13 +250,9 @@ small { font-size: .8rem; color: var(--ink-muted); }
 /* ============================================================
    LANDING PAGE
    ============================================================ */
-#page-landing {
-  background: var(--white);
-}
-
+#page-landing { background: var(--white); }
 .hero {
-  padding: 70px 20px 60px;
-  text-align: center;
+  padding: 70px 20px 60px; text-align: center;
   background: linear-gradient(180deg, #fff 0%, #f7f6f2 100%);
   border-bottom: 1px solid var(--border);
 }
@@ -289,241 +261,85 @@ small { font-size: .8rem; color: var(--ink-muted); }
   background: var(--accent-lt); color: var(--accent);
   padding: 5px 14px; border-radius: 99px;
   font-size: .78rem; font-weight: 700;
-  letter-spacing: .05em; text-transform: uppercase;
-  margin-bottom: 22px;
+  letter-spacing: .05em; text-transform: uppercase; margin-bottom: 22px;
 }
 .hero h1 { max-width: 640px; margin: 0 auto 18px; }
 .hero h1 em { font-style: italic; color: var(--accent); }
 .hero p { max-width: 480px; margin: 0 auto 32px; font-size: 1rem; }
 .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-.how-it-works {
-  padding: 64px 20px;
-  max-width: 960px; margin: 0 auto;
-}
+.how-it-works { padding: 64px 20px; max-width: 960px; margin: 0 auto; }
 .how-it-works h2 { text-align: center; margin-bottom: 40px; }
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-.step-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  text-align: center;
-}
-.step-icon {
-  font-size: 2rem; margin-bottom: 12px;
-  display: block;
-}
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.step-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+.step-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
 .step-card h3 { margin-bottom: 6px; font-size: 1rem; }
 .step-card p  { font-size: .88rem; }
 
-.data-notice {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 32px 20px;
-  text-align: center;
-}
+.data-notice { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 20px; text-align: center; }
 .data-notice p { max-width: 600px; margin: 0 auto; font-size: .88rem; }
 
 /* ============================================================
    AUTH PAGES
    ============================================================ */
-.auth-page {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 48px 20px;
-  background: var(--surface);
-}
-.auth-box {
-  width: 100%;
-  max-width: 440px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  box-shadow: var(--shadow);
-}
+.auth-page { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 48px 20px; background: var(--surface); }
+.auth-box { width: 100%; max-width: 440px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 32px; box-shadow: var(--shadow); }
 .auth-box h2 { margin-bottom: 6px; }
 .auth-box > p { margin-bottom: 24px; font-size: .9rem; }
-.auth-footer {
-  margin-top: 20px;
-  text-align: center;
-  font-size: .86rem;
-  color: var(--ink-muted);
-}
+.auth-footer { margin-top: 20px; text-align: center; font-size: .86rem; color: var(--ink-muted); }
 .auth-footer a { color: var(--accent); font-weight: 600; }
 
 /* ============================================================
    DASHBOARD
    ============================================================ */
-#page-dashboard {
-  background: var(--surface);
-  min-height: calc(100vh - 56px);
-}
-.dashboard-layout {
-  max-width: 900px; margin: 0 auto;
-  padding: 32px 20px;
-  display: grid;
-  gap: 24px;
-}
-.search-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 30px;
-  box-shadow: var(--shadow-sm);
-}
+#page-dashboard { background: var(--surface); min-height: calc(100vh - 56px); }
+.dashboard-layout { max-width: 900px; margin: 0 auto; padding: 32px 20px; display: grid; gap: 24px; }
+.search-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-sm); }
 .search-card h2 { margin-bottom: 6px; }
 .search-card > p { margin-bottom: 22px; font-size: .9rem; }
 
-.search-type-tabs {
-  display: flex; gap: 0;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.tab-btn {
-  flex: 1; padding: 9px;
-  background: transparent;
-  font-size: .85rem; font-weight: 600;
-  color: var(--ink-muted);
-  border: none;
-  transition: var(--transition);
-}
-.tab-btn.active {
-  background: var(--accent);
-  color: #fff;
-}
-.tab-btn:not(.active):hover { background: var(--surface); }
+/* Mileage input row */
+.mileage-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.mileage-row label { font-size: .82rem; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: .02em; white-space: nowrap; }
+.mileage-row input { flex: 1; }
+.mileage-hint { font-size: .75rem; color: var(--ink-muted); }
 
+.search-type-tabs { display: flex; gap: 0; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
+.tab-btn { flex: 1; padding: 9px; background: transparent; font-size: .85rem; font-weight: 600; color: var(--ink-muted); border: none; transition: var(--transition); }
+.tab-btn.active { background: var(--accent); color: #fff; }
+.tab-btn:not(.active):hover { background: var(--surface); }
 .search-panel { display: none; }
 .search-panel.active { display: block; }
 
 /* ============================================================
-   OLD RESULTS (kept for fallback)
-   ============================================================ */
-.result-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-.result-header {
-  padding: 22px 26px 18px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  flex-wrap: wrap;
-}
-.result-car-id { font-size: .82rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; }
-.result-risk-badge {
-  font-size: .92rem; font-weight: 700;
-  padding: 6px 16px; border-radius: 99px;
-}
-.risk-high   { background: var(--red-lt);   color: var(--red);   }
-.risk-caution{ background: var(--amber-lt); color: var(--amber); }
-.risk-low    { background: var(--green-lt); color: var(--green); }
-
-.result-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid var(--border);
-}
-.stat-cell {
-  padding: 18px 20px;
-  text-align: center;
-  border-right: 1px solid var(--border);
-}
-.stat-cell:last-child { border-right: none; }
-.stat-num { font-size: 2rem; font-family: 'DM Serif Display', serif; font-weight: 400; }
-.stat-num.red    { color: var(--red); }
-.stat-num.amber  { color: var(--amber); }
-.stat-num.green  { color: var(--green); }
-.stat-label { font-size: .75rem; color: var(--ink-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
-
-.result-verdict { padding: 20px 26px; }
-.result-verdict p { font-size: .92rem; line-height: 1.6; }
-.result-cta { padding: 0 26px 22px; display: flex; gap: 10px; flex-wrap: wrap; }
-
-/* ============================================================
    TOKEN / PAYWALL
    ============================================================ */
-.paywall-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  text-align: center;
-  box-shadow: var(--shadow);
-}
+.paywall-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 32px; text-align: center; box-shadow: var(--shadow); }
 .paywall-card h2 { margin: 12px 0 8px; }
 .paywall-card > p { margin-bottom: 24px; font-size: .9rem; }
 .icon-big { font-size: 3rem; display: block; margin-bottom: 4px; }
-
-.token-packs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-}
-.token-pack {
-  border: 2px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 16px 10px;
-  cursor: pointer;
-  transition: var(--transition);
-  text-align: center;
-}
+.token-packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+.token-pack { border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 16px 10px; cursor: pointer; transition: var(--transition); text-align: center; }
 .token-pack:hover { border-color: var(--accent); }
 .token-pack.selected { border-color: var(--accent); background: var(--accent-lt); }
 .pack-tokens { font-size: 1.8rem; font-family: 'DM Serif Display', serif; color: var(--ink); }
 .pack-name   { font-size: .8rem; font-weight: 600; color: var(--ink-muted); margin: 2px 0; text-transform: uppercase; letter-spacing: .04em; }
 .pack-price  { font-size: 1rem; font-weight: 700; color: var(--accent); }
-
-.verify-section {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-}
+.verify-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
 .verify-section > p { font-size: .86rem; margin-bottom: 12px; }
 
 /* ============================================================
    MODALS
    ============================================================ */
 .modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.45);
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
   display: flex; align-items: center; justify-content: center;
-  z-index: 500;
-  padding: 20px;
-  animation: fadeIn .18s ease;
+  z-index: 500; padding: 20px; animation: fadeIn .18s ease;
 }
-.modal {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  max-width: 500px; width: 100%;
-  max-height: 85vh; overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  animation: slideUp .2s ease;
-}
+.modal { background: var(--white); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 500px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-lg); position: relative; animation: slideUp .2s ease; }
 .modal h2 { margin-bottom: 10px; }
 .modal > p { margin-bottom: 20px; font-size: .9rem; }
-.modal-close {
-  position: absolute; top: 16px; right: 16px;
-  background: var(--surface); border: none;
-  width: 28px; height: 28px; border-radius: 50%;
-  font-size: .85rem; cursor: pointer; color: var(--ink-muted);
-  display: flex; align-items: center; justify-content: center;
-}
+.modal-close { position: absolute; top: 16px; right: 16px; background: var(--surface); border: none; width: 28px; height: 28px; border-radius: 50%; font-size: .85rem; cursor: pointer; color: var(--ink-muted); display: flex; align-items: center; justify-content: center; }
 .modal-close:hover { background: var(--border); }
 .legal-text { font-size: .86rem; line-height: 1.7; margin-bottom: 20px; }
 .legal-text h4 { font-size: .9rem; margin: 14px 0 4px; color: var(--ink); }
@@ -538,218 +354,88 @@ small { font-size: .8rem; color: var(--ink-muted); }
 /* ============================================================
    FAB
    ============================================================ */
-#feedback-fab {
-  position: fixed; bottom: 24px; right: 24px;
-  background: var(--ink);
-  color: #fff;
-  border-radius: 99px;
-  padding: 10px 18px;
-  font-size: .85rem; font-weight: 600;
-  display: flex; align-items: center; gap: 7px;
-  box-shadow: var(--shadow-lg);
-  cursor: pointer;
-  z-index: 200;
-  transition: var(--transition);
-}
+#feedback-fab { position: fixed; bottom: 24px; right: 24px; background: var(--ink); color: #fff; border-radius: 99px; padding: 10px 18px; font-size: .85rem; font-weight: 600; display: flex; align-items: center; gap: 7px; box-shadow: var(--shadow-lg); cursor: pointer; z-index: 200; transition: var(--transition); }
 #feedback-fab:hover { background: var(--accent); transform: translateY(-2px); }
 #feedback-fab .fab-icon { font-size: 1rem; }
 
 /* ============================================================
    FOOTER
    ============================================================ */
-footer {
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  padding: 20px;
-  text-align: center;
-}
-footer p {
-  max-width: 680px; margin: 0 auto;
-  font-size: .78rem; color: var(--ink-muted);
-  line-height: 1.6;
-}
+footer { background: var(--white); border-top: 1px solid var(--border); padding: 20px; text-align: center; }
+footer p { max-width: 680px; margin: 0 auto; font-size: .78rem; color: var(--ink-muted); line-height: 1.6; }
 footer a { color: var(--ink-muted); text-decoration: underline; }
 
 /* ============================================================
    LOADER
    ============================================================ */
-.loader {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 60px 20px; gap: 14px;
-}
-.spinner {
-  width: 36px; height: 36px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-}
+.loader { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; gap: 14px; }
+.spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
 .loader p { font-size: .9rem; color: var(--ink-muted); }
 
 /* ============================================================
-   PREMIUM LOADER (multi-step)
+   PREMIUM LOADER
    ============================================================ */
-.premium-loader {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 48px 28px;
-  text-align: center;
-}
+.premium-loader { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 48px 28px; text-align: center; }
 .premium-loader h3 { font-size: 1.1rem; margin-bottom: 8px; }
 .premium-loader .loader-sub { font-size: .88rem; color: var(--ink-muted); margin-bottom: 28px; }
-.loader-steps { display: flex; flex-direction: column; gap: 10px; max-width: 340px; margin: 0 auto; }
-.loader-step {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: .86rem;
-  font-weight: 500;
-  color: var(--ink-muted);
-  transition: all .3s ease;
-}
-.loader-step.active {
-  background: var(--accent-lt);
-  border-color: #f3bdb5;
-  color: var(--accent);
-}
-.loader-step.done {
-  background: var(--green-lt);
-  border-color: #a8d9c1;
-  color: var(--green);
-}
-.step-dot {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .7rem; flex-shrink: 0;
-  transition: all .3s ease;
-}
-.loader-step.active .step-dot {
-  background: var(--accent);
-  animation: pulse-dot 1s ease infinite;
-}
+.loader-steps { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 0 auto; }
+.loader-step { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: .86rem; font-weight: 500; color: var(--ink-muted); transition: all .3s ease; }
+.loader-step.active { background: var(--accent-lt); border-color: #f3bdb5; color: var(--accent); }
+.loader-step.done   { background: var(--green-lt);  border-color: #a8d9c1; color: var(--green); }
+.step-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: .7rem; flex-shrink: 0; transition: all .3s ease; }
+.loader-step.active .step-dot { background: var(--accent); animation: pulse-dot 1s ease infinite; }
 .loader-step.done .step-dot { background: var(--green); }
-
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
+@keyframes pulse-dot { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
 /* ============================================================
    PREMIUM REPORT STYLES
    ============================================================ */
+.premium-report { display: flex; flex-direction: column; gap: 16px; animation: fadeIn .3s ease; }
 
-/* Report wrapper */
-.premium-report {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  animation: fadeIn .3s ease;
+/* ── RED FLAG (NEW) ── */
+.red-flag-alert {
+  background: #fff0ee;
+  border: 2px solid var(--red);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex; align-items: flex-start; gap: 16px;
 }
+.red-flag-icon { font-size: 2.2rem; flex-shrink: 0; }
+.red-flag-body {}
+.red-flag-label {
+  font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--red); margin-bottom: 4px;
+}
+.red-flag-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
+.red-flag-desc  { font-size: .87rem; color: var(--ink-soft); line-height: 1.6; }
 
 /* ── REPORT HEADER ── */
-.report-header {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.report-header-top {
-  padding: 28px 28px 22px;
-  border-bottom: 1px solid var(--border);
-}
-.report-meta {
-  display: flex; align-items: center; gap: 8px;
-  font-size: .75rem; font-weight: 600;
-  color: var(--ink-muted);
-  text-transform: uppercase; letter-spacing: .06em;
-  margin-bottom: 8px;
-}
+.report-header { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+.report-header-top { padding: 28px 28px 22px; border-bottom: 1px solid var(--border); }
+.report-meta { display: flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
 .report-meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-muted); }
-.report-car-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  line-height: 1.1;
-  margin-bottom: 14px;
-  color: var(--ink);
-}
-.report-badges {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-}
-.report-risk-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: .85rem; font-weight: 700;
-  padding: 7px 16px; border-radius: 99px;
-  letter-spacing: .01em;
-}
-.report-risk-badge.high   { background: var(--red-lt);   color: var(--red);   border: 1.5px solid #f3bdb5; }
-.report-risk-badge.caution{ background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
-.report-risk-badge.low    { background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
-.report-recommendation {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: .82rem; font-weight: 600;
-  padding: 6px 14px; border-radius: 99px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--ink-soft);
-}
-.report-header-footer {
-  padding: 12px 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 8px;
-}
-.report-generated {
-  font-size: .75rem; color: var(--ink-muted);
-}
-.report-source {
-  font-size: .75rem; color: var(--ink-muted);
-  display: flex; align-items: center; gap: 5px;
-}
+.report-car-name { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.1; margin-bottom: 14px; color: var(--ink); }
+.report-badges { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.report-risk-badge { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 700; padding: 7px 16px; border-radius: 99px; letter-spacing: .01em; }
+.report-risk-badge.high    { background: var(--red-lt);   color: var(--red);   border: 1.5px solid #f3bdb5; }
+.report-risk-badge.caution { background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
+.report-risk-badge.low     { background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
+.report-recommendation { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; padding: 6px 14px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-soft); }
+.report-header-footer { padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.report-generated { font-size: .75rem; color: var(--ink-muted); }
+.report-source { font-size: .75rem; color: var(--ink-muted); display: flex; align-items: center; gap: 5px; }
 
 /* ── QUICK SUMMARY ── */
-.report-summary {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-}
-.section-label {
-  display: flex; align-items: center; gap: 8px;
-  font-size: .72rem; font-weight: 700;
-  color: var(--ink-muted);
-  text-transform: uppercase; letter-spacing: .08em;
-  margin-bottom: 12px;
-}
+.report-summary { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
+.section-label { display: flex; align-items: center; gap: 8px; font-size: .72rem; font-weight: 700; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
 .section-label-icon { font-size: .95rem; }
-.report-summary p {
-  font-size: .95rem; line-height: 1.7;
-  color: var(--ink-soft);
-}
+.report-summary p { font-size: .95rem; line-height: 1.7; color: var(--ink-soft); }
 
 /* ── CORE METRICS ── */
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-.metric-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 22px 18px;
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-}
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.metric-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center; box-shadow: var(--shadow-sm); }
 .metric-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
-.metric-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.4rem; line-height: 1;
-  margin-bottom: 4px;
-}
+.metric-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; line-height: 1; margin-bottom: 4px; }
 .metric-num.c-red    { color: var(--red); }
 .metric-num.c-amber  { color: var(--amber); }
 .metric-num.c-green  { color: var(--green); }
@@ -757,24 +443,9 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .metric-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); }
 
 /* ── RISK SCORE ── */
-.risk-score-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-}
-.risk-score-inner {
-  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-}
-.risk-score-gauge {
-  flex-shrink: 0;
-  width: 88px; height: 88px;
-  border-radius: 50%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-family: 'DM Serif Display', serif;
-  font-size: 2rem; line-height: 1;
-  border: 4px solid;
-}
+.risk-score-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
+.risk-score-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.risk-score-gauge { flex-shrink: 0; width: 88px; height: 88px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1; border: 4px solid; }
 .risk-score-gauge.c-red    { border-color: var(--red);   color: var(--red);   background: var(--red-lt); }
 .risk-score-gauge.c-amber  { border-color: var(--amber); color: var(--amber); background: var(--amber-lt); }
 .risk-score-gauge.c-green  { border-color: var(--green); color: var(--green); background: var(--green-lt); }
@@ -783,234 +454,156 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .risk-score-text h3 { margin-bottom: 6px; }
 .risk-score-text p { font-size: .88rem; }
 .risk-score-bar-wrap { margin-top: 16px; }
-.risk-score-bar-labels {
-  display: flex; justify-content: space-between;
-  font-size: .7rem; font-weight: 600; color: var(--ink-muted);
-  margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em;
-}
-.risk-bar-track {
-  height: 10px; border-radius: 99px;
-  background: linear-gradient(90deg, var(--green) 0%, var(--amber) 50%, var(--red) 100%);
-  position: relative; overflow: visible;
-}
-.risk-bar-marker {
-  position: absolute; top: 50%;
-  width: 18px; height: 18px;
-  background: var(--white);
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: left .8s ease;
-}
+.risk-score-bar-labels { display: flex; justify-content: space-between; font-size: .7rem; font-weight: 600; color: var(--ink-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+.risk-bar-track { height: 10px; border-radius: 99px; background: linear-gradient(90deg, var(--green) 0%, var(--amber) 50%, var(--red) 100%); position: relative; overflow: visible; }
+.risk-bar-marker { position: absolute; top: 50%; width: 18px; height: 18px; background: var(--white); border: 3px solid var(--ink); border-radius: 50%; transform: translate(-50%, -50%); transition: left .8s ease; }
+
+/* Normalized score sub-note */
+.score-normalized-note { font-size: .75rem; color: var(--ink-muted); margin-top: 10px; padding: 8px 12px; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); }
 
 /* ── PROBLEM AREAS ── */
-.problem-areas {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-}
+.problem-areas { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
 .problem-list { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
-.problem-item {
-  display: flex; align-items: center; gap: 12px;
-}
+.problem-item { display: flex; align-items: center; gap: 12px; }
 .problem-icon { font-size: 1.3rem; flex-shrink: 0; width: 28px; text-align: center; }
 .problem-bar-wrap { flex: 1; }
-.problem-name {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: .88rem; font-weight: 600; color: var(--ink);
-  margin-bottom: 5px;
-}
+.problem-name { display: flex; justify-content: space-between; align-items: center; font-size: .88rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
 .problem-count { font-size: .78rem; color: var(--ink-muted); font-weight: 400; }
-.problem-bar-track {
-  height: 7px; background: var(--surface); border-radius: 99px; overflow: hidden;
-}
-.problem-bar-fill {
-  height: 100%; border-radius: 99px;
-  transition: width .8s ease;
-}
+.problem-bar-track { height: 7px; background: var(--surface); border-radius: 99px; overflow: hidden; }
+.problem-bar-fill { height: 100%; border-radius: 99px; transition: width .8s ease; }
 .problem-bar-fill.p-red   { background: var(--red); }
 .problem-bar-fill.p-amber { background: var(--amber); }
 .problem-bar-fill.p-green { background: var(--green); }
 .problem-bar-fill.p-ink   { background: #8a6e5e; }
 
 /* ── VEHICLE SPECS ── */
-.specs-section {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-}
-.specs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 14px;
-  margin-top: 14px;
-}
-.spec-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-}
-.spec-label {
-  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--ink-muted); margin-bottom: 5px;
-}
+.specs-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
+.specs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; margin-top: 14px; }
+.spec-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.spec-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); margin-bottom: 5px; }
 .spec-value { font-size: .92rem; font-weight: 600; color: var(--ink); }
 .spec-not-available { color: var(--ink-muted); font-weight: 400; font-style: italic; }
+.specs-vin-note { margin-top: 12px; padding: 10px 14px; background: var(--blue-lt); border: 1px solid #bfdbfe; border-radius: var(--radius); font-size: .8rem; color: var(--blue); }
 
 /* ── SAFETY SCORECARD ── */
-.safety-section {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-}
-.safety-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 14px;
-  margin-top: 14px;
-}
-.safety-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-}
-.safety-category {
-  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--ink-muted); margin-bottom: 6px;
-}
+.safety-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
+.safety-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-top: 14px; }
+.safety-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.safety-category { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); margin-bottom: 6px; }
 .safety-stars { font-size: 1.1rem; margin-bottom: 4px; letter-spacing: 1px; }
 .safety-rating-text { font-size: .82rem; font-weight: 600; color: var(--ink); }
 .safety-na { font-size: .82rem; color: var(--ink-muted); font-style: italic; }
 .safety-features { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
-.safety-feature {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  font-size: .86rem; font-weight: 500;
-}
+.safety-feature { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius); font-size: .86rem; font-weight: 500; }
 .safety-feature.present { background: var(--green-lt); color: var(--green); }
 .safety-feature.absent  { background: var(--surface);  color: var(--ink-muted); border: 1px solid var(--border); }
+.safety-na-block { margin-top: 14px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.safety-na-block p { font-size: .84rem; color: var(--ink-muted); margin: 0; }
 
 /* ── RELIABILITY SIGNAL ── */
-.reliability-section {
+.reliability-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
+.reliability-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 99px; font-size: .92rem; font-weight: 700; margin: 12px 0; }
+.reliability-badge.above  { background: var(--red-lt);   color: var(--red);   border: 1.5px solid #f3bdb5; }
+.reliability-badge.below  { background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
+.reliability-badge.normal { background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
+.lifespan-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin-top: 14px; }
+.lifespan-block .lifespan-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); margin-bottom: 4px; }
+.lifespan-block .lifespan-value { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.lifespan-block .lifespan-note  { font-size: .78rem; color: var(--ink-muted); }
+
+/* ── MARKET CONTEXT (NEW) ── */
+.market-context {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px 28px;
 }
-.reliability-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 18px; border-radius: 99px;
-  font-size: .92rem; font-weight: 700;
-  margin: 12px 0;
+.market-comparison-row {
+  display: flex; align-items: center; gap: 14px; margin-top: 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px;
 }
-.reliability-badge.above { background: var(--red-lt);   color: var(--red);   border: 1.5px solid #f3bdb5; }
-.reliability-badge.below { background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
-.reliability-badge.normal{ background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
-.lifespan-block {
-  background: var(--surface);
+.market-vs-icon { font-size: 1.6rem; flex-shrink: 0; }
+.market-vs-text { flex: 1; }
+.market-vs-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); margin-bottom: 3px; }
+.market-vs-value { font-size: .95rem; font-weight: 700; }
+.market-vs-value.better { color: var(--green); }
+.market-vs-value.worse  { color: var(--red); }
+.market-vs-value.avg    { color: var(--amber); }
+.market-bar-group { margin-top: 14px; }
+.market-bar-item { margin-bottom: 10px; }
+.market-bar-label { display: flex; justify-content: space-between; font-size: .82rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.market-bar-track { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.market-bar-fill { height: 100%; border-radius: 99px; }
+.market-bar-fill.this-vehicle { background: var(--accent); }
+.market-bar-fill.class-avg    { background: var(--border); }
+.market-footnote { font-size: .75rem; color: var(--ink-muted); margin-top: 10px; font-style: italic; }
+
+/* ── MAINTENANCE FORECAST (NEW) ── */
+.maintenance-section {
+  background: var(--white);
   border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.maintenance-list { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.maintenance-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px;
   border-radius: var(--radius);
-  padding: 14px 18px;
-  margin-top: 14px;
+  border: 1px solid var(--border);
 }
-.lifespan-block .lifespan-title {
-  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--ink-muted); margin-bottom: 4px;
+.maintenance-item.due-soon   { background: var(--red-lt);   border-color: #f3bdb5; }
+.maintenance-item.due-near   { background: var(--amber-lt); border-color: #ffd68f; }
+.maintenance-item.due-future { background: var(--green-lt); border-color: #a8d9c1; }
+.maintenance-item.due-na     { background: var(--surface);  border-color: var(--border); }
+.maint-icon { font-size: 1.4rem; flex-shrink: 0; }
+.maint-body { flex: 1; }
+.maint-name { font-size: .9rem; font-weight: 700; color: var(--ink); }
+.maint-when { font-size: .8rem; color: var(--ink-muted); margin-top: 1px; }
+.maint-status {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  padding: 3px 8px; border-radius: 99px; white-space: nowrap;
 }
-.lifespan-block .lifespan-value {
-  font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px;
-}
-.lifespan-block .lifespan-note { font-size: .78rem; color: var(--ink-muted); }
+.status-soon   { background: var(--red);   color: #fff; }
+.status-near   { background: var(--amber); color: #fff; }
+.status-future { background: var(--green); color: #fff; }
+.status-na     { background: var(--border); color: var(--ink-muted); }
+.maint-no-mileage { padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: .85rem; color: var(--ink-muted); }
 
 /* ── COMMON ISSUES ── */
-.issues-section {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-}
+.issues-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
 .issues-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.issue-tag {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 6px 13px; border-radius: 99px;
-  font-size: .82rem; font-weight: 600;
-  background: var(--surface); border: 1px solid var(--border);
-  color: var(--ink-soft);
-}
+.issue-tag { display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 99px; font-size: .82rem; font-weight: 600; background: var(--surface); border: 1px solid var(--border); color: var(--ink-soft); }
 .issue-tag.high { background: var(--red-lt); border-color: #f3bdb5; color: var(--red); }
 
 /* ── WHAT THIS MEANS / WHAT TO DO ── */
-.guidance-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.guidance-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px 24px;
-}
+.guidance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.guidance-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 24px; }
 .guidance-card h3 { font-size: 1rem; margin-bottom: 10px; }
 .guidance-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.guidance-list li {
-  display: flex; align-items: flex-start; gap: 9px;
-  font-size: .88rem; color: var(--ink-soft); line-height: 1.55;
-}
-.guidance-list li::before {
-  content: attr(data-icon);
-  flex-shrink: 0; margin-top: 1px;
-}
+.guidance-list li { display: flex; align-items: flex-start; gap: 9px; font-size: .88rem; color: var(--ink-soft); line-height: 1.55; }
+.guidance-list li::before { content: attr(data-icon); flex-shrink: 0; margin-top: 1px; }
 
 /* ── WARNINGS ── */
-.warnings-section {
-  background: var(--red-lt);
-  border: 1px solid #f3bdb5;
-  border-radius: var(--radius-lg);
-  padding: 22px 24px;
-}
+.warnings-section { background: var(--red-lt); border: 1px solid #f3bdb5; border-radius: var(--radius-lg); padding: 22px 24px; }
 .warnings-section .section-label { color: var(--red); }
-.warning-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(200,67,43,.12);
-  font-size: .88rem; color: var(--ink-soft); line-height: 1.55;
-}
+.warning-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid rgba(200,67,43,.12); font-size: .88rem; color: var(--ink-soft); line-height: 1.55; }
 .warning-item:last-child { border-bottom: none; padding-bottom: 0; }
 .warning-item strong { color: var(--ink); }
 
 /* ── TRUST SECTION ── */
-.trust-section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 22px 24px;
-  display: flex; align-items: flex-start; gap: 14px;
-}
+.trust-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; display: flex; align-items: flex-start; gap: 14px; }
 .trust-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
 .trust-text h3 { font-size: .95rem; margin-bottom: 6px; }
 .trust-text p  { font-size: .84rem; line-height: 1.6; }
 
 /* ── DISCLAIMER ── */
-.disclaimer-section {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px 24px;
-  font-size: .8rem; line-height: 1.65; color: var(--ink-muted);
-}
+.disclaimer-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 24px; font-size: .8rem; line-height: 1.65; color: var(--ink-muted); }
 .disclaimer-section strong { color: var(--ink-soft); }
 
 /* ── CTA ROW ── */
-.report-cta-row {
-  display: flex; gap: 10px; flex-wrap: wrap; padding: 4px 0;
-}
+.report-cta-row { display: flex; gap: 10px; flex-wrap: wrap; padding: 4px 0; }
 
 /* ============================================================
    ANIMATIONS
@@ -1023,18 +616,9 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
    SEARCH HISTORY
    ============================================================ */
 .history-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
-.history-item {
-  display: flex; align-items: center; justify-content: space-between;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  font-size: .85rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
+.history-item { display: flex; align-items: center; justify-content: space-between; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; font-size: .85rem; cursor: pointer; transition: var(--transition); }
 .history-item:hover { border-color: #ccc; background: #f0ede8; }
-.history-item .hi-id { font-weight: 600; color: var(--ink); }
+.history-item .hi-id   { font-weight: 600; color: var(--ink); }
 .history-item .hi-date { color: var(--ink-muted); font-size: .78rem; }
 
 /* ============================================================
@@ -1043,9 +627,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 @media (max-width: 640px) {
   .auth-box { padding: 26px 20px; }
   .search-card, .paywall-card { padding: 22px 18px; }
-  .result-stats { grid-template-columns: 1fr 1fr; }
-  .stat-cell:nth-child(2) { border-right: none; }
-  .stat-cell:nth-child(3) { border-top: 1px solid var(--border); grid-column: 1 / -1; }
   .form-row { grid-template-columns: 1fr; }
   .hero { padding: 48px 16px 40px; }
   .metrics-grid { grid-template-columns: 1fr 1fr; }
@@ -1054,59 +635,37 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   .report-summary, .risk-score-card, .problem-areas,
   .specs-section, .safety-section, .reliability-section,
   .issues-section, .guidance-card, .warnings-section,
-  .trust-section, .disclaimer-section { padding: 18px 18px; }
+  .trust-section, .disclaimer-section,
+  .red-flag-alert, .maintenance-section,
+  .market-context { padding: 18px 18px; }
   .risk-score-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
   .specs-grid { grid-template-columns: 1fr 1fr; }
   .safety-grid { grid-template-columns: 1fr 1fr; }
+  .mileage-row { flex-direction: column; align-items: flex-start; }
+  .red-flag-alert { flex-direction: column; gap: 10px; }
+  .market-comparison-row { flex-direction: column; gap: 8px; }
 }
 
 /* ============================================================
    PROGRESS BAR
    ============================================================ */
-#progress-bar {
-  position: fixed; top: 0; left: 0;
-  height: 3px; background: var(--accent);
-  width: 0; z-index: 9999;
-  transition: width .3s ease, opacity .4s ease;
-  opacity: 0;
-}
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 9999; transition: width .3s ease, opacity .4s ease; opacity: 0; }
 #progress-bar.active { opacity: 1; }
 
 /* ============================================================
    VERIFICATION CODE INPUT
    ============================================================ */
-.code-inputs {
-  display: flex; gap: 8px; justify-content: center; margin: 16px 0;
-}
-.code-input {
-  width: 44px; height: 52px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  text-align: center;
-  font-size: 1.3rem; font-weight: 700;
-  color: var(--ink);
-  background: var(--white);
-  transition: border-color var(--transition);
-}
+.code-inputs { display: flex; gap: 8px; justify-content: center; margin: 16px 0; }
+.code-input { width: 44px; height: 52px; border: 1.5px solid var(--border); border-radius: var(--radius); text-align: center; font-size: 1.3rem; font-weight: 700; color: var(--ink); background: var(--white); transition: border-color var(--transition); }
 .code-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,67,43,.1); }
 
 /* ============================================================
-   EMPTY STATE
+   EMPTY / SECTION HEADER
    ============================================================ */
-.empty-state {
-  text-align: center; padding: 48px 20px;
-  color: var(--ink-muted);
-}
+.empty-state { text-align: center; padding: 48px 20px; color: var(--ink-muted); }
 .empty-state .es-icon { font-size: 2.6rem; margin-bottom: 12px; display: block; opacity: .5; }
 .empty-state p { font-size: .9rem; }
-
-/* ============================================================
-   SECTION HEADER
-   ============================================================ */
-.section-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
-}
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .section-header h3 { font-size: .95rem; font-weight: 700; }
 </style>
 </head>
@@ -1115,7 +674,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 <!-- PROGRESS BAR -->
 <div id="progress-bar"></div>
 
-<!-- NAVBAR (shown when logged in) -->
+<!-- NAVBAR -->
 <nav id="navbar" class="hidden">
   <div class="navbar-inner">
     <div class="brand">CarClarity<span class="brand-dot">.</span></div>
@@ -1137,46 +696,21 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     <h1>Know what you're buying<br>before you <em>sign anything.</em></h1>
     <p>CarClarity checks official NHTSA records — recalls, complaints, and manufacturer bulletins — in seconds.</p>
     <div class="hero-cta">
-      <button class="btn btn-primary btn-lg" onclick="showPage('page-signup')">
-        Check a Car Free →
-      </button>
-      <button class="btn btn-outline btn-lg" onclick="showPage('page-login')">
-        Sign In
-      </button>
+      <button class="btn btn-primary btn-lg" onclick="showPage('page-signup')">Check a Car Free →</button>
+      <button class="btn btn-outline btn-lg" onclick="showPage('page-login')">Sign In</button>
     </div>
   </section>
-
   <section class="how-it-works">
     <h2>How it works</h2>
     <div class="steps-grid">
-      <div class="step-card">
-        <span class="step-icon">📋</span>
-        <h3>Sign Up Free</h3>
-        <p>Create an account and get 3 free searches — no credit card required.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-icon">🔍</span>
-        <h3>Enter a VIN or Year/Make/Model</h3>
-        <p>We look up official NHTSA records instantly. No guesswork.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-icon">📊</span>
-        <h3>Get a Premium Report</h3>
-        <p>See recalls, complaints, safety ratings, specs, and a risk score — in one clear report.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-icon">🛡️</span>
-        <h3>Buy More Searches</h3>
-        <p>Used your 3 free searches? Top up instantly with a token pack.</p>
-      </div>
+      <div class="step-card"><span class="step-icon">📋</span><h3>Sign Up Free</h3><p>Create an account and get 3 free searches — no credit card required.</p></div>
+      <div class="step-card"><span class="step-icon">🔍</span><h3>Enter a VIN or Year/Make/Model</h3><p>We look up official NHTSA records instantly. No guesswork.</p></div>
+      <div class="step-card"><span class="step-icon">📊</span><h3>Get a Premium Report</h3><p>See recalls, complaints, safety ratings, specs, and a risk score — in one clear report.</p></div>
+      <div class="step-card"><span class="step-icon">🛡️</span><h3>Buy More Searches</h3><p>Used your 3 free searches? Top up instantly with a token pack.</p></div>
     </div>
   </section>
-
   <section class="data-notice">
-    <p>
-      ⚠️ <strong>Important:</strong> CarClarity uses publicly available data from the U.S. National Highway Traffic Safety Administration (NHTSA).
-      Results are informational only and do not replace a professional inspection, a full vehicle history report, or your own due diligence.
-    </p>
+    <p>⚠️ <strong>Important:</strong> CarClarity uses publicly available data from the U.S. National Highway Traffic Safety Administration (NHTSA). Results are informational only and do not replace a professional inspection, a full vehicle history report, or your own due diligence.</p>
   </section>
 </div>
 
@@ -1214,9 +748,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
       </div>
       <div class="checkbox-group">
         <input type="checkbox" id="su-terms" />
-        <label for="su-terms">
-          I have read and agree to the <a href="#" onclick="openModal('modal-terms'); return false;">Terms &amp; Conditions</a> and <a href="#" onclick="openModal('modal-privacy'); return false;">Privacy Policy</a>.
-        </label>
+        <label for="su-terms">I have read and agree to the <a href="#" onclick="openModal('modal-terms'); return false;">Terms &amp; Conditions</a> and <a href="#" onclick="openModal('modal-privacy'); return false;">Privacy Policy</a>.</label>
       </div>
       <button class="btn btn-primary btn-full" id="su-btn" onclick="doSignup()">Create Account</button>
       <div class="auth-footer">Already have an account? <a href="#" onclick="showPage('page-login'); return false;">Sign in</a></div>
@@ -1243,9 +775,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         <input type="tel" maxlength="1" class="code-input" id="vc5" oninput="codeInput(this,5)" onkeydown="codeBack(event,5)" />
       </div>
       <button class="btn btn-primary btn-full" id="verify-btn" onclick="doVerifyEmail()">Verify &amp; Activate</button>
-      <p style="margin-top:16px;font-size:.84rem;color:var(--ink-muted)">
-        Didn't receive it? <a href="#" onclick="resendVerification(); return false;">Resend code</a>
-      </p>
+      <p style="margin-top:16px;font-size:.84rem;color:var(--ink-muted)">Didn't receive it? <a href="#" onclick="resendVerification(); return false;">Resend code</a></p>
     </div>
   </div>
 </div>
@@ -1359,8 +889,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Year</label>
-            <input type="number" class="form-input" id="search-year"
-              placeholder="e.g. 2018" min="1981" max="2025" />
+            <input type="number" class="form-input" id="search-year" placeholder="e.g. 2018" min="1981" max="2025" />
           </div>
           <div class="form-group">
             <label class="form-label">Make</label>
@@ -1371,6 +900,16 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
           <label class="form-label">Model</label>
           <input type="text" class="form-input" id="search-model" placeholder="e.g. Camry" />
         </div>
+      </div>
+
+      <!-- Mileage input (optional — powers Maintenance Forecast) -->
+      <div style="margin-bottom:16px;">
+        <label class="form-label" style="margin-bottom:5px;">Current Mileage <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-muted)">(optional — unlocks Maintenance Forecast)</span></label>
+        <input type="number" class="form-input" id="search-mileage"
+          placeholder="e.g. 85000"
+          min="0" max="999999"
+          style="max-width:240px;"
+        />
       </div>
 
       <div id="search-alert"></div>
@@ -1403,7 +942,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
       <span class="icon-big">🪙</span>
       <h2>You're out of tokens</h2>
       <p>Purchase a token pack to continue checking vehicles. Tokens never expire.</p>
-
       <div class="token-packs">
         <div class="token-pack selected" onclick="selectPack(this,'basic')" data-pack="basic">
           <div class="pack-tokens">5</div>
@@ -1421,11 +959,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
           <div class="pack-price">$24.99</div>
         </div>
       </div>
-
-      <button class="btn btn-green btn-lg btn-full" onclick="goToGumroad()">
-        Buy Tokens on Gumroad →
-      </button>
-
+      <button class="btn btn-green btn-lg btn-full" onclick="goToGumroad()">Buy Tokens on Gumroad →</button>
       <div class="verify-section">
         <p>Already purchased? Enter your Gumroad license key to add tokens:</p>
         <div class="form-group">
@@ -1436,19 +970,14 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         <div id="verify-license-alert"></div>
         <button class="btn btn-outline btn-full" onclick="doVerifyLicense()">Verify License Key</button>
       </div>
-
       <div style="margin-top:16px;">
-        <a href="#" onclick="showPage('page-dashboard'); return false;" style="font-size:.84rem;color:var(--ink-muted);">
-          ← Back to dashboard
-        </a>
+        <a href="#" onclick="showPage('page-dashboard'); return false;" style="font-size:.84rem;color:var(--ink-muted);">← Back to dashboard</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ============================================================
-     FLOATING FEEDBACK BUTTON
-     ============================================================ -->
+<!-- FLOATING FEEDBACK BUTTON -->
 <button id="feedback-fab" onclick="openModal('modal-message')" title="Send us a message">
   <span class="fab-icon">💬</span> Send us a message
 </button>
@@ -1456,27 +985,20 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 <!-- ============================================================
      MODALS
      ============================================================ -->
-
-<!-- MESSAGE MODAL -->
+<!-- MESSAGE -->
 <div id="modal-message" class="modal-overlay hidden" onclick="overlayClose(event,'modal-message')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-message')">✕</button>
     <h2>Send a Message</h2>
     <p>We read every message. Usually respond within 24–48 hours.</p>
     <div id="message-alert"></div>
-    <div class="form-group">
-      <label class="form-label">Subject</label>
-      <input type="text" class="form-input" id="msg-subject" placeholder="What's on your mind?" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Message</label>
-      <textarea class="form-textarea" id="msg-body" placeholder="Tell us anything — a question, a bug, a suggestion..."></textarea>
-    </div>
+    <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" id="msg-subject" placeholder="What's on your mind?" /></div>
+    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" id="msg-body" placeholder="Tell us anything — a question, a bug, a suggestion..."></textarea></div>
     <button class="btn btn-primary btn-full" onclick="doSendMessage()">Send Message</button>
   </div>
 </div>
 
-<!-- RATING MODAL -->
+<!-- RATING -->
 <div id="modal-rating" class="modal-overlay hidden">
   <div class="modal text-center">
     <div style="font-size:2.2rem;margin-bottom:8px;">🎉</div>
@@ -1489,72 +1011,45 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
       <span class="star" onclick="setRating(4)">★</span>
       <span class="star" onclick="setRating(5)">★</span>
     </div>
-    <div class="form-group">
-      <textarea class="form-textarea" id="rating-comment" placeholder="Any comments? (optional)"></textarea>
-    </div>
+    <div class="form-group"><textarea class="form-textarea" id="rating-comment" placeholder="Any comments? (optional)"></textarea></div>
     <div id="rating-alert"></div>
     <button class="btn btn-primary btn-full" onclick="doSubmitRating()">Submit Feedback</button>
     <button class="btn btn-ghost btn-full" style="margin-top:8px;" onclick="closeModal('modal-rating')">Maybe later</button>
   </div>
 </div>
 
-<!-- TERMS MODAL -->
+<!-- TERMS -->
 <div id="modal-terms" class="modal-overlay hidden" onclick="overlayClose(event,'modal-terms')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-terms')">✕</button>
     <h2>Terms &amp; Conditions</h2>
     <div class="legal-text">
-      <h4>1. Acceptance</h4>
-      <p>By creating an account and using CarClarity ("the Service"), you agree to these Terms. If you do not agree, do not use the Service.</p>
-      <h4>2. Service Description</h4>
-      <p>CarClarity provides informational vehicle data sourced from the U.S. National Highway Traffic Safety Administration (NHTSA) public API. Results are for informational purposes only.</p>
-      <h4>3. No Guarantee of Accuracy</h4>
-      <p>We display data as provided by government sources. We do not modify, enhance, or validate vehicle records. Government databases may be incomplete or delayed. CarClarity makes no guarantee that the data is complete, accurate, or current.</p>
-      <h4>4. Not a Substitute for Professional Inspection</h4>
-      <p>CarClarity results do not replace a certified mechanic inspection, a full vehicle history report (such as Carfax or AutoCheck), or any other form of professional due diligence. You are solely responsible for your purchasing decisions.</p>
-      <h4>5. Tokens and Payments</h4>
-      <p>Tokens are consumed when a search is completed. Tokens are non-refundable. If a search fails due to a technical error on our part, your token may be restored at our discretion.</p>
-      <h4>6. Account Security</h4>
-      <p>You are responsible for maintaining the confidentiality of your account credentials. We are not liable for unauthorized access resulting from your failure to protect your login details.</p>
-      <h4>7. Prohibited Uses</h4>
-      <p>You may not use the Service to create multiple accounts to abuse free tokens, scrape data automatically, or interfere with the Service's operation.</p>
-      <h4>8. Limitation of Liability</h4>
-      <p>To the maximum extent permitted by law, CarClarity shall not be liable for any indirect, incidental, special, or consequential damages, including purchasing decisions made in reliance on our results.</p>
-      <h4>9. Changes to Terms</h4>
-      <p>We may update these Terms at any time. Continued use of the Service after changes constitutes acceptance.</p>
-      <h4>10. Governing Law</h4>
-      <p>These Terms are governed by the laws of the United States.</p>
-      <p style="margin-top:12px;font-style:italic;color:var(--ink-muted);">Last updated: 2025. These are placeholder terms intended for a small-launch MVP. Consult a qualified attorney before commercial launch.</p>
+      <h4>1. Acceptance</h4><p>By creating an account and using CarClarity ("the Service"), you agree to these Terms.</p>
+      <h4>2. Service Description</h4><p>CarClarity provides informational vehicle data sourced from the U.S. National Highway Traffic Safety Administration (NHTSA) public API. Results are for informational purposes only.</p>
+      <h4>3. No Guarantee of Accuracy</h4><p>We display data as provided by government sources. We do not modify, enhance, or validate vehicle records. Government databases may be incomplete or delayed.</p>
+      <h4>4. Not a Substitute for Professional Inspection</h4><p>CarClarity results do not replace a certified mechanic inspection, a full vehicle history report, or any other form of professional due diligence. You are solely responsible for your purchasing decisions.</p>
+      <h4>5. Tokens and Payments</h4><p>Tokens are consumed when a search is completed. Tokens are non-refundable. If a search fails due to a technical error on our part, your token may be restored at our discretion.</p>
+      <h4>6. Prohibited Uses</h4><p>You may not use the Service to create multiple accounts to abuse free tokens, scrape data automatically, or interfere with the Service's operation.</p>
+      <h4>7. Limitation of Liability</h4><p>To the maximum extent permitted by law, CarClarity shall not be liable for any indirect, incidental, special, or consequential damages arising from purchasing decisions made in reliance on our results.</p>
+      <h4>8. Governing Law</h4><p>These Terms are governed by the laws of the United States.</p>
+      <p style="margin-top:12px;font-style:italic;color:var(--ink-muted);">Last updated: 2025. Consult a qualified attorney before commercial launch.</p>
     </div>
     <button class="btn btn-primary btn-full" onclick="closeModal('modal-terms')">Got it</button>
   </div>
 </div>
 
-<!-- PRIVACY MODAL -->
+<!-- PRIVACY -->
 <div id="modal-privacy" class="modal-overlay hidden" onclick="overlayClose(event,'modal-privacy')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-privacy')">✕</button>
     <h2>Privacy Policy</h2>
     <div class="legal-text">
-      <h4>1. What We Collect</h4>
-      <p>We collect your email address, a hashed (not plain-text) password, the vehicle queries you submit, your country, a browser-generated device identifier, and optional feedback you provide.</p>
-      <h4>2. How We Use Your Data</h4>
-      <p>Your data is used to operate your account, display search history, prevent abuse, and improve the Service. We do not sell your personal data.</p>
-      <h4>3. Data Storage</h4>
-      <p>Data is stored in Google Sheets on a Google account controlled by the Service operator. Your password is hashed before storage — we never store plain-text passwords.</p>
-      <h4>4. Email Communications</h4>
-      <p>We send transactional emails only: account verification codes and password reset codes. We do not send marketing emails without your explicit opt-in.</p>
-      <h4>5. Cookies &amp; Local Storage</h4>
-      <p>We use localStorage to store your session token and device ID. We do not use tracking cookies or third-party advertising trackers.</p>
-      <h4>6. Third-Party Services</h4>
-      <p>We use Gumroad for payment processing. Gumroad's own privacy policy governs data collected during payment. We use the NHTSA public API for vehicle data; no personal data is sent to NHTSA.</p>
-      <h4>7. Data Retention</h4>
-      <p>We retain your data for as long as your account is active. You may request deletion by contacting us at the support email listed in the app footer.</p>
-      <h4>8. Your Rights</h4>
-      <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us.</p>
-      <h4>9. Changes</h4>
-      <p>We may update this Policy. We will notify you of significant changes by email.</p>
-      <p style="margin-top:12px;font-style:italic;color:var(--ink-muted);">Last updated: 2025. These are placeholder terms intended for a small-launch MVP. Consult a qualified attorney before commercial launch.</p>
+      <h4>1. What We Collect</h4><p>We collect your email address, a hashed password, vehicle queries, your country, a device identifier, and optional feedback.</p>
+      <h4>2. How We Use Your Data</h4><p>Your data is used to operate your account, display search history, prevent abuse, and improve the Service. We do not sell your personal data.</p>
+      <h4>3. Data Storage</h4><p>Data is stored in Google Sheets. Your password is hashed before storage — we never store plain-text passwords.</p>
+      <h4>4. Third-Party Services</h4><p>We use Gumroad for payment processing and the NHTSA public API for vehicle data.</p>
+      <h4>5. Data Retention</h4><p>We retain your data for as long as your account is active. You may request deletion by contacting support.</p>
+      <p style="margin-top:12px;font-style:italic;color:var(--ink-muted);">Last updated: 2025.</p>
     </div>
     <button class="btn btn-primary btn-full" onclick="closeModal('modal-privacy')">Got it</button>
   </div>
@@ -1571,7 +1066,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     &nbsp;·&nbsp; <a href="#" onclick="openModal('modal-terms'); return false;">Terms</a>
     &nbsp;·&nbsp; <a href="#" onclick="openModal('modal-privacy'); return false;">Privacy</a>
     &nbsp;·&nbsp; <a href="#" onclick="openModal('modal-message'); return false;">Support</a>
-    &nbsp;·&nbsp; <span id="footer-support-email"><!-- FILL IN: your support email --></span>
+    &nbsp;·&nbsp; <span id="footer-support-email"></span>
   </p>
 </footer>
 
@@ -1580,7 +1075,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
      ============================================================ -->
 <script>
 /* ============================================================
-   CONFIG — FILL IN THESE VALUES BEFORE LAUNCH
+   CONFIG — FILL IN BEFORE LAUNCH
    ============================================================ */
 const CONFIG = {
   APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyj1u-0j1rT2F28mDV5Kw5ny-JK_4HYb-AyHF04_e_6s61gzz2YfuE-Oep7XXw-5D0A/exec',
@@ -1596,20 +1091,43 @@ const CONFIG = {
    STATE
    ============================================================ */
 const state = {
-  sessionToken: null,
-  userId: null,
-  email: null,
-  tokens: 0,
-  searchCount: 0,
-  ratingShown: false,
-  currentPage: 'page-landing',
-  pendingEmail: null,
-  resetEmail: null,
-  searchTab: 'vin',
-  selectedPack: 'basic',
+  sessionToken:  null,
+  userId:        null,
+  email:         null,
+  tokens:        0,
+  searchCount:   0,
+  ratingShown:   false,
+  currentPage:   'page-landing',
+  pendingEmail:  null,
+  resetEmail:    null,
+  searchTab:     'vin',
+  selectedPack:  'basic',
   currentRating: 0,
-  history: [],
-  rateLimitTimers: {},
+  history:       [],
+};
+
+/* ============================================================
+   INTELLIGENCE ENGINE — CLASS AVERAGES
+   These are approximate reference averages derived from NHTSA
+   population data and used only for comparative context.
+   They are not guaranteed to be exact.
+   ============================================================ */
+const CLASS_AVERAGES = {
+  sedan:     { complaintsPerYear: 180, recalls: 1.8 },
+  suv:       { complaintsPerYear: 220, recalls: 2.0 },
+  truck:     { complaintsPerYear: 190, recalls: 1.9 },
+  minivan:   { complaintsPerYear: 160, recalls: 1.7 },
+  coupe:     { complaintsPerYear: 140, recalls: 1.5 },
+  hatchback: { complaintsPerYear: 150, recalls: 1.6 },
+  ev:        { complaintsPerYear: 130, recalls: 1.4 },
+  default:   { complaintsPerYear: 180, recalls: 1.8 },
+};
+
+// Recall component risk weights
+const RECALL_WEIGHTS = {
+  high:   ['brakes', 'brake', 'fuel', 'engine', 'fire', 'accelerat', 'airbag', 'air bag', 'rollover', 'steering', 'electrical', 'ignition'],
+  medium: ['transmission', 'suspension', 'powertrain', 'cooling', 'exhaust', 'tires', 'wheels'],
+  low:    ['label', 'manual', 'owner', 'documentation', 'lights', 'visibility', 'mirror', 'window', 'seat belt'],
 };
 
 /* ============================================================
@@ -1683,19 +1201,9 @@ function showUnauthed() {
 /* ============================================================
    MODALS
    ============================================================ */
-function openModal(id) {
-  const m = document.getElementById(id);
-  if (m) m.classList.remove('hidden');
-}
-
-function closeModal(id) {
-  const m = document.getElementById(id);
-  if (m) m.classList.add('hidden');
-}
-
-function overlayClose(event, id) {
-  if (event.target === event.currentTarget) closeModal(id);
-}
+function openModal(id)  { const m = document.getElementById(id); if (m) m.classList.remove('hidden'); }
+function closeModal(id) { const m = document.getElementById(id); if (m) m.classList.add('hidden'); }
+function overlayClose(event, id) { if (event.target === event.currentTarget) closeModal(id); }
 
 /* ============================================================
    ALERTS
@@ -1704,11 +1212,7 @@ function showAlert(containerId, type, message) {
   const icons = { error: '⚠️', success: '✅', info: 'ℹ️' };
   const el = document.getElementById(containerId);
   if (!el) return;
-  el.innerHTML = `
-    <div class="alert alert-${type}">
-      <span class="alert-icon">${icons[type] || 'ℹ️'}</span>
-      <span>${message}</span>
-    </div>`;
+  el.innerHTML = `<div class="alert alert-${type}"><span class="alert-icon">${icons[type] || 'ℹ️'}</span><span>${message}</span></div>`;
 }
 
 function clearAlerts() {
@@ -1723,14 +1227,10 @@ function progressStart() {
   bar.style.width = '35%';
   bar.classList.add('active');
 }
-
 function progressDone() {
   const bar = document.getElementById('progress-bar');
   bar.style.width = '100%';
-  setTimeout(() => {
-    bar.classList.remove('active');
-    bar.style.width = '0';
-  }, 400);
+  setTimeout(() => { bar.classList.remove('active'); bar.style.width = '0'; }, 400);
 }
 
 /* ============================================================
@@ -1749,13 +1249,13 @@ function setBtnLoading(btnId, loading, text) {
 }
 
 /* ============================================================
-   API CALL (JSONP-SAFE)
+   API CALL (JSONP)
    ============================================================ */
-let _jsonpCallbackCounter = 0;
+let _jsonpCounter = 0;
 
 function apiCall(action, params) {
   progressStart();
-  const deviceId = localStorage.getItem('cc_device_id') || '';
+  const deviceId  = localStorage.getItem('cc_device_id') || '';
   const allParams = Object.assign({ action, deviceId }, params);
   if (state.sessionToken) allParams.sessionToken = state.sessionToken;
 
@@ -1764,70 +1264,43 @@ function apiCall(action, params) {
     .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(allParams[k]))
     .join('&');
 
-  const callbackName = '_cc_cb_' + (++_jsonpCallbackCounter);
-  const url = CONFIG.APPS_SCRIPT_URL + '?' + qs + '&callback=' + callbackName;
+  const cbName = '_cc_cb_' + (++_jsonpCounter);
+  const url    = CONFIG.APPS_SCRIPT_URL + '?' + qs + '&callback=' + cbName;
 
   return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    const timeout = setTimeout(() => {
-      cleanup();
-      reject(new Error('Request timed out. Please check your connection.'));
-    }, 30000);
+    const script  = document.createElement('script');
+    const timeout = setTimeout(() => { cleanup(); reject(new Error('Request timed out. Please check your connection.')); }, 35000);
 
-    window[callbackName] = (data) => {
-      cleanup();
-      progressDone();
-      resolve(data);
-    };
+    window[cbName] = (data) => { cleanup(); progressDone(); resolve(data); };
 
     function cleanup() {
       clearTimeout(timeout);
-      delete window[callbackName];
+      delete window[cbName];
       if (script.parentNode) script.parentNode.removeChild(script);
     }
 
-    script.onerror = () => {
-      cleanup();
-      progressDone();
-      reject(new Error('Network error. Please check your connection.'));
-    };
-
+    script.onerror = () => { cleanup(); progressDone(); reject(new Error('Network error. Please check your connection.')); };
     script.src = url;
     document.head.appendChild(script);
   });
 }
 
 /* ============================================================
-   DEVICE ID
-   ============================================================ */
-function getDeviceId() {
-  return localStorage.getItem('cc_device_id') || '';
-}
-
-/* ============================================================
-   SESSION MANAGEMENT
+   SESSION
    ============================================================ */
 function saveSession(token, userId, email) {
-  state.sessionToken = token;
-  state.userId = userId;
-  state.email  = email;
+  state.sessionToken = token; state.userId = userId; state.email = email;
   localStorage.setItem('cc_session', token);
   localStorage.setItem('cc_uid',     userId);
   localStorage.setItem('cc_email',   email);
 }
-
 function clearSession() {
-  state.sessionToken = null;
-  state.userId = null;
-  state.email  = null;
+  state.sessionToken = state.userId = state.email = null;
   localStorage.removeItem('cc_session');
   localStorage.removeItem('cc_uid');
   localStorage.removeItem('cc_email');
 }
 
-/* ============================================================
-   TOKEN CHIP
-   ============================================================ */
 function updateTokenChip() {
   document.getElementById('nav-token-count').textContent = state.tokens;
 }
@@ -1838,13 +1311,8 @@ function updateTokenChip() {
 document.getElementById('su-country').addEventListener('change', function() {
   const unsupported = document.getElementById('unsupported-country');
   const suBtn = document.getElementById('su-btn');
-  if (this.value === 'OTHER') {
-    unsupported.classList.remove('hidden');
-    suBtn.disabled = true;
-  } else {
-    unsupported.classList.add('hidden');
-    suBtn.disabled = false;
-  }
+  if (this.value === 'OTHER') { unsupported.classList.remove('hidden'); suBtn.disabled = true; }
+  else { unsupported.classList.add('hidden'); suBtn.disabled = false; }
 });
 
 /* ============================================================
@@ -1852,10 +1320,10 @@ document.getElementById('su-country').addEventListener('change', function() {
    ============================================================ */
 async function doSignup() {
   clearAlerts();
-  const email  = document.getElementById('su-email').value.trim().toLowerCase();
-  const pass   = document.getElementById('su-pass').value;
-  const pass2  = document.getElementById('su-pass2').value;
-  const terms  = document.getElementById('su-terms').checked;
+  const email   = document.getElementById('su-email').value.trim().toLowerCase();
+  const pass    = document.getElementById('su-pass').value;
+  const pass2   = document.getElementById('su-pass2').value;
+  const terms   = document.getElementById('su-terms').checked;
   const country = document.getElementById('su-country').value;
 
   if (!email || !validateEmail(email)) return showAlert('signup-alert', 'error', 'Please enter a valid email address.');
@@ -1875,11 +1343,8 @@ async function doSignup() {
     } else {
       showAlert('signup-alert', 'error', r.error || 'Signup failed. Please try again.');
     }
-  } catch (e) {
-    showAlert('signup-alert', 'error', e.message);
-  } finally {
-    setBtnLoading('su-btn', false);
-  }
+  } catch (e) { showAlert('signup-alert', 'error', e.message); }
+  finally { setBtnLoading('su-btn', false); }
 }
 
 /* ============================================================
@@ -1890,13 +1355,9 @@ function codeInput(el, idx) {
   el.value = val.slice(-1);
   if (val && idx < 5) document.getElementById('vc' + (idx + 1)).focus();
 }
-
 function codeBack(e, idx) {
-  if (e.key === 'Backspace' && !e.target.value && idx > 0) {
-    document.getElementById('vc' + (idx - 1)).focus();
-  }
+  if (e.key === 'Backspace' && !e.target.value && idx > 0) document.getElementById('vc' + (idx - 1)).focus();
 }
-
 function getVerifyCode() {
   return [0,1,2,3,4,5].map(i => document.getElementById('vc' + i).value).join('');
 }
@@ -1904,25 +1365,20 @@ function getVerifyCode() {
 async function doVerifyEmail() {
   const code = getVerifyCode();
   if (code.length !== 6) return showAlert('verify-alert', 'error', 'Please enter the full 6-digit code.');
-
   setBtnLoading('verify-btn', true, 'Verifying');
   try {
     const r = await apiCall('verifyEmail', { email: state.pendingEmail, code });
     if (r.ok) {
       saveSession(r.sessionToken, r.userId, state.pendingEmail);
-      state.tokens      = r.tokens;
-      state.searchCount = 0;
+      state.tokens = r.tokens; state.searchCount = 0;
       updateTokenChip();
       showAuthed();
       showAlert('search-alert', 'success', '🎉 Account verified! You have 3 free searches ready.');
     } else {
       showAlert('verify-alert', 'error', r.error || 'Invalid or expired code.');
     }
-  } catch (e) {
-    showAlert('verify-alert', 'error', e.message);
-  } finally {
-    setBtnLoading('verify-btn', false);
-  }
+  } catch (e) { showAlert('verify-alert', 'error', e.message); }
+  finally { setBtnLoading('verify-btn', false); }
 }
 
 async function resendVerification() {
@@ -1930,9 +1386,7 @@ async function resendVerification() {
     const r = await apiCall('resendVerification', { email: state.pendingEmail });
     showAlert('verify-alert', r.ok ? 'success' : 'error',
       r.ok ? 'A new code has been sent.' : (r.error || 'Could not resend. Try again shortly.'));
-  } catch (e) {
-    showAlert('verify-alert', 'error', e.message);
-  }
+  } catch (e) { showAlert('verify-alert', 'error', e.message); }
 }
 
 /* ============================================================
@@ -1942,32 +1396,24 @@ async function doLogin() {
   clearAlerts();
   const email = document.getElementById('li-email').value.trim().toLowerCase();
   const pass  = document.getElementById('li-pass').value;
-
   if (!email || !validateEmail(email)) return showAlert('login-alert', 'error', 'Please enter a valid email.');
-  if (!pass)  return showAlert('login-alert', 'error', 'Please enter your password.');
-
+  if (!pass) return showAlert('login-alert', 'error', 'Please enter your password.');
   setBtnLoading('li-btn', true, 'Signing in');
   try {
     const r = await apiCall('login', { email, password: hashClient(pass) });
     if (r.ok) {
       saveSession(r.sessionToken, r.userId, email);
-      state.tokens      = r.tokens;
-      state.searchCount = r.searchCount;
+      state.tokens = r.tokens; state.searchCount = r.searchCount;
       updateTokenChip();
       showAuthed();
     } else {
       showAlert('login-alert', 'error', r.error || 'Login failed. Check your email and password.');
     }
-  } catch (e) {
-    showAlert('login-alert', 'error', e.message);
-  } finally {
-    setBtnLoading('li-btn', false);
-  }
+  } catch (e) { showAlert('login-alert', 'error', e.message); }
+  finally { setBtnLoading('li-btn', false); }
 }
 
-document.getElementById('li-pass').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doLogin();
-});
+document.getElementById('li-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 
 /* ============================================================
    LOGOUT
@@ -1975,9 +1421,7 @@ document.getElementById('li-pass').addEventListener('keydown', e => {
 async function doLogout() {
   try { await apiCall('logout', {}); } catch {}
   clearSession();
-  state.tokens = 0;
-  state.searchCount = 0;
-  state.history = [];
+  state.tokens = 0; state.searchCount = 0; state.history = [];
   document.getElementById('results-area').innerHTML = '';
   document.getElementById('history-card').style.display = 'none';
   showUnauthed();
@@ -1989,7 +1433,6 @@ async function doLogout() {
 async function doRequestReset() {
   const email = document.getElementById('rr-email').value.trim().toLowerCase();
   if (!email || !validateEmail(email)) return showAlert('reset-req-alert', 'error', 'Please enter a valid email.');
-
   setBtnLoading('rr-btn', true, 'Sending code');
   try {
     const r = await apiCall('requestPasswordReset', { email });
@@ -1997,43 +1440,27 @@ async function doRequestReset() {
       state.resetEmail = email;
       showAlert('reset-req-alert', 'success', 'Reset code sent! Check your inbox (and spam folder).');
       setTimeout(() => showPage('page-reset-confirm'), 1800);
-    } else {
-      showAlert('reset-req-alert', 'error', r.error || 'Could not send reset code. Try again.');
-    }
-  } catch (e) {
-    showAlert('reset-req-alert', 'error', e.message);
-  } finally {
-    setBtnLoading('rr-btn', false);
-  }
+    } else { showAlert('reset-req-alert', 'error', r.error || 'Could not send reset code.'); }
+  } catch (e) { showAlert('reset-req-alert', 'error', e.message); }
+  finally { setBtnLoading('rr-btn', false); }
 }
 
 async function doConfirmReset() {
   const code  = document.getElementById('rc-code').value.trim();
   const pass  = document.getElementById('rc-pass').value;
   const pass2 = document.getElementById('rc-pass2').value;
-
   if (!code || code.length < 6) return showAlert('reset-conf-alert', 'error', 'Enter the 6-digit reset code.');
   if (!pass || pass.length < 8) return showAlert('reset-conf-alert', 'error', 'Password must be at least 8 characters.');
   if (pass !== pass2)           return showAlert('reset-conf-alert', 'error', 'Passwords do not match.');
-
   setBtnLoading('rc-btn', true, 'Resetting password');
   try {
-    const r = await apiCall('confirmPasswordReset', {
-      email: state.resetEmail,
-      code,
-      newPassword: hashClient(pass)
-    });
+    const r = await apiCall('confirmPasswordReset', { email: state.resetEmail, code, newPassword: hashClient(pass) });
     if (r.ok) {
       showAlert('reset-conf-alert', 'success', 'Password updated! You can now sign in.');
       setTimeout(() => showPage('page-login'), 2000);
-    } else {
-      showAlert('reset-conf-alert', 'error', r.error || 'Reset failed. Check your code and try again.');
-    }
-  } catch (e) {
-    showAlert('reset-conf-alert', 'error', e.message);
-  } finally {
-    setBtnLoading('rc-btn', false);
-  }
+    } else { showAlert('reset-conf-alert', 'error', r.error || 'Reset failed. Check your code and try again.'); }
+  } catch (e) { showAlert('reset-conf-alert', 'error', e.message); }
+  finally { setBtnLoading('rc-btn', false); }
 }
 
 /* ============================================================
@@ -2049,17 +1476,13 @@ function switchTab(tab) {
 
 async function doSearch() {
   clearAlerts();
-
-  if (state.tokens <= 0) {
-    showPage('page-paywall');
-    return;
-  }
+  if (state.tokens <= 0) { showPage('page-paywall'); return; }
 
   let searchData = { searchType: state.searchTab };
   if (state.searchTab === 'vin') {
     const vin = document.getElementById('search-vin').value.trim().toUpperCase();
     if (!vin || vin.length !== 17) return showAlert('search-alert', 'error', 'Please enter a valid 17-character VIN.');
-    if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)) return showAlert('search-alert', 'error', 'VIN contains invalid characters. VINs use letters A–Z (except I, O, Q) and digits 0–9.');
+    if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)) return showAlert('search-alert', 'error', 'VIN contains invalid characters.');
     searchData.vin = vin;
   } else {
     const year  = document.getElementById('search-year').value.trim();
@@ -2073,24 +1496,23 @@ async function doSearch() {
   }
 
   setBtnLoading('search-btn', true, 'Fetching records');
-
-  // Premium multi-step loader
   document.getElementById('results-area').innerHTML = buildPremiumLoader();
   setTimeout(() => activateLoaderStep(0), 100);
   setTimeout(() => activateLoaderStep(1), 900);
   setTimeout(() => activateLoaderStep(2), 1800);
-  setTimeout(() => activateLoaderStep(3), 2600);
+  setTimeout(() => activateLoaderStep(3), 2700);
+  setTimeout(() => activateLoaderStep(4), 3400);
 
   try {
     const r = await apiCall('searchCar', searchData);
     if (r.ok) {
-      state.tokens = r.tokensRemaining;
+      state.tokens      = r.tokensRemaining;
       state.searchCount = r.searchCount;
       updateTokenChip();
       renderPremiumReport(r);
       addToHistory(r, searchData);
       checkRatingTrigger();
-    } else if (r.noTokens) {
+    } else if (r.error === 'no_tokens') {
       document.getElementById('results-area').innerHTML = '';
       showPage('page-paywall');
     } else {
@@ -2112,181 +1534,488 @@ function buildPremiumLoader() {
   return `
   <div class="premium-loader" id="premium-loader">
     <div class="spinner" style="margin-bottom:16px;"></div>
-    <h3>Building Your CarClarity Report</h3>
+    <h3>Building Your CarClarity Intelligence Report</h3>
     <p class="loader-sub">Querying official government databases…</p>
     <div class="loader-steps">
-      <div class="loader-step" id="lstep-0">
-        <div class="step-dot" id="lstep-dot-0">1</div>
-        <span>Checking NHTSA recall database</span>
-      </div>
-      <div class="loader-step" id="lstep-1">
-        <div class="step-dot" id="lstep-dot-1">2</div>
-        <span>Fetching consumer complaints</span>
-      </div>
-      <div class="loader-step" id="lstep-2">
-        <div class="step-dot" id="lstep-dot-2">3</div>
-        <span>Loading vehicle specifications &amp; NCAP safety ratings</span>
-      </div>
-      <div class="loader-step" id="lstep-3">
-        <div class="step-dot" id="lstep-dot-3">4</div>
-        <span>Generating risk analysis</span>
-      </div>
+      <div class="loader-step" id="lstep-0"><div class="step-dot" id="lstep-dot-0">1</div><span>Checking NHTSA recall database</span></div>
+      <div class="loader-step" id="lstep-1"><div class="step-dot" id="lstep-dot-1">2</div><span>Fetching consumer complaints</span></div>
+      <div class="loader-step" id="lstep-2"><div class="step-dot" id="lstep-dot-2">3</div><span>Loading vehicle specs &amp; NCAP safety ratings</span></div>
+      <div class="loader-step" id="lstep-3"><div class="step-dot" id="lstep-dot-3">4</div><span>Running intelligence &amp; risk analysis</span></div>
+      <div class="loader-step" id="lstep-4"><div class="step-dot" id="lstep-dot-4">5</div><span>Generating your personalized report</span></div>
     </div>
   </div>`;
 }
 
 function activateLoaderStep(idx) {
-  // Mark previous as done
   if (idx > 0) {
     const prev = document.getElementById('lstep-' + (idx - 1));
-    if (prev) {
-      prev.classList.remove('active');
-      prev.classList.add('done');
-      const dot = document.getElementById('lstep-dot-' + (idx - 1));
-      if (dot) dot.textContent = '✓';
-    }
+    if (prev) { prev.classList.remove('active'); prev.classList.add('done'); const dot = document.getElementById('lstep-dot-' + (idx - 1)); if (dot) dot.textContent = '✓'; }
   }
   const step = document.getElementById('lstep-' + idx);
   if (step) step.classList.add('active');
 }
 
 /* ============================================================
-   PREMIUM REPORT RENDERER
+   ★ INTELLIGENCE ENGINE — CLIENT-SIDE SCORING LAYER ★
+   These functions run on data returned by the backend and apply
+   normalization, weighted scoring, and dynamic narrative generation.
+   ============================================================ */
+
+/**
+ * Detects vehicle class from specs body class string.
+ */
+function detectVehicleClass(specs) {
+  if (!specs) return 'default';
+  const body = (specs.bodyClass || specs.vehicleType || '').toLowerCase();
+  const fuel = (specs.fuelType || '').toLowerCase();
+  if (fuel.includes('electric')) return 'ev';
+  if (body.includes('truck') || body.includes('pickup')) return 'truck';
+  if (body.includes('van') || body.includes('minivan')) return 'minivan';
+  if (body.includes('suv') || body.includes('utility')) return 'suv';
+  if (body.includes('hatchback')) return 'hatchback';
+  if (body.includes('coupe') || body.includes('convertible')) return 'coupe';
+  if (body.includes('sedan')) return 'sedan';
+  return 'default';
+}
+
+/**
+ * Detects if vehicle is an EV or Hybrid from specs.
+ */
+function detectIsEV(specs) {
+  if (!specs) return false;
+  const fuel = (specs.fuelType || '').toLowerCase();
+  return fuel.includes('electric') || fuel.includes('ev') || fuel.includes('battery');
+}
+function detectIsHybrid(specs) {
+  if (!specs) return false;
+  const fuel = (specs.fuelType || '').toLowerCase();
+  return fuel.includes('hybrid');
+}
+
+/**
+ * STATISTICAL NORMALIZATION:
+ * Calculates complaints-per-year-of-age as a normalized proxy
+ * when real sales volume is unavailable (no public API for that).
+ * Returns { rate, vehicleAge, normalized: true }.
+ */
+function calcNormalizedComplaintRate(complaintCount, modelYear, specs) {
+  const currentYear = new Date().getFullYear();
+  const age = modelYear ? Math.max(1, currentYear - parseInt(modelYear)) : 5;
+  const ratePerYear = complaintCount / age;
+
+  const vehicleClass    = detectVehicleClass(specs);
+  const classAvg        = CLASS_AVERAGES[vehicleClass] || CLASS_AVERAGES.default;
+  const avgRatePerYear  = classAvg.complaintsPerYear;
+
+  // Relative index: 1.0 = exactly average, >1 = worse than avg, <1 = better
+  const relativeIndex   = ratePerYear / avgRatePerYear;
+
+  return {
+    ratePerYear:    Math.round(ratePerYear * 10) / 10,
+    vehicleAge:     age,
+    vehicleClass:   vehicleClass,
+    avgPerYear:     avgRatePerYear,
+    relativeIndex:  Math.round(relativeIndex * 100) / 100,
+    normalized:     true,
+  };
+}
+
+/**
+ * WEIGHTED RECALL SCORING:
+ * Returns a weighted recall risk score and a severity label.
+ * High-risk components (brakes, fuel, airbag) count more than labels/lights.
+ */
+function calcWeightedRecallScore(recallDetails, recallCount) {
+  if (!recallDetails || recallDetails.length === 0) {
+    return { weightedScore: recallCount, dominantSeverity: recallCount > 0 ? 'unknown' : 'none', breakdown: {} };
+  }
+
+  let weightedScore = 0;
+  const breakdown   = { high: 0, medium: 0, low: 0 };
+
+  recallDetails.forEach(recall => {
+    const compRaw  = (recall.component || recall.summary || '').toLowerCase();
+    let   weight   = 1.5; // default medium weight
+    let   severity = 'medium';
+
+    for (const kw of RECALL_WEIGHTS.high) {
+      if (compRaw.includes(kw)) { weight = 3.0; severity = 'high'; break; }
+    }
+    if (severity !== 'high') {
+      for (const kw of RECALL_WEIGHTS.low) {
+        if (compRaw.includes(kw)) { weight = 0.5; severity = 'low'; break; }
+      }
+    }
+    weightedScore += weight;
+    breakdown[severity]++;
+  });
+
+  // If we only have count (no details), fall back to flat scoring
+  if (recallDetails.length < recallCount) {
+    const extra = recallCount - recallDetails.length;
+    weightedScore += extra * 1.5;
+  }
+
+  const dominantSeverity = breakdown.high > 0 ? 'high' : (breakdown.low === recallDetails.length ? 'low' : 'medium');
+  return { weightedScore: Math.round(weightedScore * 10) / 10, dominantSeverity, breakdown };
+}
+
+/**
+ * NORMALIZED RISK SCORE (1-10):
+ * Uses normalized complaint rate + weighted recall score instead
+ * of flat thresholds. Much more accurate for real-world vehicles.
+ */
+function calcIntelligentRiskScore(r, normRate, weightedRecall) {
+  let score = 1;
+
+  // Complaint contribution — relative index based (not flat count)
+  const ri = normRate.relativeIndex;
+  if (ri > 4.0)      score += 4;
+  else if (ri > 2.5) score += 3;
+  else if (ri > 1.5) score += 2;
+  else if (ri > 1.0) score += 1;
+  else if (ri > 0.5) score += 0.5;
+
+  // Weighted recall contribution
+  const ws = weightedRecall.weightedScore;
+  if (ws > 12)     score += 4;
+  else if (ws > 8) score += 3;
+  else if (ws > 4) score += 2;
+  else if (ws > 2) score += 1;
+  else if (ws > 0) score += 0.5;
+
+  // Severity bump: if dominant recalls are safety-critical, +1
+  if (weightedRecall.dominantSeverity === 'high' && weightedRecall.breakdown.high >= 2) {
+    score += 1;
+  }
+
+  return Math.min(10, Math.max(1, Math.round(score)));
+}
+
+/**
+ * DYNAMIC VERDICT NARRATIVE:
+ * Generates a specific, data-driven explanation of WHY the car got
+ * its score — not a generic bucket text.
+ */
+function buildDynamicVerdict(r, normRate, weightedRecall, riskScore, vehicleClass, isEV) {
+  const recallCount    = r.recallCount    || 0;
+  const complaintCount = r.complaintCount || 0;
+  const breakdown      = r.complaintBreakdown || {};
+  const topComponent   = Object.keys(breakdown).sort((a, b) => breakdown[b] - breakdown[a])[0] || null;
+
+  const parts = [];
+
+  // Opening: normalized context
+  if (normRate.ratePerYear > 0) {
+    const vsAvg = normRate.relativeIndex;
+    if (vsAvg > 1.5) {
+      parts.push(`This vehicle generates approximately ${normRate.ratePerYear} complaints per year of ownership — ${Math.round((vsAvg - 1) * 100)}% above the average ${normRate.vehicleClass === 'default' ? 'vehicle' : normRate.vehicleClass}.`);
+    } else if (vsAvg < 0.7) {
+      parts.push(`This vehicle generates approximately ${normRate.ratePerYear} complaints per year — ${Math.round((1 - vsAvg) * 100)}% below the class average, which is a positive signal.`);
+    } else {
+      parts.push(`At approximately ${normRate.ratePerYear} complaints per year, this vehicle sits within a normal range for its class.`);
+    }
+  }
+
+  // Recall narrative
+  if (recallCount === 0) {
+    parts.push('No safety recalls are on record, which is a strong positive indicator.');
+  } else if (weightedRecall.dominantSeverity === 'high') {
+    parts.push(`The ${recallCount} recall(s) on record include safety-critical components (brakes, fuel, or airbags), which carry elevated risk weight in this analysis.`);
+  } else if (weightedRecall.dominantSeverity === 'low') {
+    parts.push(`The ${recallCount} recall(s) on record involve lower-severity items such as documentation or lighting — these are less concerning than mechanical safety recalls.`);
+  } else {
+    parts.push(`${recallCount} recall(s) are on record with moderate risk weighting.`);
+  }
+
+  // Top complaint driver
+  if (topComponent) {
+    const topCount = breakdown[topComponent];
+    parts.push(`The primary driver of complaints is the <strong>${escapeHtml(topComponent)}</strong> system (${topCount.toLocaleString()} reports), which accounts for the largest share of owner-reported issues.`);
+  }
+
+  // EV-specific signal
+  if (isEV) {
+    const batteryIssues = Object.keys(breakdown).some(k => k.toLowerCase().includes('battery') || k.toLowerCase().includes('charg') || k.toLowerCase().includes('electric'));
+    if (batteryIssues) {
+      parts.push('⚡ <strong>EV Alert:</strong> Battery or charging system complaints are present. For a used EV purchase, a battery health report and charging port inspection are strongly recommended.');
+    } else {
+      parts.push('⚡ This electric vehicle does not show significant battery-related complaint patterns, which is a positive signal for battery health.');
+    }
+  }
+
+  return parts.join(' ');
+}
+
+/**
+ * RED FLAG: identifies the single most critical issue from data.
+ */
+function buildRedFlag(r, normRate, weightedRecall) {
+  const recallCount    = r.recallCount    || 0;
+  const breakdown      = r.complaintBreakdown || {};
+  const recallDetails  = r.recallDetails  || [];
+
+  // Priority 1: High-severity recall
+  if (weightedRecall.dominantSeverity === 'high' && weightedRecall.breakdown.high >= 1) {
+    const highRecall = recallDetails.find(rec => {
+      const c = (rec.component || rec.summary || '').toLowerCase();
+      return RECALL_WEIGHTS.high.some(kw => c.includes(kw));
+    });
+    return {
+      show:  true,
+      title: `Safety-Critical Recall: ${highRecall ? (highRecall.component || 'See NHTSA') : 'High-Severity Recall on Record'}`,
+      desc:  highRecall && highRecall.summary
+        ? highRecall.summary.slice(0, 200) + (highRecall.summary.length > 200 ? '…' : '')
+        : `This vehicle has ${recallCount} recall(s) involving safety-critical components. Visit nhtsa.gov/recalls to check resolution status immediately.`,
+    };
+  }
+
+  // Priority 2: Dominant complaint component if very high
+  const sorted = Object.entries(breakdown).sort((a, b) => b[1] - a[1]);
+  if (sorted.length > 0) {
+    const [topComp, topCount] = sorted[0];
+    if (normRate.relativeIndex > 1.5 && topCount > 50) {
+      return {
+        show:  true,
+        title: `Recurring ${topComp} Issues`,
+        desc:  `${topCount.toLocaleString()} owner complaints are focused on the ${topComp.toLowerCase()} system — the most concentrated problem area for this vehicle. This warrants specific inspection before purchase.`,
+      };
+    }
+  }
+
+  // Priority 3: High normalized rate with no specific recall
+  if (normRate.relativeIndex > 2.5) {
+    return {
+      show:  true,
+      title: 'Significantly Above-Average Complaint Volume',
+      desc:  `This vehicle has ${Math.round((normRate.relativeIndex - 1) * 100)}% more complaints per year than the average vehicle in its class. While this doesn't predict failure, it signals higher-than-normal owner-reported problems.`,
+    };
+  }
+
+  return { show: false, title: '', desc: '' };
+}
+
+/**
+ * MAINTENANCE FORECAST:
+ * Estimates upcoming service needs based on current mileage,
+ * vehicle age, and fuel type.
+ */
+function buildMaintenanceForecast(mileage, modelYear, specs) {
+  if (!mileage || mileage <= 0) return null;
+
+  const currentYear = new Date().getFullYear();
+  const age         = modelYear ? currentYear - parseInt(modelYear) : 0;
+  const isEV        = detectIsEV(specs);
+  const isHybrid    = detectIsHybrid(specs);
+  const mi          = parseInt(mileage);
+
+  function statusOf(dueAt) {
+    const remaining = dueAt - mi;
+    if (remaining <= 0)      return 'due-soon';
+    if (remaining <= 10000)  return 'due-near';
+    return 'due-future';
+  }
+  function labelOf(dueAt) {
+    const remaining = dueAt - mi;
+    if (remaining <= 0)      return { cls: 'status-soon',   text: 'Overdue' };
+    if (remaining <= 10000)  return { cls: 'status-near',   text: `Due in ~${(remaining/1000).toFixed(0)}k mi` };
+    return                          { cls: 'status-future', text: `Due at ~${(dueAt/1000).toFixed(0)}k mi` };
+  }
+
+  const items = [];
+
+  if (isEV) {
+    items.push({ icon: '🔋', name: 'Battery Health Check', dueAt: Math.ceil(mi / 25000) * 25000, note: 'Have battery capacity tested by a certified EV technician.' });
+    items.push({ icon: '🔌', name: 'Charging Port & Cable Inspection', dueAt: Math.ceil(mi / 30000) * 30000, note: 'Inspect for corrosion, debris, and wear.' });
+    items.push({ icon: '🧊', name: 'Coolant System (Battery Thermal Mgmt)', dueAt: Math.ceil(mi / 50000) * 50000, note: 'Critical for EV battery longevity in hot climates.' });
+    items.push({ icon: '🛑', name: 'Brake Fluid', dueAt: Math.ceil(mi / 45000) * 45000, note: 'EVs use regenerative braking but still need brake fluid changes.' });
+  } else {
+    // Timing belt/chain (petrol/hybrid)
+    const timingDue = 100000;
+    items.push({ icon: '⚙️', name: 'Timing Belt / Chain Service', dueAt: timingDue, note: mi >= timingDue ? 'If unserviced, this is a critical failure risk.' : 'One of the most important high-mileage services.' });
+
+    // Spark plugs
+    const plugDue = Math.ceil(mi / 60000) * 60000;
+    items.push({ icon: '⚡', name: 'Spark Plugs', dueAt: plugDue, note: 'Worn plugs cause misfires and reduced fuel economy.' });
+
+    // Transmission fluid
+    const txFluidDue = Math.ceil(mi / 60000) * 60000;
+    items.push({ icon: '🔩', name: 'Transmission Fluid Change', dueAt: txFluidDue, note: 'Critical for automatic transmissions — neglect leads to costly repairs.' });
+
+    // Coolant flush
+    const coolantDue = Math.ceil(mi / 50000) * 50000;
+    items.push({ icon: '🌡️', name: 'Coolant Flush', dueAt: coolantDue, note: 'Prevents corrosion and overheating.' });
+
+    if (isHybrid) {
+      items.push({ icon: '🔋', name: 'Hybrid Battery Health Check', dueAt: Math.ceil(mi / 40000) * 40000, note: 'Hybrid battery degradation affects fuel economy and can be expensive to replace.' });
+    }
+
+    // Brake fluid
+    const brakeDue = Math.ceil(mi / 45000) * 45000;
+    items.push({ icon: '🛑', name: 'Brake Fluid Change', dueAt: brakeDue, note: 'Absorbs moisture over time, reducing stopping effectiveness.' });
+  }
+
+  // Universal items
+  const airFilterDue = Math.ceil(mi / 20000) * 20000;
+  items.push({ icon: '💨', name: 'Air Filter', dueAt: airFilterDue, note: 'Dirty filters reduce performance and fuel economy.' });
+
+  // Sort: overdue first, then soonest due
+  items.sort((a, b) => (a.dueAt - mi) - (b.dueAt - mi));
+
+  return items.map(item => {
+    const status = statusOf(item.dueAt);
+    const label  = labelOf(item.dueAt);
+    return { ...item, status, label };
+  }).slice(0, 6); // show top 6
+}
+
+/**
+ * MARKET CONTEXT:
+ * Compares this vehicle against its class average.
+ */
+function buildMarketContext(r, normRate, vehicleClass) {
+  const classAvg = CLASS_AVERAGES[vehicleClass] || CLASS_AVERAGES.default;
+  const ri       = normRate.relativeIndex;
+
+  let compareLabel, compareClass, compareText;
+  if (ri < 0.7) {
+    compareLabel = `${Math.round((1 - ri) * 100)}% fewer complaints than class average`;
+    compareClass = 'better';
+    compareText  = `This vehicle has fewer reported issues per year than the typical ${vehicleClass === 'default' ? 'vehicle' : vehicleClass} in NHTSA records — a relative positive signal.`;
+  } else if (ri > 1.4) {
+    compareLabel = `${Math.round((ri - 1) * 100)}% more complaints than class average`;
+    compareClass = 'worse';
+    compareText  = `This vehicle has more complaints per year than the average ${vehicleClass === 'default' ? 'vehicle' : vehicleClass}. This context is important — a high absolute count on a popular model may still be average.`;
+  } else {
+    compareLabel = 'In line with class average';
+    compareClass = 'avg';
+    compareText  = `This vehicle's complaint rate is within a normal range compared to similar vehicles in NHTSA records.`;
+  }
+
+  // Bar widths: cap at 100%, vehicle bar relative to class average
+  const thisVehiclePct = Math.min(100, Math.round(normRate.ratePerYear / Math.max(1, classAvg.complaintsPerYear) * 100));
+  const classAvgPct    = 100;
+
+  return {
+    vehicleClass,
+    compareLabel,
+    compareClass,
+    compareText,
+    thisVehiclePct,
+    classAvgPct,
+    thisRatePerYear:  normRate.ratePerYear,
+    classRatePerYear: classAvg.complaintsPerYear,
+  };
+}
+
+/* ============================================================
+   MAIN REPORT RENDERER
    ============================================================ */
 function renderPremiumReport(r) {
-  const identifier = r.vin ? `VIN: ${r.vin}` : `${r.year} ${r.make} ${r.model}`;
-  const carName    = r.vehicleName || (r.year ? `${r.year} ${r.make} ${r.model}` : r.vin);
-  const now        = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+  // ── Get mileage from the UI input ──
+  const mileageInput = parseInt(document.getElementById('search-mileage').value.trim()) || 0;
 
-  // ── Risk level helpers ──
-  const rl = (r.riskLevel || 'LOW RISK').toUpperCase();
-  const riskClass = rl === 'HIGH RISK' ? 'high' : (rl === 'CAUTION' ? 'caution' : 'low');
-  const riskEmoji = rl === 'HIGH RISK' ? '🔴' : (rl === 'CAUTION' ? '🟡' : '🟢');
-  const numColorClass = rl === 'HIGH RISK' ? 'c-red' : (rl === 'CAUTION' ? 'c-amber' : 'c-green');
-  const scoreColorClass = riskClass === 'high' ? 'c-red' : (riskClass === 'caution' ? 'c-amber' : 'c-green');
+  // ── Identifiers ──
+  const identifier = r.vin ? `VIN: ${r.vin}` : `${r.vehicleYear || r.year || ''} ${r.vehicleMake || r.make || ''} ${r.vehicleModel || r.model || ''}`.trim();
+  const carName    = r.vehicleName || (r.vehicleYear ? `${r.vehicleYear} ${r.vehicleMake} ${r.vehicleModel}` : (r.year ? `${r.year} ${r.make} ${r.model}` : r.vin || 'Vehicle'));
+  const modelYear  = r.vehicleYear || r.year || null;
+  const now        = r.generatedAt
+    ? new Date(r.generatedAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
+    : new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
 
-  // ── Recommendation ──
-  const recStr = r.recommendation || (
-    rl === 'HIGH RISK' ? 'Not Recommended' :
-    rl === 'CAUTION'   ? 'Proceed with Inspection' : 'Generally Safe'
-  );
-  const recEmoji = recStr === 'Not Recommended' ? '🚫' : (recStr === 'Proceed with Inspection' ? '🔎' : '✅');
+  const recallCount    = r.recallCount    || 0;
+  const complaintCount = r.complaintCount || 0;
+  const specs          = r.specs          || {};
+  const safety         = r.safety         || {};
 
-  // ── Risk score ──
-  const riskScore = typeof r.riskScore === 'number' ? r.riskScore : computeFallbackRiskScore(r);
-  const scoreBarPct = ((riskScore - 1) / 9) * 100;
+  // ── Intelligence Engine ──
+  const normRate       = calcNormalizedComplaintRate(complaintCount, modelYear, specs);
+  const weightedRecall = calcWeightedRecallScore(r.recallDetails || [], recallCount);
+  const vehicleClass   = detectVehicleClass(specs);
+  const isEV           = detectIsEV(specs);
+  const isHybrid       = detectIsHybrid(specs);
 
-  // ── Reliability signal ──
-  const relSignal = r.reliabilitySignal || computeReliabilitySignal(r);
-  const relClass  = relSignal === 'ABOVE AVERAGE RISK' ? 'above' :
-                    relSignal === 'BELOW AVERAGE RELIABILITY' ? 'below' : 'normal';
-  const relEmoji  = relSignal === 'ABOVE AVERAGE RISK' ? '⚠️' :
-                    relSignal === 'BELOW AVERAGE RELIABILITY' ? '📉' : '✅';
+  // Override backend risk score with normalized client score
+  const riskScore      = calcIntelligentRiskScore(r, normRate, weightedRecall);
+  const rl             = riskScore >= 7 ? 'HIGH RISK' : (riskScore >= 4 ? 'CAUTION' : 'LOW RISK');
+  const riskClass      = rl === 'HIGH RISK' ? 'high' : (rl === 'CAUTION' ? 'caution' : 'low');
+  const riskEmoji      = rl === 'HIGH RISK' ? '🔴' : (rl === 'CAUTION' ? '🟡' : '🟢');
+  const numColorClass  = rl === 'HIGH RISK' ? 'c-red' : (rl === 'CAUTION' ? 'c-amber' : 'c-green');
+  const scoreColorClass= riskClass === 'high' ? 'c-red' : (riskClass === 'caution' ? 'c-amber' : 'c-green');
+  const scoreBarPct    = ((riskScore - 1) / 9) * 100;
 
-  // ── Complaint breakdown ──
-  const breakdown = r.complaintBreakdown || {};
-  const breakdownEntries = Object.entries(breakdown)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 6);
-  const maxComplaint = breakdownEntries.length ? breakdownEntries[0][1] : 1;
+  const recStr     = rl === 'HIGH RISK' ? 'Not Recommended' : (rl === 'CAUTION' ? 'Proceed with Inspection' : 'Generally Safe');
+  const recEmoji   = recStr === 'Not Recommended' ? '🚫' : (recStr === 'Proceed with Inspection' ? '🔎' : '✅');
 
-  // ── Vehicle specs ──
-  const specs = r.specs || {};
+  // Dynamic verdict narrative
+  const dynamicVerdict = buildDynamicVerdict(r, normRate, weightedRecall, riskScore, vehicleClass, isEV);
 
-  // ── Safety ──
-  const safety = r.safety || {};
-  const overallSafety = safety.overallRating || safety.combinedRating || null;
+  // Reliability signal (normalized)
+  const ri = normRate.relativeIndex;
+  const relSignal = ri > 1.5 ? 'ABOVE AVERAGE RISK' : (ri < 0.7 ? 'NORMAL RANGE' : 'NORMAL RANGE');
+  const relClass  = relSignal === 'ABOVE AVERAGE RISK' ? 'above' : 'normal';
+  const relEmoji  = relSignal === 'ABOVE AVERAGE RISK' ? '⚠️' : '✅';
 
-  // ── Common issues ──
-  const commonIssues = r.commonIssues || extractCommonIssues(breakdown, r.complaints || []);
+  // Red Flag
+  const redFlag        = buildRedFlag(r, normRate, weightedRecall);
 
-  // ── Lifespan estimate ──
-  const lifespan = computeLifespanEstimate(specs, r.year);
+  // Market Context
+  const marketCtx      = buildMarketContext(r, normRate, vehicleClass);
 
-  // ── Summary text ──
-  const summaryText = r.summary || buildSummaryText(r, carName, relSignal);
+  // Maintenance Forecast
+  const maintForecast  = buildMaintenanceForecast(mileageInput, modelYear, specs);
 
-  // ── Problem area colors ──
-  const problemColors = ['p-red', 'p-amber', 'p-amber', 'p-ink', 'p-ink', 'p-ink'];
+  // Lifespan estimate (unchanged)
+  const lifespan       = computeLifespanEstimate(specs, modelYear);
 
-  // ── Problem icons ──
-  const componentIcons = {
-    'engine': '⚙️', 'fuel': '⛽', 'powertrain': '🔧', 'transmission': '🔩',
-    'brakes': '🛑', 'brake': '🛑', 'steering': '🎯', 'suspension': '🔄',
-    'electrical': '⚡', 'airbag': '💨', 'seat': '💺', 'visibility': '👁️',
-    'tires': '🔲', 'wheels': '🔲', 'structure': '🏗️', 'unknown': '📋',
-    'other': '📋', 'exhaust': '💨', 'cooling': '🌡️', 'ac': '❄️',
-    'lights': '💡', 'windows': '🪟', 'doors': '🚪',
-  };
+  // Complaint breakdown
+  const breakdown        = r.complaintBreakdown || {};
+  const breakdownEntries = Object.entries(breakdown).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const maxComplaint     = breakdownEntries.length ? breakdownEntries[0][1] : 1;
 
-  function getComponentIcon(name) {
-    const lc = name.toLowerCase();
-    for (const [k, v] of Object.entries(componentIcons)) {
-      if (lc.includes(k)) return v;
-    }
-    return '📋';
-  }
+  // Safety
+  const overallSafety = safety.overallRating || null;
 
-  // ── Safety star renderer ──
-  function renderStars(rating) {
-    if (!rating && rating !== 0) return '<span class="safety-na">Not available</span>';
-    const num = parseInt(rating);
-    if (isNaN(num) || num === 0) return '<span class="safety-na">Not rated</span>';
-    const filled = Math.min(5, Math.max(0, num));
-    return '⭐'.repeat(filled) + '☆'.repeat(5 - filled);
-  }
+  // Common issues
+  const commonIssues = r.commonIssues || extractCommonIssues(breakdown, []);
 
-  function ratingText(rating) {
-    const n = parseInt(rating);
-    if (!n) return 'Not rated';
-    const labels = ['', 'Poor (1/5)', 'Below Average (2/5)', 'Average (3/5)', 'Good (4/5)', 'Excellent (5/5)'];
-    return labels[Math.min(5, n)] || n + '/5 stars';
-  }
-
-  // ── Build recall warnings ──
-  const recallWarnings = r.recallCount > 0 ? `
+  // Recall warnings HTML
+  const recallDetails     = r.recallDetails || [];
+  const recallWarningsHTML = recallCount > 0 ? `
     <div class="warnings-section">
       <div class="section-label"><span class="section-label-icon">⚠️</span> Recall Warnings</div>
-      ${r.recalls && r.recalls.length ? r.recalls.slice(0,3).map(rec => `
+      ${recallDetails.length ? recallDetails.slice(0,5).map(rec => `
         <div class="warning-item">
           <span>🔔</span>
           <div>
             <strong>${escapeHtml(rec.component || 'Recall')}</strong>
-            ${rec.summary ? ` — ${escapeHtml(rec.summary).slice(0,200)}${rec.summary.length > 200 ? '…' : ''}` : ''}
+            ${rec.summary ? ` — ${escapeHtml(rec.summary.slice(0,220))}${rec.summary.length > 220 ? '…' : ''}` : ''}
+            <span style="display:inline-block;margin-left:6px;font-size:.75rem;font-weight:700;padding:1px 7px;border-radius:99px;background:${weightedRecallSeverityForItem(rec) === 'high' ? 'var(--red-lt);color:var(--red)' : 'var(--surface);color:var(--ink-muted)'};">${weightedRecallSeverityForItem(rec).toUpperCase()}</span>
           </div>
-        </div>`).join('') : `
-        <div class="warning-item">
-          <span>🔔</span>
-          <div>This vehicle has <strong>${r.recallCount} recall(s)</strong> on record. Visit
-            <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener">nhtsa.gov/recalls</a>
-            to see current status and get free repairs from authorized dealers.
-          </div>
-        </div>`}
+        </div>`).join('')
+        : `<div class="warning-item"><span>🔔</span><div>This vehicle has <strong>${recallCount} recall(s)</strong>. Visit <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener">nhtsa.gov/recalls</a> to check status.</div></div>`}
     </div>` : '';
 
-  // ── Safety features ──
-  const safetyFeaturesList = [
-    { key: 'ESC',   label: 'Electronic Stability Control',  icon: '🛞' },
-    { key: 'FCW',   label: 'Forward Collision Warning',     icon: '🚨' },
-    { key: 'LDW',   label: 'Lane Departure Warning',        icon: '〰️' },
-  ];
-
-  const safetyFeaturesHTML = safetyFeaturesList.map(f => {
-    const present = safety[f.key] === true || safety[f.key] === 'Standard' || safety[f.key] === 'Optional';
-    return `<div class="safety-feature ${present ? 'present' : 'absent'}">
-      ${f.icon} ${f.label} — <strong>${present ? 'Available' : 'Not detected'}</strong>
-    </div>`;
-  }).join('');
-
-  // ── FULL REPORT HTML ──
+  // Build report HTML
   document.getElementById('results-area').innerHTML = `
   <div class="premium-report">
 
-    <!-- ① HEADER -->
+    <!-- ① RED FLAG ALERT (new — shown only when triggered) -->
+    ${redFlag.show ? `
+    <div class="red-flag-alert">
+      <div class="red-flag-icon">🚩</div>
+      <div class="red-flag-body">
+        <div class="red-flag-label">⚠️ #1 Red Flag — Read First</div>
+        <div class="red-flag-title">${escapeHtml(redFlag.title)}</div>
+        <div class="red-flag-desc">${redFlag.desc}</div>
+      </div>
+    </div>` : ''}
+
+    <!-- ② REPORT HEADER -->
     <div class="report-header">
       <div class="report-header-top">
         <div class="report-meta">
-          <span>CarClarity Risk Report</span>
+          <span>CarClarity Intelligence Report</span>
           <span class="report-meta-dot"></span>
           <span>Official NHTSA Data</span>
           <span class="report-meta-dot"></span>
@@ -2296,6 +2025,8 @@ function renderPremiumReport(r) {
         <div class="report-badges">
           <span class="report-risk-badge ${riskClass}">${riskEmoji} ${escapeHtml(rl)}</span>
           <span class="report-recommendation">${recEmoji} ${escapeHtml(recStr)}</span>
+          ${isEV ? '<span class="badge badge-blue" style="font-size:.78rem;padding:5px 11px;">⚡ Electric Vehicle</span>' : ''}
+          ${isHybrid ? '<span class="badge badge-purple" style="font-size:.78rem;padding:5px 11px;">🔋 Hybrid</span>' : ''}
         </div>
       </div>
       <div class="report-header-footer">
@@ -2304,22 +2035,22 @@ function renderPremiumReport(r) {
       </div>
     </div>
 
-    <!-- ② QUICK SUMMARY -->
+    <!-- ③ QUICK SUMMARY (dynamic narrative) -->
     <div class="report-summary">
-      <div class="section-label"><span class="section-label-icon">📋</span> Quick Summary</div>
-      <p>${escapeHtml(summaryText)}</p>
+      <div class="section-label"><span class="section-label-icon">📋</span> Intelligence Summary</div>
+      <p>${dynamicVerdict}</p>
     </div>
 
-    <!-- ③ CORE METRICS -->
+    <!-- ④ CORE METRICS -->
     <div class="metrics-grid">
       <div class="metric-card">
         <span class="metric-icon">🔔</span>
-        <div class="metric-num ${numColorClass}">${r.recallCount}</div>
+        <div class="metric-num ${recallCount > 0 ? numColorClass : 'c-green'}">${recallCount}</div>
         <div class="metric-label">Safety Recalls</div>
       </div>
       <div class="metric-card">
         <span class="metric-icon">📣</span>
-        <div class="metric-num ${numColorClass}">${r.complaintCount}</div>
+        <div class="metric-num ${numColorClass}">${complaintCount.toLocaleString()}</div>
         <div class="metric-label">Consumer Complaints</div>
       </div>
       <div class="metric-card">
@@ -2329,9 +2060,9 @@ function renderPremiumReport(r) {
       </div>
     </div>
 
-    <!-- ④ RISK SCORE -->
+    <!-- ⑤ RISK SCORE (normalized) -->
     <div class="risk-score-card">
-      <div class="section-label"><span class="section-label-icon">🎯</span> Risk Score</div>
+      <div class="section-label"><span class="section-label-icon">🎯</span> Normalized Risk Score</div>
       <div class="risk-score-inner">
         <div class="risk-score-gauge ${scoreColorClass}">
           ${riskScore}
@@ -2339,97 +2070,145 @@ function renderPremiumReport(r) {
         </div>
         <div class="risk-score-text">
           <h3>${rl === 'HIGH RISK' ? 'High Risk Vehicle' : rl === 'CAUTION' ? 'Moderate Risk' : 'Lower Risk Vehicle'}</h3>
-          <p>${buildRiskScoreExplanation(riskScore, r)}</p>
+          <p>${buildRiskScoreExplanation(riskScore, r, normRate, weightedRecall)}</p>
         </div>
       </div>
       <div class="risk-score-bar-wrap">
         <div class="risk-score-bar-labels"><span>Low (1)</span><span>Moderate (5)</span><span>High (10)</span></div>
-        <div class="risk-bar-track">
-          <div class="risk-bar-marker" id="risk-bar-marker" style="left:${scoreBarPct}%"></div>
-        </div>
+        <div class="risk-bar-track"><div class="risk-bar-marker" id="risk-bar-marker" style="left:${scoreBarPct}%"></div></div>
+      </div>
+      <div class="score-normalized-note">
+        📊 This score accounts for vehicle age (${normRate.vehicleAge} years) and complaint frequency relative to the ${normRate.vehicleClass === 'default' ? 'vehicle' : normRate.vehicleClass} class average — not just raw counts.
       </div>
     </div>
 
-    <!-- ⑤ TOP PROBLEM AREAS -->
+    <!-- ⑥ MARKET CONTEXT (new) -->
+    <div class="market-context">
+      <div class="section-label"><span class="section-label-icon">📈</span> Market Context — Class Comparison</div>
+      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">How this vehicle compares to similar ${marketCtx.vehicleClass === 'default' ? 'vehicles' : marketCtx.vehicleClass + 's'} in NHTSA complaint data</p>
+      <div class="market-comparison-row">
+        <div class="market-vs-icon">${marketCtx.compareClass === 'better' ? '🟢' : (marketCtx.compareClass === 'worse' ? '🔴' : '🟡')}</div>
+        <div class="market-vs-text">
+          <div class="market-vs-label">vs. Class Average</div>
+          <div class="market-vs-value ${marketCtx.compareClass}">${escapeHtml(marketCtx.compareLabel)}</div>
+        </div>
+      </div>
+      <div class="market-bar-group">
+        <div class="market-bar-item">
+          <div class="market-bar-label"><span>This Vehicle</span><span>${marketCtx.thisRatePerYear} complaints/yr</span></div>
+          <div class="market-bar-track"><div class="market-bar-fill this-vehicle" style="width:${Math.min(100, marketCtx.thisVehiclePct)}%"></div></div>
+        </div>
+        <div class="market-bar-item">
+          <div class="market-bar-label"><span>${vehicleClass === 'default' ? 'Vehicle' : vehicleClass.charAt(0).toUpperCase()+vehicleClass.slice(1)} Class Average</span><span>${marketCtx.classRatePerYear} complaints/yr</span></div>
+          <div class="market-bar-track"><div class="market-bar-fill class-avg" style="width:100%;background:var(--border);"></div></div>
+        </div>
+      </div>
+      <p class="market-footnote">${escapeHtml(marketCtx.compareText)}</p>
+      <p class="market-footnote">⚠️ Class averages are approximations derived from NHTSA population data. Exact sales volumes are not publicly available. Use this as directional context, not a precise benchmark.</p>
+    </div>
+
+    <!-- ⑦ TOP PROBLEM AREAS -->
     ${breakdownEntries.length ? `
     <div class="problem-areas">
       <div class="section-label"><span class="section-label-icon">🔍</span> Top Reported Problem Areas</div>
-      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">Based on NHTSA consumer complaint data</p>
+      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">Grouped from NHTSA consumer complaint records</p>
       <div class="problem-list">
         ${breakdownEntries.map(([name, count], i) => {
-          const pct = Math.round((count / maxComplaint) * 100);
+          const pct        = Math.round((count / maxComplaint) * 100);
           const colorClass = i === 0 ? 'p-red' : (i <= 1 ? 'p-amber' : 'p-ink');
+          const icon       = getComponentIcon(name);
           return `<div class="problem-item">
-            <span class="problem-icon">${getComponentIcon(name)}</span>
+            <span class="problem-icon">${icon}</span>
             <div class="problem-bar-wrap">
               <div class="problem-name">
                 <span>${escapeHtml(name)}</span>
                 <span class="problem-count">${count.toLocaleString()} complaints</span>
               </div>
-              <div class="problem-bar-track">
-                <div class="problem-bar-fill ${colorClass}" style="width:${pct}%"></div>
-              </div>
+              <div class="problem-bar-track"><div class="problem-bar-fill ${colorClass}" style="width:${pct}%"></div></div>
             </div>
           </div>`;
         }).join('')}
       </div>
-    </div>` : ''}
+    </div>` : `
+    <div class="problem-areas">
+      <div class="section-label"><span class="section-label-icon">🔍</span> Top Reported Problem Areas</div>
+      <div class="alert alert-info" style="margin-top:10px;margin-bottom:0;">
+        <span class="alert-icon">ℹ️</span>
+        <span>No complaint breakdown data is available for this vehicle in NHTSA records. This may indicate few complaints or that data is not available for this model year.</span>
+      </div>
+    </div>`}
 
-    <!-- ⑥ VEHICLE SPECIFICATIONS -->
+    <!-- ⑧ MAINTENANCE FORECAST (new) -->
+    <div class="maintenance-section">
+      <div class="section-label"><span class="section-label-icon">🗓️</span> Maintenance Forecast</div>
+      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">Based on entered mileage and typical service intervals for this vehicle type</p>
+      ${maintForecast ? `
+      <div class="maintenance-list">
+        ${maintForecast.map(item => `
+        <div class="maintenance-item ${item.status}">
+          <div class="maint-icon">${item.icon}</div>
+          <div class="maint-body">
+            <div class="maint-name">${escapeHtml(item.name)}</div>
+            <div class="maint-when">${escapeHtml(item.note)}</div>
+          </div>
+          <div class="maint-status ${item.label.cls}">${escapeHtml(item.label.text)}</div>
+        </div>`).join('')}
+      </div>
+      <p style="font-size:.75rem;color:var(--ink-muted);margin-top:12px;">⚠️ Intervals are estimates based on typical manufacturer guidelines. Always consult the vehicle's owner manual. Actual service history may differ.</p>
+      ` : `
+      <div class="maint-no-mileage">
+        💡 Enter the vehicle's current mileage in the search form above to unlock a personalized maintenance forecast for this vehicle.
+      </div>`}
+    </div>
+
+    <!-- ⑨ VEHICLE SPECIFICATIONS -->
     <div class="specs-section">
       <div class="section-label"><span class="section-label-icon">🔧</span> Vehicle Specifications</div>
       <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">From NHTSA Vehicle Parts Information Catalog (vPIC)</p>
+      ${specs.vinRequired ? `<div class="specs-vin-note">🔍 ${escapeHtml(specs.note || 'For full engine and transmission specifications, search by VIN instead of Year/Make/Model.')}</div>` : ''}
       <div class="specs-grid">
-        ${buildSpecItem('Engine', specs.displacement ? `${specs.displacement}L` : null)}
+        ${buildSpecItem('Engine', specs.engineDisplacement ? `${specs.engineDisplacement}L` : (specs.displacement ? `${specs.displacement}L` : null))}
         ${buildSpecItem('Cylinders', specs.cylinders)}
         ${buildSpecItem('Fuel Type', specs.fuelType)}
+        ${buildSpecItem('Horsepower', specs.horsepower ? `${specs.horsepower} hp` : null)}
         ${buildSpecItem('Drive Type', specs.driveType)}
         ${buildSpecItem('Body Style', specs.bodyClass)}
-        ${buildSpecItem('Transmission', specs.transmission)}
+        ${buildSpecItem('Transmission', specs.transmissionStyle || specs.transmission)}
+        ${buildSpecItem('Trans. Speeds', specs.transmissionSpeeds)}
         ${buildSpecItem('Doors', specs.doors)}
-        ${buildSpecItem('Plant City', specs.plantCity ? `${specs.plantCity}${specs.plantCountry ? ', ' + specs.plantCountry : ''}` : null)}
+        ${buildSpecItem('Series / Trim', specs.series || specs.trim ? `${specs.series || ''}${specs.series && specs.trim ? ' / ' : ''}${specs.trim || ''}` : null)}
+        ${buildSpecItem('Plant', specs.plantCity ? `${specs.plantCity}${specs.plantCountry ? ', ' + specs.plantCountry : ''}` : specs.plantCountry || null)}
+        ${buildSpecItem('Vehicle Type', specs.vehicleType)}
       </div>
+      ${!specs.available ? `<div class="alert alert-info" style="margin-top:14px;margin-bottom:0;"><span class="alert-icon">ℹ️</span><span>Vehicle specification data is not available for this vehicle. This is typically because the model year predates the NHTSA vPIC database, or the identifier returned no match.</span></div>` : ''}
     </div>
 
-    <!-- ⑦ SAFETY SCORECARD -->
+    <!-- ⑩ SAFETY SCORECARD -->
     <div class="safety-section">
       <div class="section-label"><span class="section-label-icon">🛡️</span> Safety Scorecard</div>
       <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">From NHTSA New Car Assessment Program (NCAP)</p>
+      ${safety.available ? `
       <div class="safety-grid">
-        <div class="safety-item">
-          <div class="safety-category">Frontal Crash</div>
-          <div class="safety-stars">${renderStars(safety.frontalCrash)}</div>
-          <div class="safety-rating-text">${ratingText(safety.frontalCrash)}</div>
-        </div>
-        <div class="safety-item">
-          <div class="safety-category">Side Crash</div>
-          <div class="safety-stars">${renderStars(safety.sideCrash)}</div>
-          <div class="safety-rating-text">${ratingText(safety.sideCrash)}</div>
-        </div>
-        <div class="safety-item">
-          <div class="safety-category">Rollover Risk</div>
-          <div class="safety-stars">${renderStars(safety.rollover)}</div>
-          <div class="safety-rating-text">${ratingText(safety.rollover)}</div>
-        </div>
-        ${overallSafety ? `<div class="safety-item">
-          <div class="safety-category">Overall Rating</div>
-          <div class="safety-stars">${renderStars(overallSafety)}</div>
-          <div class="safety-rating-text">${ratingText(overallSafety)}</div>
-        </div>` : ''}
+        ${renderSafetyItem('Overall Rating', safety.overallRating)}
+        ${renderSafetyItem('Frontal Crash', safety.overallFrontCrashRating || safety.frontalCrash)}
+        ${renderSafetyItem('Side Crash', safety.overallSideCrashRating || safety.sideCrash)}
+        ${renderSafetyItem('Rollover Risk', safety.rolloverRating || safety.rollover)}
       </div>
-      ${safetyFeaturesHTML ? `<div class="safety-features">${safetyFeaturesHTML}</div>` : ''}
-      ${!safety.frontalCrash && !safety.sideCrash && !safety.rollover ? `
-        <div class="alert alert-info" style="margin-top:14px;margin-bottom:0;">
-          <span class="alert-icon">ℹ️</span>
-          <span>NCAP safety ratings are not available for this vehicle. This may be because the model year predates the NHTSA rating program or was not tested.</span>
-        </div>` : ''}
+      <div class="safety-features">
+        ${renderSafetyFeature('🛞', 'Electronic Stability Control', safety.electronicStabilityControl)}
+        ${renderSafetyFeature('🚨', 'Forward Collision Warning',    safety.forwardCollisionWarning)}
+        ${renderSafetyFeature('〰️', 'Lane Departure Warning',       safety.laneDepartureWarning)}
+      </div>` : `
+      <div class="safety-na-block">
+        <p>ℹ️ <strong>Safety Ratings Not Available</strong> — NCAP crash test data is not available for this specific vehicle. This is common for vehicles older than ~2010, vehicles not tested by NHTSA, or vehicles that were not sold in the US market. It does <em>not</em> indicate a safety problem.</p>
+      </div>`}
     </div>
 
-    <!-- ⑧ RELIABILITY SIGNAL -->
+    <!-- ⑪ RELIABILITY SIGNAL -->
     <div class="reliability-section">
       <div class="section-label"><span class="section-label-icon">📊</span> Reliability Signal</div>
       <div class="reliability-badge ${relClass}">${relEmoji} ${escapeHtml(relSignal)}</div>
-      <p style="font-size:.88rem;">${buildReliabilityExplanation(relSignal, r)}</p>
+      <p style="font-size:.88rem;">${buildReliabilityExplanation(relSignal, r, normRate)}</p>
       <div class="lifespan-block">
         <div class="lifespan-title">🗓️ Expected Lifespan Estimate</div>
         <div class="lifespan-value">${lifespan.range}</div>
@@ -2437,56 +2216,53 @@ function renderPremiumReport(r) {
       </div>
     </div>
 
-    <!-- ⑨ COMMON ISSUES -->
+    <!-- ⑫ COMMON ISSUES -->
     ${commonIssues.length ? `
     <div class="issues-section">
       <div class="section-label"><span class="section-label-icon">🏷️</span> Common Issues Reported</div>
-      <p style="font-size:.85rem;margin-top:-4px;">Keywords extracted from consumer complaints in the NHTSA database</p>
+      <p style="font-size:.85rem;margin-top:-4px;">Keywords extracted from consumer complaint summaries in NHTSA records</p>
       <div class="issues-tags">
-        ${commonIssues.map((issue, i) => `
-          <span class="issue-tag ${i < 3 ? 'high' : ''}">${escapeHtml(issue)}</span>`).join('')}
+        ${commonIssues.map((issue, i) => `<span class="issue-tag ${i < 3 ? 'high' : ''}">${escapeHtml(issue)}</span>`).join('')}
       </div>
     </div>` : ''}
 
-    <!-- ⑩ WHAT THIS MEANS + WHAT TO DO -->
+    <!-- ⑬ WHAT THIS MEANS + WHAT TO DO -->
     <div class="guidance-grid">
       <div class="guidance-card">
         <h3>💡 What This Means For You</h3>
         <ul class="guidance-list">
-          ${buildMeaningsList(r, rl).map(item => `<li data-icon="${item.icon}">${escapeHtml(item.text)}</li>`).join('')}
+          ${buildMeaningsList(r, rl, normRate, weightedRecall).map(item => `<li data-icon="${item.icon}">${escapeHtml(item.text)}</li>`).join('')}
         </ul>
       </div>
       <div class="guidance-card">
         <h3>✅ What You Should Do Next</h3>
         <ul class="guidance-list">
-          ${buildActionsList(r, rl).map(item => `<li data-icon="${item.icon}">${escapeHtml(item.text)}</li>`).join('')}
+          ${buildActionsList(r, rl, weightedRecall).map(item => `<li data-icon="${item.icon}">${escapeHtml(item.text)}</li>`).join('')}
         </ul>
       </div>
     </div>
 
-    <!-- ⑪ RECALL WARNINGS -->
-    ${recallWarnings}
+    <!-- ⑭ RECALL WARNINGS -->
+    ${recallWarningsHTML}
 
-    <!-- ⑫ TRUST SECTION -->
+    <!-- ⑮ TRUST SECTION -->
     <div class="trust-section">
       <span class="trust-icon">🏛️</span>
       <div class="trust-text">
         <h3>Data You Can Trust</h3>
-        <p>All data in this report is sourced directly from the <strong>U.S. National Highway Traffic Safety Administration (NHTSA)</strong> — the official federal agency responsible for vehicle safety in the United States. No data in this report is invented or estimated without basis. Recall and complaint data is updated continuously by NHTSA.</p>
+        <p>All data in this report is sourced directly from the <strong>U.S. National Highway Traffic Safety Administration (NHTSA)</strong> — the official federal agency responsible for vehicle safety in the United States. Risk scoring uses statistical normalization and weighted analysis, not arbitrary thresholds. No data is invented. Recall and complaint records are maintained by NHTSA and updated continuously.</p>
       </div>
     </div>
 
-    <!-- ⑬ DISCLAIMER -->
+    <!-- ⑯ DISCLAIMER -->
     <div class="disclaimer-section">
-      <strong>⚠️ Important Disclaimer:</strong> This report is informational only. It does not replace a professional mechanical inspection, a full vehicle history report (Carfax/AutoCheck), or any professional due diligence. Data accuracy depends on NHTSA's own records, which may be incomplete or delayed. Reliability and risk signals are derived logically from available data — they are not guarantees. <strong>Always have any used car inspected by a certified mechanic before purchasing.</strong>
+      <strong>⚠️ Important Disclaimer:</strong> This report is informational only. Risk scores are derived from statistical analysis of publicly available NHTSA data and are not guarantees of vehicle condition or future reliability. Class averages used for comparison are approximations — exact sales volumes are not publicly available. This report does <strong>not</strong> replace a professional mechanical inspection, a full vehicle history report (Carfax/AutoCheck), or any other professional due diligence. Maintenance forecasts are estimates based on typical intervals and may not reflect this specific vehicle's history. <strong>Always have any used car inspected by a certified mechanic before purchasing.</strong>
     </div>
 
     <!-- CTA ROW -->
     <div class="report-cta-row">
-      <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-        View on NHTSA.gov ↗
-      </a>
-      <button class="btn btn-ghost btn-sm" onclick="doSearch()">Search another vehicle</button>
+      <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View on NHTSA.gov ↗</a>
+      <button class="btn btn-ghost btn-sm" onclick="window.scrollTo(0,0)">Run Another Search ↑</button>
     </div>
 
     <div style="text-align:right;margin-bottom:4px;">
@@ -2495,7 +2271,7 @@ function renderPremiumReport(r) {
 
   </div>`;
 
-  // Animate risk bar after render
+  // Animate risk bar
   requestAnimationFrame(() => {
     const marker = document.getElementById('risk-bar-marker');
     if (marker) {
@@ -2510,189 +2286,159 @@ function renderPremiumReport(r) {
 }
 
 /* ============================================================
-   REPORT HELPERS
+   REPORT HELPER FUNCTIONS
    ============================================================ */
 
 function buildSpecItem(label, value) {
-  const display = value ? escapeHtml(String(value)) : '<span class="spec-not-available">N/A</span>';
-  return `<div class="spec-item">
-    <div class="spec-label">${label}</div>
-    <div class="spec-value">${display}</div>
-  </div>`;
+  const display = (value && String(value).trim() && String(value).trim() !== 'null')
+    ? escapeHtml(String(value)) : '<span class="spec-not-available">Data not available</span>';
+  return `<div class="spec-item"><div class="spec-label">${label}</div><div class="spec-value">${display}</div></div>`;
 }
 
-function computeFallbackRiskScore(r) {
-  let score = 1;
-  const recalls    = r.recallCount    || 0;
-  const complaints = r.complaintCount || 0;
-  if (recalls >= 10)       score += 4;
-  else if (recalls >= 5)   score += 3;
-  else if (recalls >= 2)   score += 2;
-  else if (recalls >= 1)   score += 1;
-
-  if (complaints >= 2000)      score += 4;
-  else if (complaints >= 1000) score += 3;
-  else if (complaints >= 500)  score += 2;
-  else if (complaints >= 100)  score += 1;
-
-  return Math.min(10, Math.max(1, score));
+function renderSafetyItem(label, rating) {
+  if (!rating || rating === 'Not Rated' || rating === 'Not Available' || rating === '0') {
+    return `<div class="safety-item"><div class="safety-category">${label}</div><div class="safety-na">Data not available for this model year</div></div>`;
+  }
+  const num = parseInt(rating);
+  const stars = !isNaN(num) && num > 0
+    ? ('⭐'.repeat(Math.min(5, num)) + '☆'.repeat(Math.max(0, 5 - num)))
+    : '';
+  const labels = ['', 'Poor (1/5)', 'Below Average (2/5)', 'Average (3/5)', 'Good (4/5)', 'Excellent (5/5)'];
+  const ratingText = !isNaN(num) && num > 0 ? (labels[Math.min(5, num)] || num + '/5') : rating;
+  return `<div class="safety-item"><div class="safety-category">${label}</div><div class="safety-stars">${stars}</div><div class="safety-rating-text">${ratingText}</div></div>`;
 }
 
-function computeReliabilitySignal(r) {
+function renderSafetyFeature(icon, label, value) {
+  const present = value && value !== 'Not Available' && value !== 'Not Rated' && value !== '' && value !== '0';
+  return `<div class="safety-feature ${present ? 'present' : 'absent'}">${icon} ${label} — <strong>${present ? (value === 'Standard' ? 'Standard' : value === 'Optional' ? 'Optional' : 'Available') : 'Not detected / Not available'}</strong></div>`;
+}
+
+function weightedRecallSeverityForItem(recall) {
+  const c = (recall.component || recall.summary || '').toLowerCase();
+  if (RECALL_WEIGHTS.high.some(kw => c.includes(kw)))  return 'high';
+  if (RECALL_WEIGHTS.low.some(kw  => c.includes(kw)))  return 'low';
+  return 'medium';
+}
+
+function getComponentIcon(name) {
+  const icons = {
+    'engine':'⚙️','fuel':'⛽','powertrain':'🔧','transmission':'🔩','brakes':'🛑','brake':'🛑',
+    'steering':'🎯','suspension':'🔄','electrical':'⚡','airbag':'💨','seat':'💺',
+    'visibility':'👁️','tires':'🔲','wheels':'🔲','structure':'🏗️','unknown':'📋',
+    'other':'📋','exhaust':'💨','cooling':'🌡️','ac':'❄️','lights':'💡','windows':'🪟','doors':'🚪',
+    'battery':'🔋','charg':'🔌',
+  };
+  const lc = name.toLowerCase();
+  for (const [k, v] of Object.entries(icons)) { if (lc.includes(k)) return v; }
+  return '📋';
+}
+
+function buildRiskScoreExplanation(score, r, normRate, weightedRecall) {
+  const ri = normRate ? normRate.relativeIndex : 1;
+  if (score >= 8) return `Score driven by ${weightedRecall.dominantSeverity === 'high' ? 'safety-critical recalls and ' : ''}complaint rates ${Math.round((ri - 1) * 100)}% above class average. Exercise extreme caution.`;
+  if (score >= 5) return `Moderate recall and complaint activity. Normalized rate is ${ri > 1 ? Math.round((ri - 1)*100) + '% above' : Math.round((1 - ri)*100) + '% below'} class average. Inspection strongly recommended.`;
+  return `Complaint rate is ${ri > 1 ? Math.round((ri - 1)*100) + '% above' : Math.round((1 - ri)*100) + '% below or at'} class average with low recall weighting. Standard due diligence applies.`;
+}
+
+function buildReliabilityExplanation(signal, r, normRate) {
   const complaints = r.complaintCount || 0;
   const recalls    = r.recallCount    || 0;
-  if (complaints > 1500 || recalls > 8) return 'ABOVE AVERAGE RISK';
-  if (complaints < 100  && recalls < 2) return 'NORMAL RANGE';
-  if (complaints > 800  || recalls > 4) return 'ABOVE AVERAGE RISK';
-  return 'NORMAL RANGE';
+  const ri         = normRate ? normRate.relativeIndex : 1;
+  if (signal === 'ABOVE AVERAGE RISK') {
+    return `At ${normRate.ratePerYear} complaints per year (${Math.round((ri - 1) * 100)}% above the ${normRate.vehicleClass === 'default' ? 'vehicle' : normRate.vehicleClass} class average), this vehicle's complaint frequency warrants extra scrutiny during a pre-purchase inspection.`;
+  }
+  return `With ${complaints.toLocaleString()} total complaints and ${recalls} recalls, this vehicle's normalized complaint rate is within a normal range. Continue with standard pre-purchase due diligence.`;
 }
 
 function computeLifespanEstimate(specs, year) {
-  const fuelType = (specs.fuelType || '').toLowerCase();
+  const fuelType = (specs && (specs.fuelType || '')).toLowerCase();
+  const bodyClass= (specs && (specs.bodyClass || '')).toLowerCase();
   const currentYear = new Date().getFullYear();
   const age = year ? currentYear - parseInt(year) : 0;
 
   if (fuelType.includes('electric')) {
-    return {
-      range: '150,000 – 250,000 miles (battery dependent)',
-      note: 'Electric vehicle longevity depends heavily on battery health and charging habits. Actual lifespan depends on maintenance and usage.'
-    };
+    return { range: '150,000 – 300,000 miles (battery dependent)', note: 'EV longevity depends heavily on battery health and charging habits. Actual lifespan depends on maintenance and usage.' };
   }
   if (fuelType.includes('hybrid')) {
-    return {
-      range: '200,000 – 300,000 miles (well-maintained)',
-      note: 'Hybrids can achieve high mileage when maintained properly. Battery pack health is a key factor. Actual lifespan depends on maintenance and usage.'
-    };
+    return { range: '200,000 – 300,000 miles (well-maintained)', note: 'Battery pack health is a key factor for hybrid longevity. Actual lifespan depends on maintenance and usage.' };
+  }
+  if (bodyClass.includes('truck') || bodyClass.includes('pickup')) {
+    return { range: '200,000 – 350,000 miles (well-maintained)', note: 'Well-maintained trucks often exceed 200,000 miles. Diesel variants can go significantly higher. Actual lifespan depends on maintenance and usage.' };
   }
   if (age > 15) {
-    return {
-      range: '50,000 – 150,000 miles remaining (estimate)',
-      note: 'Older vehicles vary widely. Maintenance history is critical. Actual lifespan depends on maintenance and usage.'
-    };
+    return { range: 'Variable — depends heavily on maintenance history', note: 'Older vehicles vary widely. Actual condition is far more important than any range estimate. A mechanic inspection is essential.' };
   }
-  return {
-    range: '150,000 – 300,000 miles (well-maintained)',
-    note: 'This is a general estimate based on typical vehicle longevity data. Actual lifespan depends on maintenance and usage habits.'
-  };
+  return { range: '150,000 – 300,000 miles (well-maintained)', note: 'Modern vehicles regularly exceed 200,000 miles with proper maintenance. Actual lifespan depends on maintenance history and driving conditions.' };
 }
 
-function buildSummaryText(r, carName, relSignal) {
-  const rl = (r.riskLevel || 'LOW RISK').toUpperCase();
-  const recalls    = r.recallCount    || 0;
-  const complaints = r.complaintCount || 0;
-
-  let tone = '';
-  if (rl === 'HIGH RISK') {
-    tone = `The ${carName} shows elevated risk indicators that deserve serious attention before any purchase decision. `;
-  } else if (rl === 'CAUTION') {
-    tone = `The ${carName} shows some concerns that a careful buyer should investigate before purchasing. `;
-  } else {
-    tone = `The ${carName} shows relatively low risk indicators based on available government data. `;
-  }
-
-  let details = `NHTSA records show ${recalls} recall${recalls !== 1 ? 's' : ''} and ${complaints.toLocaleString()} consumer complaint${complaints !== 1 ? 's' : ''}.`;
-
-  if (relSignal === 'ABOVE AVERAGE RISK') {
-    details += ' The complaint volume is higher than typical for this vehicle class, suggesting recurring owner-reported issues.';
-  } else if (relSignal === 'NORMAL RANGE') {
-    details += ' Complaint levels are within normal range for this vehicle type.';
-  }
-
-  return tone + details + ' Review the full report below before making a buying decision.';
-}
-
-function buildRiskScoreExplanation(score, r) {
-  if (score >= 8) return `This score reflects ${r.recallCount || 0} recalls and ${(r.complaintCount || 0).toLocaleString()} complaints — significantly above average. Exercise extreme caution.`;
-  if (score >= 5) return `This score reflects moderate recall and complaint activity. A professional inspection is strongly recommended before purchase.`;
-  return `This score reflects relatively low recall and complaint counts. Always verify current recall status before buying any used vehicle.`;
-}
-
-function buildReliabilityExplanation(signal, r) {
-  const complaints = r.complaintCount || 0;
-  const recalls    = r.recallCount    || 0;
-  if (signal === 'ABOVE AVERAGE RISK') {
-    return `With ${complaints.toLocaleString()} complaints and ${recalls} recalls on record, this vehicle exceeds typical thresholds for its class. This does not mean it will fail, but it warrants extra scrutiny during a pre-purchase inspection.`;
-  }
-  if (signal === 'BELOW AVERAGE RELIABILITY') {
-    return `Complaint levels are somewhat elevated compared to average vehicles of similar age and class. Ensure a thorough mechanical inspection before committing to a purchase.`;
-  }
-  return `With ${complaints.toLocaleString()} complaints and ${recalls} recalls, this vehicle falls within a normal range for its class. Continue with standard pre-purchase due diligence.`;
-}
-
-function extractCommonIssues(breakdown, complaints) {
-  const keywords = [];
-  const keywordMap = {
-    'engine':       'Engine problems',
-    'transmission': 'Transmission issues',
-    'electrical':   'Electrical faults',
-    'brakes':       'Brake concerns',
-    'steering':     'Steering problems',
-    'fuel':         'Fuel system issues',
-    'airbag':       'Airbag concerns',
-    'suspension':   'Suspension wear',
-    'cooling':      'Cooling system',
-    'exhaust':      'Exhaust issues',
-  };
-  for (const [k, label] of Object.entries(keywordMap)) {
-    const found = Object.keys(breakdown).some(c => c.toLowerCase().includes(k));
-    if (found) keywords.push(label);
-  }
-  return keywords.slice(0, 8);
-}
-
-function buildMeaningsList(r, rl) {
+function buildMeaningsList(r, rl, normRate, weightedRecall) {
   const items = [];
   const recalls    = r.recallCount    || 0;
   const complaints = r.complaintCount || 0;
+  const ri         = normRate ? normRate.relativeIndex : 1;
 
-  if (recalls > 0) {
-    items.push({ icon: '🔔', text: `${recalls} recall${recalls > 1 ? 's' : ''} on record means safety fixes may be needed — these are typically repaired free at authorized dealers.` });
+  if (recalls > 0 && weightedRecall.dominantSeverity === 'high') {
+    items.push({ icon: '🚨', text: `${recalls} recall(s) include safety-critical components. These must be verified as resolved at nhtsa.gov/recalls before purchase.` });
+  } else if (recalls > 0) {
+    items.push({ icon: '🔔', text: `${recalls} recall(s) on record. Check resolution status at nhtsa.gov/recalls — authorized dealers fix these at no charge.` });
   } else {
-    items.push({ icon: '✅', text: 'No recall history found for this vehicle configuration.' });
+    items.push({ icon: '✅', text: 'No safety recalls found — a strong positive indicator for this vehicle.' });
   }
 
-  if (complaints > 1000) {
-    items.push({ icon: '⚠️', text: `${complaints.toLocaleString()} consumer complaints is a high volume — indicates recurring issues reported by real owners.` });
-  } else if (complaints > 200) {
-    items.push({ icon: '🔎', text: `${complaints.toLocaleString()} complaints is above average — investigate the top problem areas in this report before buying.` });
+  if (ri > 1.5) {
+    items.push({ icon: '⚠️', text: `Complaint rate is ${Math.round((ri - 1) * 100)}% above the class average. This suggests recurring owner-reported issues at higher-than-normal frequency.` });
+  } else if (ri < 0.7) {
+    items.push({ icon: '✅', text: `Complaint rate is ${Math.round((1 - ri) * 100)}% below the class average — a positive reliability signal relative to similar vehicles.` });
   } else {
-    items.push({ icon: '✅', text: `Complaint volume is relatively low for this vehicle.` });
+    items.push({ icon: '📊', text: `Complaint volume is within a normal range for this vehicle class. Raw numbers alone don't tell the full story.` });
   }
 
   if (rl === 'HIGH RISK') {
-    items.push({ icon: '🚫', text: 'High risk rating means this vehicle has more red flags than most. Proceed only after a thorough inspection.' });
+    items.push({ icon: '🚫', text: 'High risk rating means this vehicle has more red flags than typical in its class. Proceed only after a thorough professional inspection.' });
   } else if (rl === 'CAUTION') {
-    items.push({ icon: '⚡', text: 'Caution rating means known issues exist — but this does not necessarily make the car a bad buy with the right inspection.' });
+    items.push({ icon: '⚡', text: 'Caution rating means documented issues exist — but this does not make the car a bad buy if the right inspection clears known problem areas.' });
   } else {
-    items.push({ icon: '🟢', text: 'Low risk rating means government data does not show major alarm signals for this vehicle.' });
+    items.push({ icon: '🟢', text: 'Low risk rating means government data does not show major alarm signals for this vehicle relative to its class.' });
   }
 
   return items;
 }
 
-function buildActionsList(r, rl) {
+function buildActionsList(r, rl, weightedRecall) {
   const items = [
     { icon: '🔧', text: 'Book a pre-purchase inspection with a certified independent mechanic before any offer.' },
     { icon: '📋', text: 'Run a full vehicle history report (Carfax or AutoCheck) to check ownership, accidents, and title status.' },
     { icon: '🌐', text: 'Visit nhtsa.gov/recalls to confirm all recalls have been repaired — dealers fix these for free.' },
   ];
+  if (weightedRecall && weightedRecall.dominantSeverity === 'high') {
+    items.push({ icon: '🚨', text: 'Ask the inspector to specifically check the high-risk recall components identified in this report.' });
+  }
   if (r.recallCount > 0) {
-    items.push({ icon: '📞', text: 'Ask the seller for recall repair documentation. If unrepaired, use this as a negotiation point.' });
+    items.push({ icon: '📞', text: 'Ask the seller for recall repair documentation. Unresolved recalls are a negotiation point for price reduction.' });
   }
   if ((r.complaintCount || 0) > 500) {
     items.push({ icon: '🗣️', text: 'Search owner forums and community reviews for first-hand accounts of the top problem areas listed above.' });
   }
   if (rl === 'HIGH RISK') {
-    items.push({ icon: '💰', text: 'If purchasing, factor in potential repair costs and negotiate accordingly or walk away.' });
+    items.push({ icon: '💰', text: 'If purchasing, factor in potential repair costs. Use this report to negotiate a lower price or walk away.' });
   }
   return items;
 }
 
-/* ============================================================
-   FALLBACK RENDER (legacy, kept for safety)
-   ============================================================ */
-function renderResults(r) {
-  renderPremiumReport(r);
+function extractCommonIssues(breakdown, complaints) {
+  const keywordMap = {
+    'engine': 'Engine problems', 'transmission': 'Transmission issues',
+    'electrical': 'Electrical faults', 'brakes': 'Brake concerns',
+    'steering': 'Steering problems', 'fuel': 'Fuel system issues',
+    'airbag': 'Airbag concerns', 'suspension': 'Suspension wear',
+    'cooling': 'Cooling system', 'exhaust': 'Exhaust issues',
+    'battery': 'Battery issues', 'charg': 'Charging system',
+  };
+  const results = [];
+  for (const [k, label] of Object.entries(keywordMap)) {
+    if (Object.keys(breakdown).some(c => c.toLowerCase().includes(k))) results.push(label);
+  }
+  return results.slice(0, 8);
 }
 
 /* ============================================================
@@ -2701,7 +2447,7 @@ function renderResults(r) {
 function addToHistory(result, searchData) {
   const entry = {
     id: result.searchId || Date.now(),
-    identifier: result.vin || `${result.year} ${result.make} ${result.model}`,
+    identifier: result.vin || `${result.vehicleYear || result.year} ${result.vehicleMake || result.make} ${result.vehicleModel || result.model}`,
     riskLevel: result.riskLevel,
     recallCount: result.recallCount,
     date: new Date().toLocaleDateString(),
@@ -2736,21 +2482,13 @@ function checkRatingTrigger() {
 
 function setRating(n) {
   state.currentRating = n;
-  document.querySelectorAll('.star').forEach((s, i) => {
-    s.classList.toggle('active', i < n);
-  });
+  document.querySelectorAll('.star').forEach((s, i) => s.classList.toggle('active', i < n));
 }
 
 async function doSubmitRating() {
   if (!state.currentRating) return showAlert('rating-alert', 'error', 'Please select a star rating.');
   const comment = document.getElementById('rating-comment').value.trim();
-  try {
-    await apiCall('rateExperience', {
-      rating: state.currentRating,
-      comment,
-      searchCount: state.searchCount,
-    });
-  } catch {}
+  try { await apiCall('rateExperience', { rating: state.currentRating, comment, searchCount: state.searchCount }); } catch {}
   closeModal('modal-rating');
   showAlert('search-alert', 'success', 'Thanks for your feedback! ❤️');
 }
@@ -2763,28 +2501,23 @@ async function doSendMessage() {
   const message = document.getElementById('msg-body').value.trim();
   if (!subject) return showAlert('message-alert', 'error', 'Please add a subject.');
   if (!message || message.length < 5) return showAlert('message-alert', 'error', 'Please write a message.');
-
   try {
     const r = await apiCall('submitMessage', { subject, message, page: state.currentPage });
     if (r.ok) {
       document.getElementById('msg-subject').value = '';
       document.getElementById('msg-body').value = '';
       closeModal('modal-message');
-      showAlert('search-alert', 'success', 'Message sent! We\'ll get back to you soon.');
+      showAlert('search-alert', 'success', "Message sent! We'll get back to you soon.");
     } else {
       showAlert('message-alert', 'error', r.error || 'Could not send message. Try again.');
     }
-  } catch (e) {
-    showAlert('message-alert', 'error', e.message);
-  }
+  } catch (e) { showAlert('message-alert', 'error', e.message); }
 }
 
 /* ============================================================
    BUY TOKENS / GUMROAD
    ============================================================ */
-function showBuyTokens() {
-  showPage('page-paywall');
-}
+function showBuyTokens() { showPage('page-paywall'); }
 
 function selectPack(el, pack) {
   document.querySelectorAll('.token-pack').forEach(p => p.classList.remove('selected'));
@@ -2794,17 +2527,13 @@ function selectPack(el, pack) {
 
 function goToGumroad() {
   const url = CONFIG.GUMROAD_PRODUCTS[state.selectedPack];
-  if (!url || url.includes('YOUR_')) {
-    showAlert('verify-license-alert', 'error', 'Gumroad product URL not configured yet. Please check back soon.');
-    return;
-  }
+  if (!url || url.includes('YOUR_')) { showAlert('verify-license-alert', 'error', 'Gumroad product URL not configured yet.'); return; }
   window.open(url, '_blank', 'noopener');
 }
 
 async function doVerifyLicense() {
   const key = document.getElementById('license-key-input').value.trim();
   if (!key) return showAlert('verify-license-alert', 'error', 'Please enter your Gumroad license key.');
-
   try {
     const r = await apiCall('verifyPurchase', { licenseKey: key });
     if (r.ok) {
@@ -2813,35 +2542,24 @@ async function doVerifyLicense() {
       showAlert('verify-license-alert', 'success', `✅ ${r.tokensAdded} tokens added! Balance: ${r.tokensRemaining}`);
       setTimeout(() => showPage('page-dashboard'), 2000);
     } else {
-      showAlert('verify-license-alert', 'error', r.error || 'License key not recognised. Please check and try again.');
+      showAlert('verify-license-alert', 'error', r.error || 'License key not recognised.');
     }
-  } catch (e) {
-    showAlert('verify-license-alert', 'error', e.message);
-  }
+  } catch (e) { showAlert('verify-license-alert', 'error', e.message); }
 }
 
 /* ============================================================
    HELPERS
    ============================================================ */
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+function validateEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
 
 function escapeHtml(str) {
   if (!str && str !== 0) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function hashClient(password) {
   let hash = 2166136261;
-  for (let i = 0; i < password.length; i++) {
-    hash ^= password.charCodeAt(i);
-    hash = (hash * 16777619) >>> 0;
-  }
+  for (let i = 0; i < password.length; i++) { hash ^= password.charCodeAt(i); hash = (hash * 16777619) >>> 0; }
   return 'ch_' + hash.toString(16).padStart(8, '0') + '_' + btoa(password.slice(0, 4)).replace(/=/g, '');
 }
 
@@ -2849,9 +2567,7 @@ function hashClient(password) {
    KEYBOARD SHORTCUTS
    ============================================================ */
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    ['modal-message','modal-rating','modal-terms','modal-privacy'].forEach(id => closeModal(id));
-  }
+  if (e.key === 'Escape') ['modal-message','modal-rating','modal-terms','modal-privacy'].forEach(id => closeModal(id));
 });
 </script>
 </body>
