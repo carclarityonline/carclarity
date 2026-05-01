@@ -7,7 +7,7 @@
 <meta name="description" content="Check a used car's recall history, complaints, and risk level before you buy. Official government data only." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
    DESIGN TOKENS
@@ -407,7 +407,7 @@ small { font-size: .8rem; color: var(--ink-muted); }
 .search-panel.active { display: block; }
 
 /* ============================================================
-   RESULTS
+   OLD RESULTS (kept for fallback)
    ============================================================ */
 .result-card {
   background: var(--white);
@@ -457,113 +457,94 @@ small { font-size: .8rem; color: var(--ink-muted); }
    ============================================================ */
 .paywall-card {
   background: var(--white);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 36px;
+  padding: 36px 32px;
   text-align: center;
   box-shadow: var(--shadow);
 }
-.paywall-card .icon-big { font-size: 3rem; margin-bottom: 16px; display: block; }
-.paywall-card h2 { margin-bottom: 8px; }
-.paywall-card p  { max-width: 380px; margin: 0 auto 24px; font-size: .92rem; }
+.paywall-card h2 { margin: 12px 0 8px; }
+.paywall-card > p { margin-bottom: 24px; font-size: .9rem; }
+.icon-big { font-size: 3rem; display: block; margin-bottom: 4px; }
+
 .token-packs {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px 0;
 }
 .token-pack {
   border: 2px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 18px 22px;
-  text-align: center;
+  padding: 16px 10px;
   cursor: pointer;
   transition: var(--transition);
-  min-width: 130px;
-  background: var(--white);
+  text-align: center;
 }
-.token-pack:hover { border-color: var(--accent); background: var(--accent-lt); }
+.token-pack:hover { border-color: var(--accent); }
 .token-pack.selected { border-color: var(--accent); background: var(--accent-lt); }
-.token-pack .pack-tokens { font-size: 1.6rem; font-family: 'DM Serif Display', serif; color: var(--accent); }
-.token-pack .pack-name   { font-size: .78rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; }
-.token-pack .pack-price  { font-size: 1rem; font-weight: 700; margin-top: 6px; }
-.verify-section { border-top: 1px solid var(--border); margin-top: 24px; padding-top: 24px; }
-.verify-section p { font-size: .88rem; margin-bottom: 12px; }
+.pack-tokens { font-size: 1.8rem; font-family: 'DM Serif Display', serif; color: var(--ink); }
+.pack-name   { font-size: .8rem; font-weight: 600; color: var(--ink-muted); margin: 2px 0; text-transform: uppercase; letter-spacing: .04em; }
+.pack-price  { font-size: 1rem; font-weight: 700; color: var(--accent); }
+
+.verify-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.verify-section > p { font-size: .86rem; margin-bottom: 12px; }
 
 /* ============================================================
    MODALS
    ============================================================ */
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(15,17,23,.55);
-  backdrop-filter: blur(3px);
-  z-index: 1000;
-  display: flex; align-items: flex-end; justify-content: center;
-  animation: fadeIn .15s ease;
-}
-@media (min-width: 600px) {
-  .modal-overlay { align-items: center; }
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 500;
+  padding: 20px;
+  animation: fadeIn .18s ease;
 }
 .modal {
   background: var(--white);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  width: 100%; max-width: 520px;
-  max-height: 92vh;
-  overflow-y: auto;
-  padding: 28px 28px 32px;
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  max-width: 500px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
   box-shadow: var(--shadow-lg);
   position: relative;
-  animation: slideUp .22s ease;
+  animation: slideUp .2s ease;
 }
-@media (min-width: 600px) {
-  .modal { border-radius: var(--radius-lg); animation: fadeIn .2s ease; }
-}
+.modal h2 { margin-bottom: 10px; }
+.modal > p { margin-bottom: 20px; font-size: .9rem; }
 .modal-close {
   position: absolute; top: 16px; right: 16px;
-  background: var(--surface); border: none; border-radius: 50%;
-  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; cursor: pointer; color: var(--ink-muted);
-  transition: var(--transition);
+  background: var(--surface); border: none;
+  width: 28px; height: 28px; border-radius: 50%;
+  font-size: .85rem; cursor: pointer; color: var(--ink-muted);
+  display: flex; align-items: center; justify-content: center;
 }
-.modal-close:hover { background: var(--border); color: var(--ink); }
-.modal h2 { margin-bottom: 6px; }
-.modal > p { margin-bottom: 20px; font-size: .9rem; }
-
-/* Rating stars */
-.stars { display: flex; gap: 6px; justify-content: center; margin: 16px 0; }
-.star {
-  font-size: 2rem; cursor: pointer;
-  color: var(--border);
-  transition: color var(--transition);
-}
-.star.active { color: #f5a623; }
+.modal-close:hover { background: var(--border); }
+.legal-text { font-size: .86rem; line-height: 1.7; margin-bottom: 20px; }
+.legal-text h4 { font-size: .9rem; margin: 14px 0 4px; color: var(--ink); }
 
 /* ============================================================
-   LEGAL MODAL
+   STARS
    ============================================================ */
-.legal-text {
-  font-size: .84rem; line-height: 1.7;
-  color: var(--ink-soft);
-  max-height: 340px; overflow-y: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 16px;
-  background: var(--surface);
-}
-.legal-text h4 { font-size: .88rem; color: var(--ink); margin: 14px 0 4px; }
-.legal-text p  { margin-bottom: 8px; font-size: .83rem; }
+.stars { display: flex; gap: 6px; justify-content: center; margin: 14px 0; }
+.star { font-size: 2rem; cursor: pointer; color: var(--border); transition: color .12s; }
+.star.active { color: #f0a500; }
 
 /* ============================================================
-   FLOATING FEEDBACK BUTTON
+   FAB
    ============================================================ */
 #feedback-fab {
-  position: fixed;
-  bottom: 24px; right: 20px;
+  position: fixed; bottom: 24px; right: 24px;
   background: var(--ink);
   color: #fff;
-  border: none;
   border-radius: 99px;
-  padding: 11px 18px;
-  font-size: .82rem; font-weight: 600;
+  padding: 10px 18px;
+  font-size: .85rem; font-weight: 600;
   display: flex; align-items: center; gap: 7px;
   box-shadow: var(--shadow-lg);
   cursor: pointer;
@@ -606,6 +587,432 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .loader p { font-size: .9rem; color: var(--ink-muted); }
 
 /* ============================================================
+   PREMIUM LOADER (multi-step)
+   ============================================================ */
+.premium-loader {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 48px 28px;
+  text-align: center;
+}
+.premium-loader h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.premium-loader .loader-sub { font-size: .88rem; color: var(--ink-muted); margin-bottom: 28px; }
+.loader-steps { display: flex; flex-direction: column; gap: 10px; max-width: 340px; margin: 0 auto; }
+.loader-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: .86rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  transition: all .3s ease;
+}
+.loader-step.active {
+  background: var(--accent-lt);
+  border-color: #f3bdb5;
+  color: var(--accent);
+}
+.loader-step.done {
+  background: var(--green-lt);
+  border-color: #a8d9c1;
+  color: var(--green);
+}
+.step-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; flex-shrink: 0;
+  transition: all .3s ease;
+}
+.loader-step.active .step-dot {
+  background: var(--accent);
+  animation: pulse-dot 1s ease infinite;
+}
+.loader-step.done .step-dot { background: var(--green); }
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ============================================================
+   PREMIUM REPORT STYLES
+   ============================================================ */
+
+/* Report wrapper */
+.premium-report {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn .3s ease;
+}
+
+/* ── REPORT HEADER ── */
+.report-header {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.report-header-top {
+  padding: 28px 28px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.report-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .75rem; font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: 8px;
+}
+.report-meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-muted); }
+.report-car-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.1;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.report-badges {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.report-risk-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .85rem; font-weight: 700;
+  padding: 7px 16px; border-radius: 99px;
+  letter-spacing: .01em;
+}
+.report-risk-badge.high   { background: var(--red-lt);   color: var(--red);   border: 1.5px solid #f3bdb5; }
+.report-risk-badge.caution{ background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
+.report-risk-badge.low    { background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
+.report-recommendation {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .82rem; font-weight: 600;
+  padding: 6px 14px; border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+}
+.report-header-footer {
+  padding: 12px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.report-generated {
+  font-size: .75rem; color: var(--ink-muted);
+}
+.report-source {
+  font-size: .75rem; color: var(--ink-muted);
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* ── QUICK SUMMARY ── */
+.report-summary {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.section-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .72rem; font-weight: 700;
+  color: var(--ink-muted);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 12px;
+}
+.section-label-icon { font-size: .95rem; }
+.report-summary p {
+  font-size: .95rem; line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* ── CORE METRICS ── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.metric-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.metric-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+.metric-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.4rem; line-height: 1;
+  margin-bottom: 4px;
+}
+.metric-num.c-red    { color: var(--red); }
+.metric-num.c-amber  { color: var(--amber); }
+.metric-num.c-green  { color: var(--green); }
+.metric-num.c-ink    { color: var(--ink); }
+.metric-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); }
+
+/* ── RISK SCORE ── */
+.risk-score-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.risk-score-inner {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.risk-score-gauge {
+  flex-shrink: 0;
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem; line-height: 1;
+  border: 4px solid;
+}
+.risk-score-gauge.c-red    { border-color: var(--red);   color: var(--red);   background: var(--red-lt); }
+.risk-score-gauge.c-amber  { border-color: var(--amber); color: var(--amber); background: var(--amber-lt); }
+.risk-score-gauge.c-green  { border-color: var(--green); color: var(--green); background: var(--green-lt); }
+.risk-score-gauge small { font-family: 'DM Sans', sans-serif; font-size: .65rem; font-weight: 600; color: var(--ink-muted); margin-top: -2px; }
+.risk-score-text { flex: 1; min-width: 180px; }
+.risk-score-text h3 { margin-bottom: 6px; }
+.risk-score-text p { font-size: .88rem; }
+.risk-score-bar-wrap { margin-top: 16px; }
+.risk-score-bar-labels {
+  display: flex; justify-content: space-between;
+  font-size: .7rem; font-weight: 600; color: var(--ink-muted);
+  margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em;
+}
+.risk-bar-track {
+  height: 10px; border-radius: 99px;
+  background: linear-gradient(90deg, var(--green) 0%, var(--amber) 50%, var(--red) 100%);
+  position: relative; overflow: visible;
+}
+.risk-bar-marker {
+  position: absolute; top: 50%;
+  width: 18px; height: 18px;
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: left .8s ease;
+}
+
+/* ── PROBLEM AREAS ── */
+.problem-areas {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.problem-list { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+.problem-item {
+  display: flex; align-items: center; gap: 12px;
+}
+.problem-icon { font-size: 1.3rem; flex-shrink: 0; width: 28px; text-align: center; }
+.problem-bar-wrap { flex: 1; }
+.problem-name {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .88rem; font-weight: 600; color: var(--ink);
+  margin-bottom: 5px;
+}
+.problem-count { font-size: .78rem; color: var(--ink-muted); font-weight: 400; }
+.problem-bar-track {
+  height: 7px; background: var(--surface); border-radius: 99px; overflow: hidden;
+}
+.problem-bar-fill {
+  height: 100%; border-radius: 99px;
+  transition: width .8s ease;
+}
+.problem-bar-fill.p-red   { background: var(--red); }
+.problem-bar-fill.p-amber { background: var(--amber); }
+.problem-bar-fill.p-green { background: var(--green); }
+.problem-bar-fill.p-ink   { background: #8a6e5e; }
+
+/* ── VEHICLE SPECS ── */
+.specs-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.spec-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.spec-label {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-muted); margin-bottom: 5px;
+}
+.spec-value { font-size: .92rem; font-weight: 600; color: var(--ink); }
+.spec-not-available { color: var(--ink-muted); font-weight: 400; font-style: italic; }
+
+/* ── SAFETY SCORECARD ── */
+.safety-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.safety-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.safety-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.safety-category {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--ink-muted); margin-bottom: 6px;
+}
+.safety-stars { font-size: 1.1rem; margin-bottom: 4px; letter-spacing: 1px; }
+.safety-rating-text { font-size: .82rem; font-weight: 600; color: var(--ink); }
+.safety-na { font-size: .82rem; color: var(--ink-muted); font-style: italic; }
+.safety-features { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.safety-feature {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: .86rem; font-weight: 500;
+}
+.safety-feature.present { background: var(--green-lt); color: var(--green); }
+.safety-feature.absent  { background: var(--surface);  color: var(--ink-muted); border: 1px solid var(--border); }
+
+/* ── RELIABILITY SIGNAL ── */
+.reliability-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.reliability-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 99px;
+  font-size: .92rem; font-weight: 700;
+  margin: 12px 0;
+}
+.reliability-badge.above { background: var(--red-lt);   color: var(--red);   border: 1.5px solid #f3bdb5; }
+.reliability-badge.below { background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
+.reliability-badge.normal{ background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
+.lifespan-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+.lifespan-block .lifespan-title {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-muted); margin-bottom: 4px;
+}
+.lifespan-block .lifespan-value {
+  font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px;
+}
+.lifespan-block .lifespan-note { font-size: .78rem; color: var(--ink-muted); }
+
+/* ── COMMON ISSUES ── */
+.issues-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.issues-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.issue-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 13px; border-radius: 99px;
+  font-size: .82rem; font-weight: 600;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--ink-soft);
+}
+.issue-tag.high { background: var(--red-lt); border-color: #f3bdb5; color: var(--red); }
+
+/* ── WHAT THIS MEANS / WHAT TO DO ── */
+.guidance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.guidance-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 24px;
+}
+.guidance-card h3 { font-size: 1rem; margin-bottom: 10px; }
+.guidance-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.guidance-list li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.55;
+}
+.guidance-list li::before {
+  content: attr(data-icon);
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* ── WARNINGS ── */
+.warnings-section {
+  background: var(--red-lt);
+  border: 1px solid #f3bdb5;
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+}
+.warnings-section .section-label { color: var(--red); }
+.warning-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(200,67,43,.12);
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.55;
+}
+.warning-item:last-child { border-bottom: none; padding-bottom: 0; }
+.warning-item strong { color: var(--ink); }
+
+/* ── TRUST SECTION ── */
+.trust-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.trust-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
+.trust-text h3 { font-size: .95rem; margin-bottom: 6px; }
+.trust-text p  { font-size: .84rem; line-height: 1.6; }
+
+/* ── DISCLAIMER ── */
+.disclaimer-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  font-size: .8rem; line-height: 1.65; color: var(--ink-muted);
+}
+.disclaimer-section strong { color: var(--ink-soft); }
+
+/* ── CTA ROW ── */
+.report-cta-row {
+  display: flex; gap: 10px; flex-wrap: wrap; padding: 4px 0;
+}
+
+/* ============================================================
    ANIMATIONS
    ============================================================ */
 @keyframes spin    { to { transform: rotate(360deg); } }
@@ -633,7 +1040,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 /* ============================================================
    MOBILE TWEAKS
    ============================================================ */
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .auth-box { padding: 26px 20px; }
   .search-card, .paywall-card { padding: 22px 18px; }
   .result-stats { grid-template-columns: 1fr 1fr; }
@@ -641,10 +1048,20 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   .stat-cell:nth-child(3) { border-top: 1px solid var(--border); grid-column: 1 / -1; }
   .form-row { grid-template-columns: 1fr; }
   .hero { padding: 48px 16px 40px; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .guidance-grid { grid-template-columns: 1fr; }
+  .report-header-top { padding: 20px 18px 16px; }
+  .report-summary, .risk-score-card, .problem-areas,
+  .specs-section, .safety-section, .reliability-section,
+  .issues-section, .guidance-card, .warnings-section,
+  .trust-section, .disclaimer-section { padding: 18px 18px; }
+  .risk-score-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .specs-grid { grid-template-columns: 1fr 1fr; }
+  .safety-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ============================================================
-   PROGRESS BAR (top of page)
+   PROGRESS BAR
    ============================================================ */
 #progress-bar {
   position: fixed; top: 0; left: 0;
@@ -744,8 +1161,8 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
       </div>
       <div class="step-card">
         <span class="step-icon">📊</span>
-        <h3>Get a Clear Report</h3>
-        <p>See recall counts, complaint counts, and a plain-English risk verdict.</p>
+        <h3>Get a Premium Report</h3>
+        <p>See recalls, complaints, safety ratings, specs, and a risk score — in one clear report.</p>
       </div>
       <div class="step-card">
         <span class="step-icon">🛡️</span>
@@ -1166,13 +1583,13 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
    CONFIG — FILL IN THESE VALUES BEFORE LAUNCH
    ============================================================ */
 const CONFIG = {
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyj1u-0j1rT2F28mDV5Kw5ny-JK_4HYb-AyHF04_e_6s61gzz2YfuE-Oep7XXw-5D0A/exec', // ← FILL IN
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyj1u-0j1rT2F28mDV5Kw5ny-JK_4HYb-AyHF04_e_6s61gzz2YfuE-Oep7XXw-5D0A/exec',
   GUMROAD_PRODUCTS: {
-    basic:    'https://gumroad.com/l/svduwa',    // ← FILL IN (5 tokens, $4.99)
-    standard: 'https://gumroad.com/l/lysrix', // ← FILL IN (15 tokens, $11.99)
-    pro:      'https://gumroad.com/l/fvwvp',      // ← FILL IN (40 tokens, $24.99)
+    basic:    'https://gumroad.com/l/svduwa',
+    standard: 'https://gumroad.com/l/lysrix',
+    pro:      'https://gumroad.com/l/fvwvp',
   },
-  SUPPORT_EMAIL: 'carclarityonline@gmail.com', // ← FILL IN
+  SUPPORT_EMAIL: 'carclarityonline@gmail.com',
 };
 
 /* ============================================================
@@ -1186,8 +1603,8 @@ const state = {
   searchCount: 0,
   ratingShown: false,
   currentPage: 'page-landing',
-  pendingEmail: null,  // for verify flow
-  resetEmail: null,    // for reset flow
+  pendingEmail: null,
+  resetEmail: null,
   searchTab: 'vin',
   selectedPack: 'basic',
   currentRating: 0,
@@ -1333,11 +1750,6 @@ function setBtnLoading(btnId, loading, text) {
 
 /* ============================================================
    API CALL (JSONP-SAFE)
-   Sends params via URL query string for GET (doGet in Apps Script)
-   Uses fetch with no-cors workaround via script tag for safety.
-   
-   We use a Promise-based JSONP approach so GitHub Pages can
-   communicate with Apps Script without CORS issues.
    ============================================================ */
 let _jsonpCallbackCounter = 0;
 
@@ -1360,7 +1772,7 @@ function apiCall(action, params) {
     const timeout = setTimeout(() => {
       cleanup();
       reject(new Error('Request timed out. Please check your connection.'));
-    }, 20000);
+    }, 30000);
 
     window[callbackName] = (data) => {
       cleanup();
@@ -1440,28 +1852,25 @@ document.getElementById('su-country').addEventListener('change', function() {
    ============================================================ */
 async function doSignup() {
   clearAlerts();
-  const email    = document.getElementById('su-email').value.trim().toLowerCase();
-  const country  = document.getElementById('su-country').value;
-  const pass     = document.getElementById('su-pass').value;
-  const pass2    = document.getElementById('su-pass2').value;
-  const terms    = document.getElementById('su-terms').checked;
+  const email  = document.getElementById('su-email').value.trim().toLowerCase();
+  const pass   = document.getElementById('su-pass').value;
+  const pass2  = document.getElementById('su-pass2').value;
+  const terms  = document.getElementById('su-terms').checked;
+  const country = document.getElementById('su-country').value;
 
-  if (!email)               return showAlert('signup-alert', 'error', 'Please enter your email address.');
-  if (!validateEmail(email)) return showAlert('signup-alert', 'error', 'Please enter a valid email address.');
-  if (country === 'OTHER')  return showAlert('signup-alert', 'error', 'We currently support the United States only.');
-  if (!pass)                return showAlert('signup-alert', 'error', 'Please create a password.');
-  if (pass.length < 8)      return showAlert('signup-alert', 'error', 'Password must be at least 8 characters.');
-  if (pass !== pass2)       return showAlert('signup-alert', 'error', 'Passwords do not match.');
-  if (!terms)               return showAlert('signup-alert', 'error', 'You must accept the Terms & Conditions and Privacy Policy.');
+  if (!email || !validateEmail(email)) return showAlert('signup-alert', 'error', 'Please enter a valid email address.');
+  if (country !== 'US') return showAlert('signup-alert', 'error', 'CarClarity currently supports the United States only.');
+  if (!pass || pass.length < 8) return showAlert('signup-alert', 'error', 'Password must be at least 8 characters.');
+  if (pass !== pass2) return showAlert('signup-alert', 'error', 'Passwords do not match.');
+  if (!terms) return showAlert('signup-alert', 'error', 'Please agree to the Terms &amp; Conditions.');
 
   setBtnLoading('su-btn', true, 'Creating account');
-
   try {
     const r = await apiCall('signup', { email, password: hashClient(pass), country });
     if (r.ok) {
       state.pendingEmail = email;
-      document.getElementById('verify-email-hint').textContent =
-        `We sent a 6-digit code to ${email}. Enter it below to verify your account and unlock your 3 free searches.`;
+      const hint = document.getElementById('verify-email-hint');
+      if (hint) hint.textContent = `We sent a 6-digit code to ${email}. Enter it below to verify your account.`;
       showPage('page-verify');
     } else {
       showAlert('signup-alert', 'error', r.error || 'Signup failed. Please try again.');
@@ -1556,7 +1965,6 @@ async function doLogin() {
   }
 }
 
-// Enter key on login
 document.getElementById('li-pass').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
@@ -1664,12 +2072,14 @@ async function doSearch() {
     searchData.year = year; searchData.make = make; searchData.model = model;
   }
 
-  setBtnLoading('search-btn', true, 'Searching NHTSA records');
-  document.getElementById('results-area').innerHTML = `
-    <div class="result-card"><div class="loader">
-      <div class="spinner"></div>
-      <p>Fetching official NHTSA records…</p>
-    </div></div>`;
+  setBtnLoading('search-btn', true, 'Fetching records');
+
+  // Premium multi-step loader
+  document.getElementById('results-area').innerHTML = buildPremiumLoader();
+  setTimeout(() => activateLoaderStep(0), 100);
+  setTimeout(() => activateLoaderStep(1), 900);
+  setTimeout(() => activateLoaderStep(2), 1800);
+  setTimeout(() => activateLoaderStep(3), 2600);
 
   try {
     const r = await apiCall('searchCar', searchData);
@@ -1677,7 +2087,7 @@ async function doSearch() {
       state.tokens = r.tokensRemaining;
       state.searchCount = r.searchCount;
       updateTokenChip();
-      renderResults(r);
+      renderPremiumReport(r);
       addToHistory(r, searchData);
       checkRatingTrigger();
     } else if (r.noTokens) {
@@ -1695,62 +2105,598 @@ async function doSearch() {
   }
 }
 
-function renderResults(r) {
-  const riskClass = { 'HIGH RISK': 'risk-high', 'CAUTION': 'risk-caution', 'LOW RISK': 'risk-low' };
-  const numClass  = { 'HIGH RISK': 'red',       'CAUTION': 'amber',        'LOW RISK': 'green'   };
-  const rc = riskClass[r.riskLevel] || 'risk-low';
-  const nc = numClass[r.riskLevel]  || 'green';
-
-  const identifier = r.vin ? `VIN: ${r.vin}` : `${r.year} ${r.make} ${r.model}`;
-
-  document.getElementById('results-area').innerHTML = `
-    <div class="result-card">
-      <div class="result-header">
-        <div>
-          <div class="result-car-id">${escapeHtml(identifier)}</div>
-        </div>
-        <div class="result-risk-badge ${rc}">${escapeHtml(r.riskLevel)}</div>
+/* ============================================================
+   PREMIUM LOADER
+   ============================================================ */
+function buildPremiumLoader() {
+  return `
+  <div class="premium-loader" id="premium-loader">
+    <div class="spinner" style="margin-bottom:16px;"></div>
+    <h3>Building Your CarClarity Report</h3>
+    <p class="loader-sub">Querying official government databases…</p>
+    <div class="loader-steps">
+      <div class="loader-step" id="lstep-0">
+        <div class="step-dot" id="lstep-dot-0">1</div>
+        <span>Checking NHTSA recall database</span>
       </div>
-
-      <div class="result-stats">
-        <div class="stat-cell">
-          <div class="stat-num ${nc}">${r.recallCount}</div>
-          <div class="stat-label">Recalls</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num ${nc}">${r.complaintCount}</div>
-          <div class="stat-label">Complaints</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num">${r.tsbCount}</div>
-          <div class="stat-label">Service Bulletins</div>
-        </div>
+      <div class="loader-step" id="lstep-1">
+        <div class="step-dot" id="lstep-dot-1">2</div>
+        <span>Fetching consumer complaints</span>
       </div>
-
-      <div class="result-verdict">
-        <p>${escapeHtml(r.verdict)}</p>
-        ${r.recallCount > 0 ? `
-          <div style="margin-top:12px;padding:10px 14px;background:var(--red-lt);border-radius:var(--radius);font-size:.84rem;color:var(--red);">
-            ⚠️ <strong>Open recalls may still apply.</strong> Visit
-            <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener">nhtsa.gov/recalls</a>
-            to check the current status and find dealers who can fix them free of charge.
-          </div>` : ''}
+      <div class="loader-step" id="lstep-2">
+        <div class="step-dot" id="lstep-dot-2">3</div>
+        <span>Loading vehicle specifications &amp; NCAP safety ratings</span>
       </div>
-
-      <div class="result-cta">
-        <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-          View on NHTSA.gov ↗
-        </a>
-        <button class="btn btn-ghost btn-sm" onclick="doSearch()">Search another</button>
+      <div class="loader-step" id="lstep-3">
+        <div class="step-dot" id="lstep-dot-3">4</div>
+        <span>Generating risk analysis</span>
       </div>
     </div>
-    <div style="text-align:right;margin-top:8px;">
-      <small>Token balance: <strong>${r.tokensRemaining}</strong> remaining</small>
-    </div>`;
+  </div>`;
+}
+
+function activateLoaderStep(idx) {
+  // Mark previous as done
+  if (idx > 0) {
+    const prev = document.getElementById('lstep-' + (idx - 1));
+    if (prev) {
+      prev.classList.remove('active');
+      prev.classList.add('done');
+      const dot = document.getElementById('lstep-dot-' + (idx - 1));
+      if (dot) dot.textContent = '✓';
+    }
+  }
+  const step = document.getElementById('lstep-' + idx);
+  if (step) step.classList.add('active');
 }
 
 /* ============================================================
-   SEARCH HISTORY (local session only)
+   PREMIUM REPORT RENDERER
+   ============================================================ */
+function renderPremiumReport(r) {
+  const identifier = r.vin ? `VIN: ${r.vin}` : `${r.year} ${r.make} ${r.model}`;
+  const carName    = r.vehicleName || (r.year ? `${r.year} ${r.make} ${r.model}` : r.vin);
+  const now        = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+
+  // ── Risk level helpers ──
+  const rl = (r.riskLevel || 'LOW RISK').toUpperCase();
+  const riskClass = rl === 'HIGH RISK' ? 'high' : (rl === 'CAUTION' ? 'caution' : 'low');
+  const riskEmoji = rl === 'HIGH RISK' ? '🔴' : (rl === 'CAUTION' ? '🟡' : '🟢');
+  const numColorClass = rl === 'HIGH RISK' ? 'c-red' : (rl === 'CAUTION' ? 'c-amber' : 'c-green');
+  const scoreColorClass = riskClass === 'high' ? 'c-red' : (riskClass === 'caution' ? 'c-amber' : 'c-green');
+
+  // ── Recommendation ──
+  const recStr = r.recommendation || (
+    rl === 'HIGH RISK' ? 'Not Recommended' :
+    rl === 'CAUTION'   ? 'Proceed with Inspection' : 'Generally Safe'
+  );
+  const recEmoji = recStr === 'Not Recommended' ? '🚫' : (recStr === 'Proceed with Inspection' ? '🔎' : '✅');
+
+  // ── Risk score ──
+  const riskScore = typeof r.riskScore === 'number' ? r.riskScore : computeFallbackRiskScore(r);
+  const scoreBarPct = ((riskScore - 1) / 9) * 100;
+
+  // ── Reliability signal ──
+  const relSignal = r.reliabilitySignal || computeReliabilitySignal(r);
+  const relClass  = relSignal === 'ABOVE AVERAGE RISK' ? 'above' :
+                    relSignal === 'BELOW AVERAGE RELIABILITY' ? 'below' : 'normal';
+  const relEmoji  = relSignal === 'ABOVE AVERAGE RISK' ? '⚠️' :
+                    relSignal === 'BELOW AVERAGE RELIABILITY' ? '📉' : '✅';
+
+  // ── Complaint breakdown ──
+  const breakdown = r.complaintBreakdown || {};
+  const breakdownEntries = Object.entries(breakdown)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6);
+  const maxComplaint = breakdownEntries.length ? breakdownEntries[0][1] : 1;
+
+  // ── Vehicle specs ──
+  const specs = r.specs || {};
+
+  // ── Safety ──
+  const safety = r.safety || {};
+  const overallSafety = safety.overallRating || safety.combinedRating || null;
+
+  // ── Common issues ──
+  const commonIssues = r.commonIssues || extractCommonIssues(breakdown, r.complaints || []);
+
+  // ── Lifespan estimate ──
+  const lifespan = computeLifespanEstimate(specs, r.year);
+
+  // ── Summary text ──
+  const summaryText = r.summary || buildSummaryText(r, carName, relSignal);
+
+  // ── Problem area colors ──
+  const problemColors = ['p-red', 'p-amber', 'p-amber', 'p-ink', 'p-ink', 'p-ink'];
+
+  // ── Problem icons ──
+  const componentIcons = {
+    'engine': '⚙️', 'fuel': '⛽', 'powertrain': '🔧', 'transmission': '🔩',
+    'brakes': '🛑', 'brake': '🛑', 'steering': '🎯', 'suspension': '🔄',
+    'electrical': '⚡', 'airbag': '💨', 'seat': '💺', 'visibility': '👁️',
+    'tires': '🔲', 'wheels': '🔲', 'structure': '🏗️', 'unknown': '📋',
+    'other': '📋', 'exhaust': '💨', 'cooling': '🌡️', 'ac': '❄️',
+    'lights': '💡', 'windows': '🪟', 'doors': '🚪',
+  };
+
+  function getComponentIcon(name) {
+    const lc = name.toLowerCase();
+    for (const [k, v] of Object.entries(componentIcons)) {
+      if (lc.includes(k)) return v;
+    }
+    return '📋';
+  }
+
+  // ── Safety star renderer ──
+  function renderStars(rating) {
+    if (!rating && rating !== 0) return '<span class="safety-na">Not available</span>';
+    const num = parseInt(rating);
+    if (isNaN(num) || num === 0) return '<span class="safety-na">Not rated</span>';
+    const filled = Math.min(5, Math.max(0, num));
+    return '⭐'.repeat(filled) + '☆'.repeat(5 - filled);
+  }
+
+  function ratingText(rating) {
+    const n = parseInt(rating);
+    if (!n) return 'Not rated';
+    const labels = ['', 'Poor (1/5)', 'Below Average (2/5)', 'Average (3/5)', 'Good (4/5)', 'Excellent (5/5)'];
+    return labels[Math.min(5, n)] || n + '/5 stars';
+  }
+
+  // ── Build recall warnings ──
+  const recallWarnings = r.recallCount > 0 ? `
+    <div class="warnings-section">
+      <div class="section-label"><span class="section-label-icon">⚠️</span> Recall Warnings</div>
+      ${r.recalls && r.recalls.length ? r.recalls.slice(0,3).map(rec => `
+        <div class="warning-item">
+          <span>🔔</span>
+          <div>
+            <strong>${escapeHtml(rec.component || 'Recall')}</strong>
+            ${rec.summary ? ` — ${escapeHtml(rec.summary).slice(0,200)}${rec.summary.length > 200 ? '…' : ''}` : ''}
+          </div>
+        </div>`).join('') : `
+        <div class="warning-item">
+          <span>🔔</span>
+          <div>This vehicle has <strong>${r.recallCount} recall(s)</strong> on record. Visit
+            <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener">nhtsa.gov/recalls</a>
+            to see current status and get free repairs from authorized dealers.
+          </div>
+        </div>`}
+    </div>` : '';
+
+  // ── Safety features ──
+  const safetyFeaturesList = [
+    { key: 'ESC',   label: 'Electronic Stability Control',  icon: '🛞' },
+    { key: 'FCW',   label: 'Forward Collision Warning',     icon: '🚨' },
+    { key: 'LDW',   label: 'Lane Departure Warning',        icon: '〰️' },
+  ];
+
+  const safetyFeaturesHTML = safetyFeaturesList.map(f => {
+    const present = safety[f.key] === true || safety[f.key] === 'Standard' || safety[f.key] === 'Optional';
+    return `<div class="safety-feature ${present ? 'present' : 'absent'}">
+      ${f.icon} ${f.label} — <strong>${present ? 'Available' : 'Not detected'}</strong>
+    </div>`;
+  }).join('');
+
+  // ── FULL REPORT HTML ──
+  document.getElementById('results-area').innerHTML = `
+  <div class="premium-report">
+
+    <!-- ① HEADER -->
+    <div class="report-header">
+      <div class="report-header-top">
+        <div class="report-meta">
+          <span>CarClarity Risk Report</span>
+          <span class="report-meta-dot"></span>
+          <span>Official NHTSA Data</span>
+          <span class="report-meta-dot"></span>
+          <span>${escapeHtml(identifier)}</span>
+        </div>
+        <div class="report-car-name">${escapeHtml(carName)}</div>
+        <div class="report-badges">
+          <span class="report-risk-badge ${riskClass}">${riskEmoji} ${escapeHtml(rl)}</span>
+          <span class="report-recommendation">${recEmoji} ${escapeHtml(recStr)}</span>
+        </div>
+      </div>
+      <div class="report-header-footer">
+        <span class="report-generated">🕐 Report generated: ${now}</span>
+        <span class="report-source">🏛️ Source: National Highway Traffic Safety Administration</span>
+      </div>
+    </div>
+
+    <!-- ② QUICK SUMMARY -->
+    <div class="report-summary">
+      <div class="section-label"><span class="section-label-icon">📋</span> Quick Summary</div>
+      <p>${escapeHtml(summaryText)}</p>
+    </div>
+
+    <!-- ③ CORE METRICS -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <span class="metric-icon">🔔</span>
+        <div class="metric-num ${numColorClass}">${r.recallCount}</div>
+        <div class="metric-label">Safety Recalls</div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-icon">📣</span>
+        <div class="metric-num ${numColorClass}">${r.complaintCount}</div>
+        <div class="metric-label">Consumer Complaints</div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-icon">📄</span>
+        <div class="metric-num c-ink">${r.tsbCount || 0}</div>
+        <div class="metric-label">Service Bulletins</div>
+      </div>
+    </div>
+
+    <!-- ④ RISK SCORE -->
+    <div class="risk-score-card">
+      <div class="section-label"><span class="section-label-icon">🎯</span> Risk Score</div>
+      <div class="risk-score-inner">
+        <div class="risk-score-gauge ${scoreColorClass}">
+          ${riskScore}
+          <small>/ 10</small>
+        </div>
+        <div class="risk-score-text">
+          <h3>${rl === 'HIGH RISK' ? 'High Risk Vehicle' : rl === 'CAUTION' ? 'Moderate Risk' : 'Lower Risk Vehicle'}</h3>
+          <p>${buildRiskScoreExplanation(riskScore, r)}</p>
+        </div>
+      </div>
+      <div class="risk-score-bar-wrap">
+        <div class="risk-score-bar-labels"><span>Low (1)</span><span>Moderate (5)</span><span>High (10)</span></div>
+        <div class="risk-bar-track">
+          <div class="risk-bar-marker" id="risk-bar-marker" style="left:${scoreBarPct}%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ TOP PROBLEM AREAS -->
+    ${breakdownEntries.length ? `
+    <div class="problem-areas">
+      <div class="section-label"><span class="section-label-icon">🔍</span> Top Reported Problem Areas</div>
+      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">Based on NHTSA consumer complaint data</p>
+      <div class="problem-list">
+        ${breakdownEntries.map(([name, count], i) => {
+          const pct = Math.round((count / maxComplaint) * 100);
+          const colorClass = i === 0 ? 'p-red' : (i <= 1 ? 'p-amber' : 'p-ink');
+          return `<div class="problem-item">
+            <span class="problem-icon">${getComponentIcon(name)}</span>
+            <div class="problem-bar-wrap">
+              <div class="problem-name">
+                <span>${escapeHtml(name)}</span>
+                <span class="problem-count">${count.toLocaleString()} complaints</span>
+              </div>
+              <div class="problem-bar-track">
+                <div class="problem-bar-fill ${colorClass}" style="width:${pct}%"></div>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>` : ''}
+
+    <!-- ⑥ VEHICLE SPECIFICATIONS -->
+    <div class="specs-section">
+      <div class="section-label"><span class="section-label-icon">🔧</span> Vehicle Specifications</div>
+      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">From NHTSA Vehicle Parts Information Catalog (vPIC)</p>
+      <div class="specs-grid">
+        ${buildSpecItem('Engine', specs.displacement ? `${specs.displacement}L` : null)}
+        ${buildSpecItem('Cylinders', specs.cylinders)}
+        ${buildSpecItem('Fuel Type', specs.fuelType)}
+        ${buildSpecItem('Drive Type', specs.driveType)}
+        ${buildSpecItem('Body Style', specs.bodyClass)}
+        ${buildSpecItem('Transmission', specs.transmission)}
+        ${buildSpecItem('Doors', specs.doors)}
+        ${buildSpecItem('Plant City', specs.plantCity ? `${specs.plantCity}${specs.plantCountry ? ', ' + specs.plantCountry : ''}` : null)}
+      </div>
+    </div>
+
+    <!-- ⑦ SAFETY SCORECARD -->
+    <div class="safety-section">
+      <div class="section-label"><span class="section-label-icon">🛡️</span> Safety Scorecard</div>
+      <p style="font-size:.85rem;margin-bottom:0;margin-top:-4px;">From NHTSA New Car Assessment Program (NCAP)</p>
+      <div class="safety-grid">
+        <div class="safety-item">
+          <div class="safety-category">Frontal Crash</div>
+          <div class="safety-stars">${renderStars(safety.frontalCrash)}</div>
+          <div class="safety-rating-text">${ratingText(safety.frontalCrash)}</div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-category">Side Crash</div>
+          <div class="safety-stars">${renderStars(safety.sideCrash)}</div>
+          <div class="safety-rating-text">${ratingText(safety.sideCrash)}</div>
+        </div>
+        <div class="safety-item">
+          <div class="safety-category">Rollover Risk</div>
+          <div class="safety-stars">${renderStars(safety.rollover)}</div>
+          <div class="safety-rating-text">${ratingText(safety.rollover)}</div>
+        </div>
+        ${overallSafety ? `<div class="safety-item">
+          <div class="safety-category">Overall Rating</div>
+          <div class="safety-stars">${renderStars(overallSafety)}</div>
+          <div class="safety-rating-text">${ratingText(overallSafety)}</div>
+        </div>` : ''}
+      </div>
+      ${safetyFeaturesHTML ? `<div class="safety-features">${safetyFeaturesHTML}</div>` : ''}
+      ${!safety.frontalCrash && !safety.sideCrash && !safety.rollover ? `
+        <div class="alert alert-info" style="margin-top:14px;margin-bottom:0;">
+          <span class="alert-icon">ℹ️</span>
+          <span>NCAP safety ratings are not available for this vehicle. This may be because the model year predates the NHTSA rating program or was not tested.</span>
+        </div>` : ''}
+    </div>
+
+    <!-- ⑧ RELIABILITY SIGNAL -->
+    <div class="reliability-section">
+      <div class="section-label"><span class="section-label-icon">📊</span> Reliability Signal</div>
+      <div class="reliability-badge ${relClass}">${relEmoji} ${escapeHtml(relSignal)}</div>
+      <p style="font-size:.88rem;">${buildReliabilityExplanation(relSignal, r)}</p>
+      <div class="lifespan-block">
+        <div class="lifespan-title">🗓️ Expected Lifespan Estimate</div>
+        <div class="lifespan-value">${lifespan.range}</div>
+        <div class="lifespan-note">${lifespan.note}</div>
+      </div>
+    </div>
+
+    <!-- ⑨ COMMON ISSUES -->
+    ${commonIssues.length ? `
+    <div class="issues-section">
+      <div class="section-label"><span class="section-label-icon">🏷️</span> Common Issues Reported</div>
+      <p style="font-size:.85rem;margin-top:-4px;">Keywords extracted from consumer complaints in the NHTSA database</p>
+      <div class="issues-tags">
+        ${commonIssues.map((issue, i) => `
+          <span class="issue-tag ${i < 3 ? 'high' : ''}">${escapeHtml(issue)}</span>`).join('')}
+      </div>
+    </div>` : ''}
+
+    <!-- ⑩ WHAT THIS MEANS + WHAT TO DO -->
+    <div class="guidance-grid">
+      <div class="guidance-card">
+        <h3>💡 What This Means For You</h3>
+        <ul class="guidance-list">
+          ${buildMeaningsList(r, rl).map(item => `<li data-icon="${item.icon}">${escapeHtml(item.text)}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="guidance-card">
+        <h3>✅ What You Should Do Next</h3>
+        <ul class="guidance-list">
+          ${buildActionsList(r, rl).map(item => `<li data-icon="${item.icon}">${escapeHtml(item.text)}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+
+    <!-- ⑪ RECALL WARNINGS -->
+    ${recallWarnings}
+
+    <!-- ⑫ TRUST SECTION -->
+    <div class="trust-section">
+      <span class="trust-icon">🏛️</span>
+      <div class="trust-text">
+        <h3>Data You Can Trust</h3>
+        <p>All data in this report is sourced directly from the <strong>U.S. National Highway Traffic Safety Administration (NHTSA)</strong> — the official federal agency responsible for vehicle safety in the United States. No data in this report is invented or estimated without basis. Recall and complaint data is updated continuously by NHTSA.</p>
+      </div>
+    </div>
+
+    <!-- ⑬ DISCLAIMER -->
+    <div class="disclaimer-section">
+      <strong>⚠️ Important Disclaimer:</strong> This report is informational only. It does not replace a professional mechanical inspection, a full vehicle history report (Carfax/AutoCheck), or any professional due diligence. Data accuracy depends on NHTSA's own records, which may be incomplete or delayed. Reliability and risk signals are derived logically from available data — they are not guarantees. <strong>Always have any used car inspected by a certified mechanic before purchasing.</strong>
+    </div>
+
+    <!-- CTA ROW -->
+    <div class="report-cta-row">
+      <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+        View on NHTSA.gov ↗
+      </a>
+      <button class="btn btn-ghost btn-sm" onclick="doSearch()">Search another vehicle</button>
+    </div>
+
+    <div style="text-align:right;margin-bottom:4px;">
+      <small>Token balance: <strong>${r.tokensRemaining}</strong> remaining</small>
+    </div>
+
+  </div>`;
+
+  // Animate risk bar after render
+  requestAnimationFrame(() => {
+    const marker = document.getElementById('risk-bar-marker');
+    if (marker) {
+      marker.style.transition = 'none';
+      marker.style.left = '0%';
+      requestAnimationFrame(() => {
+        marker.style.transition = 'left .9s cubic-bezier(.4,0,.2,1)';
+        marker.style.left = scoreBarPct + '%';
+      });
+    }
+  });
+}
+
+/* ============================================================
+   REPORT HELPERS
+   ============================================================ */
+
+function buildSpecItem(label, value) {
+  const display = value ? escapeHtml(String(value)) : '<span class="spec-not-available">N/A</span>';
+  return `<div class="spec-item">
+    <div class="spec-label">${label}</div>
+    <div class="spec-value">${display}</div>
+  </div>`;
+}
+
+function computeFallbackRiskScore(r) {
+  let score = 1;
+  const recalls    = r.recallCount    || 0;
+  const complaints = r.complaintCount || 0;
+  if (recalls >= 10)       score += 4;
+  else if (recalls >= 5)   score += 3;
+  else if (recalls >= 2)   score += 2;
+  else if (recalls >= 1)   score += 1;
+
+  if (complaints >= 2000)      score += 4;
+  else if (complaints >= 1000) score += 3;
+  else if (complaints >= 500)  score += 2;
+  else if (complaints >= 100)  score += 1;
+
+  return Math.min(10, Math.max(1, score));
+}
+
+function computeReliabilitySignal(r) {
+  const complaints = r.complaintCount || 0;
+  const recalls    = r.recallCount    || 0;
+  if (complaints > 1500 || recalls > 8) return 'ABOVE AVERAGE RISK';
+  if (complaints < 100  && recalls < 2) return 'NORMAL RANGE';
+  if (complaints > 800  || recalls > 4) return 'ABOVE AVERAGE RISK';
+  return 'NORMAL RANGE';
+}
+
+function computeLifespanEstimate(specs, year) {
+  const fuelType = (specs.fuelType || '').toLowerCase();
+  const currentYear = new Date().getFullYear();
+  const age = year ? currentYear - parseInt(year) : 0;
+
+  if (fuelType.includes('electric')) {
+    return {
+      range: '150,000 – 250,000 miles (battery dependent)',
+      note: 'Electric vehicle longevity depends heavily on battery health and charging habits. Actual lifespan depends on maintenance and usage.'
+    };
+  }
+  if (fuelType.includes('hybrid')) {
+    return {
+      range: '200,000 – 300,000 miles (well-maintained)',
+      note: 'Hybrids can achieve high mileage when maintained properly. Battery pack health is a key factor. Actual lifespan depends on maintenance and usage.'
+    };
+  }
+  if (age > 15) {
+    return {
+      range: '50,000 – 150,000 miles remaining (estimate)',
+      note: 'Older vehicles vary widely. Maintenance history is critical. Actual lifespan depends on maintenance and usage.'
+    };
+  }
+  return {
+    range: '150,000 – 300,000 miles (well-maintained)',
+    note: 'This is a general estimate based on typical vehicle longevity data. Actual lifespan depends on maintenance and usage habits.'
+  };
+}
+
+function buildSummaryText(r, carName, relSignal) {
+  const rl = (r.riskLevel || 'LOW RISK').toUpperCase();
+  const recalls    = r.recallCount    || 0;
+  const complaints = r.complaintCount || 0;
+
+  let tone = '';
+  if (rl === 'HIGH RISK') {
+    tone = `The ${carName} shows elevated risk indicators that deserve serious attention before any purchase decision. `;
+  } else if (rl === 'CAUTION') {
+    tone = `The ${carName} shows some concerns that a careful buyer should investigate before purchasing. `;
+  } else {
+    tone = `The ${carName} shows relatively low risk indicators based on available government data. `;
+  }
+
+  let details = `NHTSA records show ${recalls} recall${recalls !== 1 ? 's' : ''} and ${complaints.toLocaleString()} consumer complaint${complaints !== 1 ? 's' : ''}.`;
+
+  if (relSignal === 'ABOVE AVERAGE RISK') {
+    details += ' The complaint volume is higher than typical for this vehicle class, suggesting recurring owner-reported issues.';
+  } else if (relSignal === 'NORMAL RANGE') {
+    details += ' Complaint levels are within normal range for this vehicle type.';
+  }
+
+  return tone + details + ' Review the full report below before making a buying decision.';
+}
+
+function buildRiskScoreExplanation(score, r) {
+  if (score >= 8) return `This score reflects ${r.recallCount || 0} recalls and ${(r.complaintCount || 0).toLocaleString()} complaints — significantly above average. Exercise extreme caution.`;
+  if (score >= 5) return `This score reflects moderate recall and complaint activity. A professional inspection is strongly recommended before purchase.`;
+  return `This score reflects relatively low recall and complaint counts. Always verify current recall status before buying any used vehicle.`;
+}
+
+function buildReliabilityExplanation(signal, r) {
+  const complaints = r.complaintCount || 0;
+  const recalls    = r.recallCount    || 0;
+  if (signal === 'ABOVE AVERAGE RISK') {
+    return `With ${complaints.toLocaleString()} complaints and ${recalls} recalls on record, this vehicle exceeds typical thresholds for its class. This does not mean it will fail, but it warrants extra scrutiny during a pre-purchase inspection.`;
+  }
+  if (signal === 'BELOW AVERAGE RELIABILITY') {
+    return `Complaint levels are somewhat elevated compared to average vehicles of similar age and class. Ensure a thorough mechanical inspection before committing to a purchase.`;
+  }
+  return `With ${complaints.toLocaleString()} complaints and ${recalls} recalls, this vehicle falls within a normal range for its class. Continue with standard pre-purchase due diligence.`;
+}
+
+function extractCommonIssues(breakdown, complaints) {
+  const keywords = [];
+  const keywordMap = {
+    'engine':       'Engine problems',
+    'transmission': 'Transmission issues',
+    'electrical':   'Electrical faults',
+    'brakes':       'Brake concerns',
+    'steering':     'Steering problems',
+    'fuel':         'Fuel system issues',
+    'airbag':       'Airbag concerns',
+    'suspension':   'Suspension wear',
+    'cooling':      'Cooling system',
+    'exhaust':      'Exhaust issues',
+  };
+  for (const [k, label] of Object.entries(keywordMap)) {
+    const found = Object.keys(breakdown).some(c => c.toLowerCase().includes(k));
+    if (found) keywords.push(label);
+  }
+  return keywords.slice(0, 8);
+}
+
+function buildMeaningsList(r, rl) {
+  const items = [];
+  const recalls    = r.recallCount    || 0;
+  const complaints = r.complaintCount || 0;
+
+  if (recalls > 0) {
+    items.push({ icon: '🔔', text: `${recalls} recall${recalls > 1 ? 's' : ''} on record means safety fixes may be needed — these are typically repaired free at authorized dealers.` });
+  } else {
+    items.push({ icon: '✅', text: 'No recall history found for this vehicle configuration.' });
+  }
+
+  if (complaints > 1000) {
+    items.push({ icon: '⚠️', text: `${complaints.toLocaleString()} consumer complaints is a high volume — indicates recurring issues reported by real owners.` });
+  } else if (complaints > 200) {
+    items.push({ icon: '🔎', text: `${complaints.toLocaleString()} complaints is above average — investigate the top problem areas in this report before buying.` });
+  } else {
+    items.push({ icon: '✅', text: `Complaint volume is relatively low for this vehicle.` });
+  }
+
+  if (rl === 'HIGH RISK') {
+    items.push({ icon: '🚫', text: 'High risk rating means this vehicle has more red flags than most. Proceed only after a thorough inspection.' });
+  } else if (rl === 'CAUTION') {
+    items.push({ icon: '⚡', text: 'Caution rating means known issues exist — but this does not necessarily make the car a bad buy with the right inspection.' });
+  } else {
+    items.push({ icon: '🟢', text: 'Low risk rating means government data does not show major alarm signals for this vehicle.' });
+  }
+
+  return items;
+}
+
+function buildActionsList(r, rl) {
+  const items = [
+    { icon: '🔧', text: 'Book a pre-purchase inspection with a certified independent mechanic before any offer.' },
+    { icon: '📋', text: 'Run a full vehicle history report (Carfax or AutoCheck) to check ownership, accidents, and title status.' },
+    { icon: '🌐', text: 'Visit nhtsa.gov/recalls to confirm all recalls have been repaired — dealers fix these for free.' },
+  ];
+  if (r.recallCount > 0) {
+    items.push({ icon: '📞', text: 'Ask the seller for recall repair documentation. If unrepaired, use this as a negotiation point.' });
+  }
+  if ((r.complaintCount || 0) > 500) {
+    items.push({ icon: '🗣️', text: 'Search owner forums and community reviews for first-hand accounts of the top problem areas listed above.' });
+  }
+  if (rl === 'HIGH RISK') {
+    items.push({ icon: '💰', text: 'If purchasing, factor in potential repair costs and negotiate accordingly or walk away.' });
+  }
+  return items;
+}
+
+/* ============================================================
+   FALLBACK RENDER (legacy, kept for safety)
+   ============================================================ */
+function renderResults(r) {
+  renderPremiumReport(r);
+}
+
+/* ============================================================
+   SEARCH HISTORY
    ============================================================ */
 function addToHistory(result, searchData) {
   const entry = {
@@ -1779,7 +2725,7 @@ function renderHistory() {
 }
 
 /* ============================================================
-   RATING POPUP (after 10 searches)
+   RATING POPUP
    ============================================================ */
 function checkRatingTrigger() {
   if (state.searchCount >= 10 && !state.ratingShown) {
@@ -1890,16 +2836,7 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-/**
- * Client-side pre-hash of passwords before sending.
- * The backend applies a second, salted server-side hash.
- * This reduces exposure if the connection is somehow intercepted.
- * 
- * Uses a simple FNV-1a + base64-like encoding as a lightweight
- * client-side obfuscation. NOT a substitute for server-side hashing.
- */
 function hashClient(password) {
-  // Simple but consistent client-side hash (FNV-1a 32-bit)
   let hash = 2166136261;
   for (let i = 0; i < password.length; i++) {
     hash ^= password.charCodeAt(i);
