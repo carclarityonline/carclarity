@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CarClarity — Know Before You Buy</title>
+<meta name="description" content="Check a used car's recall history, complaints, and risk level before you buy. Official government data only." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --ink:       #0f1117;
+  --ink-soft:  #3a3d4a;
+  --ink-muted: #6b6f7e;
+  --surface:   #f7f6f2;
+  --white:     #ffffff;
+  --border:    #e2e0d8;
+  --accent:    #c8432b;
+  --accent-dk: #a33420;
+  --accent-lt: #fdf0ed;
+  --green:     #1d7a4f;
+  --green-lt:  #e8f6ef;
+  --amber:     #b86f00;
+  --amber-lt:  #fff4e0;
+  --red:       #c8432b;
+  --red-lt:    #fdf0ed;
+  --radius:    10px;
+  --radius-lg: 18px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+  --shadow:    0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.05);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  --transition: .18s ease;
+}
+
+/* ============================================================
+   RESET + BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+input, select, textarea { font-family: inherit; outline: none; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.serif { font-family: 'DM Serif Display', Georgia, serif; }
+h1, h2, h3 { font-family: 'DM Serif Display', Georgia, serif; line-height: 1.18; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); }
+h3 { font-size: 1.15rem; }
+p  { line-height: 1.65; color: var(--ink-soft); }
+small { font-size: .8rem; color: var(--ink-muted); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+.container-sm { max-width: 520px; margin: 0 auto; padding: 0 20px; }
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.mt-4  { margin-top: 4px; }
+.mt-8  { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mb-8  { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.gap-8 { gap: 8px; }
+.flex  { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.w-full { width: 100%; }
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+.alert {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: .88rem;
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  animation: fadeIn .2s ease;
+}
+.alert-error   { background: var(--red-lt);   color: var(--red);   border: 1px solid #f3bdb5; }
+.alert-success { background: var(--green-lt); color: var(--green); border: 1px solid #a8d9c1; }
+.alert-info    { background: #eef3ff;          color: #3455c8;     border: 1px solid #c0cef6; }
+.alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border-radius: var(--radius);
+  font-size: .92rem;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--accent-dk); }
+.btn-primary:active { transform: scale(.98); }
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { background: var(--white); border-color: #c0bdb5; }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  padding: 8px 14px;
+  font-size: .85rem;
+}
+.btn-ghost:hover { background: var(--border); }
+.btn-green {
+  background: var(--green);
+  color: #fff;
+}
+.btn-green:hover { background: #165f3c; }
+.btn-lg { padding: 14px 30px; font-size: 1rem; border-radius: 12px; }
+.btn-sm { padding: 7px 14px; font-size: .82rem; }
+.btn-full { width: 100%; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.btn-loading::after {
+  content: '';
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin-left: 6px;
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 5px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: .93rem;
+  color: var(--ink);
+  background: var(--white);
+  transition: border-color var(--transition);
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,67,43,.1);
+}
+.form-textarea { min-height: 90px; resize: vertical; }
+.form-hint { font-size: .78rem; color: var(--ink-muted); margin-top: 4px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+.checkbox-group input[type=checkbox] { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; accent-color: var(--accent); }
+.checkbox-group label { font-size: .86rem; color: var(--ink-soft); line-height: 1.5; }
+.checkbox-group label a { color: var(--accent); font-weight: 600; }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+}
+.card-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--ink-muted); font-size: .78rem;
+  margin: 18px 0;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ============================================================
+   BADGE
+   ============================================================ */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 99px;
+  font-size: .75rem; font-weight: 600;
+}
+.badge-red    { background: var(--red-lt);   color: var(--red);   }
+.badge-amber  { background: var(--amber-lt); color: var(--amber); }
+.badge-green  { background: var(--green-lt); color: var(--green); }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#navbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.navbar-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; max-width: 1100px; margin: 0 auto;
+}
+.brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; color: var(--ink);
+  display: flex; align-items: center; gap: 8px;
+}
+.brand-dot { color: var(--accent); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.token-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--accent-lt); color: var(--accent);
+  padding: 5px 12px; border-radius: 99px;
+  font-size: .82rem; font-weight: 700; cursor: pointer;
+}
+.token-chip:hover { background: #f5d3cb; }
+
+/* ============================================================
+   PAGES (visibility)
+   ============================================================ */
+.page { display: none; flex-direction: column; flex: 1; animation: fadeIn .25s ease; }
+.page.active { display: flex; }
+
+/* ============================================================
+   LANDING PAGE
+   ============================================================ */
+#page-landing {
+  background: var(--white);
+}
+
+.hero {
+  padding: 70px 20px 60px;
+  text-align: center;
+  background: linear-gradient(180deg, #fff 0%, #f7f6f2 100%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent-lt); color: var(--accent);
+  padding: 5px 14px; border-radius: 99px;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.hero h1 { max-width: 640px; margin: 0 auto 18px; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero p { max-width: 480px; margin: 0 auto 32px; font-size: 1rem; }
+.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.how-it-works {
+  padding: 64px 20px;
+  max-width: 960px; margin: 0 auto;
+}
+.how-it-works h2 { text-align: center; margin-bottom: 40px; }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.step-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+}
+.step-icon {
+  font-size: 2rem; margin-bottom: 12px;
+  display: block;
+}
+.step-card h3 { margin-bottom: 6px; font-size: 1rem; }
+.step-card p  { font-size: .88rem; }
+
+.data-notice {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 32px 20px;
+  text-align: center;
+}
+.data-notice p { max-width: 600px; margin: 0 auto; font-size: .88rem; }
+
+/* ============================================================
+   AUTH PAGES
+   ============================================================ */
+.auth-page {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 20px;
+  background: var(--surface);
+}
+.auth-box {
+  width: 100%;
+  max-width: 440px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow);
+}
+.auth-box h2 { margin-bottom: 6px; }
+.auth-box > p { margin-bottom: 24px; font-size: .9rem; }
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: .86rem;
+  color: var(--ink-muted);
+}
+.auth-footer a { color: var(--accent); font-weight: 600; }
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+#page-dashboard {
+  background: var(--surface);
+  min-height: calc(100vh - 56px);
+}
+.dashboard-layout {
+  max-width: 900px; margin: 0 auto;
+  padding: 32px 20px;
+  display: grid;
+  gap: 24px;
+}
+.search-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-sm);
+}
+.search-card h2 { margin-bottom: 6px; }
+.search-card > p { margin-bottom: 22px; font-size: .9rem; }
+
+.search-type-tabs {
+  display: flex; gap: 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.tab-btn {
+  flex: 1; padding: 9px;
+  background: transparent;
+  font-size: .85rem; font-weight: 600;
+  color: var(--ink-muted);
+  border: none;
+  transition: var(--transition);
+}
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+.tab-btn:not(.active):hover { background: var(--surface); }
+
+.search-panel { display: none; }
+.search-panel.active { display: block; }
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+.result-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.result-header {
+  padding: 22px 26px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap;
+}
+.result-car-id { font-size: .82rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; }
+.result-risk-badge {
+  font-size: .92rem; font-weight: 700;
+  padding: 6px 16px; border-radius: 99px;
+}
+.risk-high   { background: var(--red-lt);   color: var(--red);   }
+.risk-caution{ background: var(--amber-lt); color: var(--amber); }
+.risk-low    { background: var(--green-lt); color: var(--green); }
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.stat-cell {
+  padding: 18px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-num { font-size: 2rem; font-family: 'DM Serif Display', serif; font-weight: 400; }
+.stat-num.red    { color: var(--red); }
+.stat-num.amber  { color: var(--amber); }
+.stat-num.green  { color: var(--green); }
+.stat-label { font-size: .75rem; color: var(--ink-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+
+.result-verdict { padding: 20px 26px; }
+.result-verdict p { font-size: .92rem; line-height: 1.6; }
+.result-cta { padding: 0 26px 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ============================================================
+   TOKEN / PAYWALL
+   ============================================================ */
+.paywall-card {
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.paywall-card .icon-big { font-size: 3rem; margin-bottom: 16px; display: block; }
+.paywall-card h2 { margin-bottom: 8px; }
+.paywall-card p  { max-width: 380px; margin: 0 auto 24px; font-size: .92rem; }
+.token-packs {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.token-pack {
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 130px;
+  background: var(--white);
+}
+.token-pack:hover { border-color: var(--accent); background: var(--accent-lt); }
+.token-pack.selected { border-color: var(--accent); background: var(--accent-lt); }
+.token-pack .pack-tokens { font-size: 1.6rem; font-family: 'DM Serif Display', serif; color: var(--accent); }
+.token-pack .pack-name   { font-size: .78rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; }
+.token-pack .pack-price  { font-size: 1rem; font-weight: 700; margin-top: 6px; }
+.verify-section { border-top: 1px solid var(--border); margin-top: 24px; padding-top: 24px; }
+.verify-section p { font-size: .88rem; margin-bottom: 12px; }
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15,17,23,.55);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: fadeIn .15s ease;
+}
+@media (min-width: 600px) {
+  .modal-overlay { align-items: center; }
+}
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  width: 100%; max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 28px 28px 32px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: slideUp .22s ease;
+}
+@media (min-width: 600px) {
+  .modal { border-radius: var(--radius-lg); animation: fadeIn .2s ease; }
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--surface); border: none; border-radius: 50%;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; cursor: pointer; color: var(--ink-muted);
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--border); color: var(--ink); }
+.modal h2 { margin-bottom: 6px; }
+.modal > p { margin-bottom: 20px; font-size: .9rem; }
+
+/* Rating stars */
+.stars { display: flex; gap: 6px; justify-content: center; margin: 16px 0; }
+.star {
+  font-size: 2rem; cursor: pointer;
+  color: var(--border);
+  transition: color var(--transition);
+}
+.star.active { color: #f5a623; }
+
+/* ============================================================
+   LEGAL MODAL
+   ============================================================ */
+.legal-text {
+  font-size: .84rem; line-height: 1.7;
+  color: var(--ink-soft);
+  max-height: 340px; overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--surface);
+}
+.legal-text h4 { font-size: .88rem; color: var(--ink); margin: 14px 0 4px; }
+.legal-text p  { margin-bottom: 8px; font-size: .83rem; }
+
+/* ============================================================
+   FLOATING FEEDBACK BUTTON
+   ============================================================ */
+#feedback-fab {
+  position: fixed;
+  bottom: 24px; right: 20px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  padding: 11px 18px;
+  font-size: .82rem; font-weight: 600;
+  display: flex; align-items: center; gap: 7px;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 200;
+  transition: var(--transition);
+}
+#feedback-fab:hover { background: var(--accent); transform: translateY(-2px); }
+#feedback-fab .fab-icon { font-size: 1rem; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 20px;
+  text-align: center;
+}
+footer p {
+  max-width: 680px; margin: 0 auto;
+  font-size: .78rem; color: var(--ink-muted);
+  line-height: 1.6;
+}
+footer a { color: var(--ink-muted); text-decoration: underline; }
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+.loader {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 60px 20px; gap: 14px;
+}
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+.loader p { font-size: .9rem; color: var(--ink-muted); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* ============================================================
+   SEARCH HISTORY
+   ============================================================ */
+.history-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.history-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.history-item:hover { border-color: #ccc; background: #f0ede8; }
+.history-item .hi-id { font-weight: 600; color: var(--ink); }
+.history-item .hi-date { color: var(--ink-muted); font-size: .78rem; }
+
+/* ============================================================
+   MOBILE TWEAKS
+   ============================================================ */
+@media (max-width: 520px) {
+  .auth-box { padding: 26px 20px; }
+  .search-card, .paywall-card { padding: 22px 18px; }
+  .result-stats { grid-template-columns: 1fr 1fr; }
+  .stat-cell:nth-child(2) { border-right: none; }
+  .stat-cell:nth-child(3) { border-top: 1px solid var(--border); grid-column: 1 / -1; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero { padding: 48px 16px 40px; }
+}
+
+/* ============================================================
+   PROGRESS BAR (top of page)
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; background: var(--accent);
+  width: 0; z-index: 9999;
+  transition: width .3s ease, opacity .4s ease;
+  opacity: 0;
+}
+#progress-bar.active { opacity: 1; }
+
+/* ============================================================
+   VERIFICATION CODE INPUT
+   ============================================================ */
+.code-inputs {
+  display: flex; gap: 8px; justify-content: center; margin: 16px 0;
+}
+.code-input {
+  width: 44px; height: 52px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--ink);
+  background: var(--white);
+  transition: border-color var(--transition);
+}
+.code-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,67,43,.1); }
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty-state {
+  text-align: center; padding: 48px 20px;
+  color: var(--ink-muted);
+}
+.empty-state .es-icon { font-size: 2.6rem; margin-bottom: 12px; display: block; opacity: .5; }
+.empty-state p { font-size: .9rem; }
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.section-header h3 { font-size: .95rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- NAVBAR (shown when logged in) -->
+<nav id="navbar" class="hidden">
+  <div class="navbar-inner">
+    <div class="brand">CarClarity<span class="brand-dot">.</span></div>
+    <div class="nav-actions">
+      <span class="token-chip" id="nav-token-chip" onclick="showBuyTokens()" title="Buy more tokens">
+        🪙 <span id="nav-token-count">–</span> tokens
+      </span>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Sign out</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     PAGE: LANDING
+     ============================================================ -->
+<div id="page-landing" class="page active">
+  <section class="hero">
+    <div class="hero-eyebrow">🇺🇸 United States Only · Official Government Data</div>
+    <h1>Know what you're buying<br>before you <em>sign anything.</em></h1>
+    <p>CarClarity checks official NHTSA records — recalls, complaints, and manufacturer bulletins — in seconds.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary btn-lg" onclick="showPage('page-signup')">
+        Check a Car Free →
+      </button>
+      <button class="btn btn-outline btn-lg" onclick="showPage('page-login')">
+        Sign In
+      </button>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How it works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-icon">📋</span>
+        <h3>Sign Up Free</h3>
+        <p>Create an account and get 3 free searches — no credit card required.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-icon">🔍</span>
+        <h3>Enter a VIN or Year/Make/Model</h3>
+        <p>We look up official NHTSA records instantly. No guesswork.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-icon">📊</span>
+        <h3>Get a Clear Report</h3>
+        <p>See recall counts, complaint counts, and a plain-English risk verdict.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-icon">🛡️</span>
+        <h3>Buy More Searches</h3>
+        <p>Used your 3 free searches? Top up instantly with a token pack.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="data-notice">
+    <p>
+      ⚠️ <strong>Important:</strong> CarClarity uses publicly available data from the U.S. National Highway Traffic Safety Administration (NHTSA).
+      Results are informational only and do not replace a professional inspection, a full vehicle history report, or your own due diligence.
+    </p>
+  </section>
+</div>
+
+<!-- ============================================================
+     PAGE: SIGNUP
+     ============================================================ -->
+<div id="page-signup" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <h2>Create your account</h2>
+      <p>3 free searches included. No credit card required.</p>
+      <div id="signup-alert"></div>
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-input" id="su-email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Country</label>
+        <select class="form-select" id="su-country">
+          <option value="US">🇺🇸 United States</option>
+          <option value="OTHER">Other country...</option>
+        </select>
+      </div>
+      <div id="unsupported-country" class="alert alert-info hidden">
+        <span class="alert-icon">🌐</span>
+        <span>We currently support the United States only. We're working on adding more countries — check back soon!</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="su-pass" placeholder="At least 8 characters" autocomplete="new-password" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm password</label>
+        <input type="password" class="form-input" id="su-pass2" placeholder="Repeat your password" autocomplete="new-password" />
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="su-terms" />
+        <label for="su-terms">
+          I have read and agree to the <a href="#" onclick="openModal('modal-terms'); return false;">Terms &amp; Conditions</a> and <a href="#" onclick="openModal('modal-privacy'); return false;">Privacy Policy</a>.
+        </label>
+      </div>
+      <button class="btn btn-primary btn-full" id="su-btn" onclick="doSignup()">Create Account</button>
+      <div class="auth-footer">Already have an account? <a href="#" onclick="showPage('page-login'); return false;">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE: VERIFY EMAIL
+     ============================================================ -->
+<div id="page-verify" class="page">
+  <div class="auth-page">
+    <div class="auth-box text-center">
+      <div style="font-size:2.8rem;margin-bottom:12px;">📬</div>
+      <h2>Check your inbox</h2>
+      <p id="verify-email-hint" style="margin-bottom:20px;">We sent a 6-digit code to your email address. Enter it below to verify your account and unlock your 3 free searches.</p>
+      <div id="verify-alert"></div>
+      <div class="code-inputs">
+        <input type="tel" maxlength="1" class="code-input" id="vc0" oninput="codeInput(this,0)" onkeydown="codeBack(event,0)" />
+        <input type="tel" maxlength="1" class="code-input" id="vc1" oninput="codeInput(this,1)" onkeydown="codeBack(event,1)" />
+        <input type="tel" maxlength="1" class="code-input" id="vc2" oninput="codeInput(this,2)" onkeydown="codeBack(event,2)" />
+        <input type="tel" maxlength="1" class="code-input" id="vc3" oninput="codeInput(this,3)" onkeydown="codeBack(event,3)" />
+        <input type="tel" maxlength="1" class="code-input" id="vc4" oninput="codeInput(this,4)" onkeydown="codeBack(event,4)" />
+        <input type="tel" maxlength="1" class="code-input" id="vc5" oninput="codeInput(this,5)" onkeydown="codeBack(event,5)" />
+      </div>
+      <button class="btn btn-primary btn-full" id="verify-btn" onclick="doVerifyEmail()">Verify &amp; Activate</button>
+      <p style="margin-top:16px;font-size:.84rem;color:var(--ink-muted)">
+        Didn't receive it? <a href="#" onclick="resendVerification(); return false;">Resend code</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE: LOGIN
+     ============================================================ -->
+<div id="page-login" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <h2>Welcome back</h2>
+      <p>Sign in to your CarClarity account.</p>
+      <div id="login-alert"></div>
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-input" id="li-email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="li-pass" placeholder="Your password" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary btn-full" id="li-btn" onclick="doLogin()">Sign In</button>
+      <div class="divider">or</div>
+      <div class="auth-footer">
+        <a href="#" onclick="showPage('page-reset-request'); return false;">Forgot your password?</a>
+        &nbsp;·&nbsp;
+        <a href="#" onclick="showPage('page-signup'); return false;">Create account</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE: RESET REQUEST
+     ============================================================ -->
+<div id="page-reset-request" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <h2>Reset your password</h2>
+      <p>Enter your email address and we'll send you a reset code.</p>
+      <div id="reset-req-alert"></div>
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-input" id="rr-email" placeholder="you@example.com" />
+      </div>
+      <button class="btn btn-primary btn-full" id="rr-btn" onclick="doRequestReset()">Send Reset Code</button>
+      <div class="auth-footer"><a href="#" onclick="showPage('page-login'); return false;">Back to Sign In</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE: RESET CONFIRM
+     ============================================================ -->
+<div id="page-reset-confirm" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <h2>Enter your reset code</h2>
+      <p>Check your email for a 6-digit reset code, then set a new password.</p>
+      <div id="reset-conf-alert"></div>
+      <div class="form-group">
+        <label class="form-label">Reset code</label>
+        <input type="tel" class="form-input" id="rc-code" placeholder="6-digit code" maxlength="6" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">New password</label>
+        <input type="password" class="form-input" id="rc-pass" placeholder="At least 8 characters" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm new password</label>
+        <input type="password" class="form-input" id="rc-pass2" placeholder="Repeat new password" />
+      </div>
+      <button class="btn btn-primary btn-full" id="rc-btn" onclick="doConfirmReset()">Set New Password</button>
+      <div class="auth-footer"><a href="#" onclick="showPage('page-login'); return false;">Back to Sign In</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE: DASHBOARD
+     ============================================================ -->
+<div id="page-dashboard" class="page">
+  <div class="dashboard-layout">
+
+    <!-- SEARCH CARD -->
+    <div class="search-card">
+      <h2>Check a Vehicle</h2>
+      <p>Use a VIN for the most accurate results, or search by Year, Make &amp; Model.</p>
+
+      <div class="search-type-tabs">
+        <button class="tab-btn active" id="tab-vin" onclick="switchTab('vin')">VIN</button>
+        <button class="tab-btn" id="tab-ymm" onclick="switchTab('ymm')">Year / Make / Model</button>
+      </div>
+
+      <!-- VIN panel -->
+      <div id="panel-vin" class="search-panel active">
+        <div class="form-group">
+          <label class="form-label">Vehicle Identification Number (VIN)</label>
+          <input type="text" class="form-input" id="search-vin"
+            placeholder="e.g. 1HGBH41JXMN109186"
+            maxlength="17"
+            style="text-transform:uppercase;font-family:monospace;letter-spacing:.06em;"
+            oninput="this.value=this.value.toUpperCase()"
+          />
+          <div class="form-hint">A VIN is 17 characters. Find it on the driver's door jamb or dashboard.</div>
+        </div>
+      </div>
+
+      <!-- YMM panel -->
+      <div id="panel-ymm" class="search-panel">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Year</label>
+            <input type="number" class="form-input" id="search-year"
+              placeholder="e.g. 2018" min="1981" max="2025" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Make</label>
+            <input type="text" class="form-input" id="search-make" placeholder="e.g. Toyota" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Model</label>
+          <input type="text" class="form-input" id="search-model" placeholder="e.g. Camry" />
+        </div>
+      </div>
+
+      <div id="search-alert"></div>
+      <button class="btn btn-primary btn-full btn-lg" id="search-btn" onclick="doSearch()">
+        🔍 Run Check &nbsp;<span style="opacity:.65;font-weight:400;font-size:.82rem;">(1 token)</span>
+      </button>
+    </div>
+
+    <!-- RESULTS AREA -->
+    <div id="results-area"></div>
+
+    <!-- RECENT HISTORY -->
+    <div class="card" id="history-card" style="display:none;">
+      <div class="section-header">
+        <h3>Recent Searches</h3>
+        <small id="history-count"></small>
+      </div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE: NO TOKENS / PAYWALL
+     ============================================================ -->
+<div id="page-paywall" class="page">
+  <div class="dashboard-layout" style="display:flex;align-items:center;justify-content:center;min-height:60vh;">
+    <div class="paywall-card" style="max-width:520px;width:100%;">
+      <span class="icon-big">🪙</span>
+      <h2>You're out of tokens</h2>
+      <p>Purchase a token pack to continue checking vehicles. Tokens never expire.</p>
+
+      <div class="token-packs">
+        <div class="token-pack selected" onclick="selectPack(this,'basic')" data-pack="basic">
+          <div class="pack-tokens">5</div>
+          <div class="pack-name">Starter</div>
+          <div class="pack-price">$4.99</div>
+        </div>
+        <div class="token-pack" onclick="selectPack(this,'standard')" data-pack="standard">
+          <div class="pack-tokens">15</div>
+          <div class="pack-name">Standard</div>
+          <div class="pack-price">$11.99</div>
+        </div>
+        <div class="token-pack" onclick="selectPack(this,'pro')" data-pack="pro">
+          <div class="pack-tokens">40</div>
+          <div class="pack-name">Pro</div>
+          <div class="pack-price">$24.99</div>
+        </div>
+      </div>
+
+      <button class="btn btn-green btn-lg btn-full" onclick="goToGumroad()">
+        Buy Tokens on Gumroad →
+      </button>
+
+      <div class="verify-section">
+        <p>Already purchased? Enter your Gumroad license key to add tokens:</p>
+        <div class="form-group">
+          <input type="text" class="form-input" id="license-key-input"
+            placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX"
+            style="font-family:monospace;font-size:.88rem;" />
+        </div>
+        <div id="verify-license-alert"></div>
+        <button class="btn btn-outline btn-full" onclick="doVerifyLicense()">Verify License Key</button>
+      </div>
+
+      <div style="margin-top:16px;">
+        <a href="#" onclick="showPage('page-dashboard'); return false;" style="font-size:.84rem;color:var(--ink-muted);">
+          ← Back to dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FLOATING FEEDBACK BUTTON
+     ============================================================ -->
+<button id="feedback-fab" onclick="openModal('modal-message')" title="Send us a message">
+  <span class="fab-icon">💬</span> Send us a message
+</button>
+
+<!-- ============================================================
+     MODALS
+     ============================================================ -->
+
+<!-- MESSAGE MODAL -->
+<div id="modal-message" class="modal-overlay hidden" onclick="overlayClose(event,'modal-message')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-message')">✕</button>
+    <h2>Send a Message</h2>
+    <p>We read every message. Usually respond within 24–48 hours.</p>
+    <div id="message-alert"></div>
+    <div class="form-group">
+      <label class="form-label">Subject</label>
+      <input type="text" class="form-input" id="msg-subject" placeholder="What's on your mind?" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Message</label>
+      <textarea class="form-textarea" id="msg-body" placeholder="Tell us anything — a question, a bug, a suggestion..."></textarea>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="doSendMessage()">Send Message</button>
+  </div>
+</div>
+
+<!-- RATING MODAL -->
+<div id="modal-rating" class="modal-overlay hidden">
+  <div class="modal text-center">
+    <div style="font-size:2.2rem;margin-bottom:8px;">🎉</div>
+    <h2>How's CarClarity working for you?</h2>
+    <p>You've completed 10 searches! We'd love to know your experience.</p>
+    <div class="stars" id="rating-stars">
+      <span class="star" onclick="setRating(1)">★</span>
+      <span class="star" onclick="setRating(2)">★</span>
+      <span class="star" onclick="setRating(3)">★</span>
+      <span class="star" onclick="setRating(4)">★</span>
+      <span class="star" onclick="setRating(5)">★</span>
+    </div>
+    <div class="form-group">
+      <textarea class="form-textarea" id="rating-comment" placeholder="Any comments? (optional)"></textarea>
+    </div>
+    <div id="rating-alert"></div>
+    <button class="btn btn-primary btn-full" onclick="doSubmitRating()">Submit Feedback</button>
+    <button class="btn btn-ghost btn-full" style="margin-top:8px;" onclick="closeModal('modal-rating')">Maybe later</button>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div id="modal-terms" class="modal-overlay hidden" onclick="overlayClose(event,'modal-terms')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-terms')">✕</button>
+    <h2>Terms &amp; Conditions</h2>
+    <div class="legal-text">
+      <h4>1. Acceptance</h4>
+      <p>By creating an account and using CarClarity ("the Service"), you agree to these Terms. If you do not agree, do not use the Service.</p>
+      <h4>2. Service Description</h4>
+      <p>CarClarity provides informational vehicle data sourced from the U.S. National Highway Traffic Safety Administration (NHTSA) public API. Results are for informational purposes only.</p>
+      <h4>3. No Guarantee of Accuracy</h4>
+      <p>We display data as provided by government sources. We do not modify, enhance, or validate vehicle records. Government databases may be incomplete or delayed. CarClarity makes no guarantee that the data is complete, accurate, or current.</p>
+      <h4>4. Not a Substitute for Professional Inspection</h4>
+      <p>CarClarity results do not replace a certified mechanic inspection, a full vehicle history report (such as Carfax or AutoCheck), or any other form of professional due diligence. You are solely responsible for your purchasing decisions.</p>
+      <h4>5. Tokens and Payments</h4>
+      <p>Tokens are consumed when a search is completed. Tokens are non-refundable. If a search fails due to a technical error on our part, your token may be restored at our discretion.</p>
+      <h4>6. Account Security</h4>
+      <p>You are responsible for maintaining the confidentiality of your account credentials. We are not liable for unauthorized access resulting from your failure to protect your login details.</p>
+      <h4>7. Prohibited Uses</h4>
+      <p>You may not use the Service to create multiple accounts to abuse free tokens, scrape data automatically, or interfere with the Service's operation.</p>
+      <h4>8. Limitation of Liability</h4>
+      <p>To the maximum extent permitted by law, CarClarity shall not be liable for any indirect, incidental, special, or consequential damages, including purchasing decisions made in reliance on our results.</p>
+      <h4>9. Changes to Terms</h4>
+      <p>We may update these Terms at any time. Continued use of the Service after changes constitutes acceptance.</p>
+      <h4>10. Governing Law</h4>
+      <p>These Terms are governed by the laws of the United States.</p>
+      <p style="margin-top:12px;font-style:italic;color:var(--ink-muted);">Last updated: 2025. These are placeholder terms intended for a small-launch MVP. Consult a qualified attorney before commercial launch.</p>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="closeModal('modal-terms')">Got it</button>
+  </div>
+</div>
+
+<!-- PRIVACY MODAL -->
+<div id="modal-privacy" class="modal-overlay hidden" onclick="overlayClose(event,'modal-privacy')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-privacy')">✕</button>
+    <h2>Privacy Policy</h2>
+    <div class="legal-text">
+      <h4>1. What We Collect</h4>
+      <p>We collect your email address, a hashed (not plain-text) password, the vehicle queries you submit, your country, a browser-generated device identifier, and optional feedback you provide.</p>
+      <h4>2. How We Use Your Data</h4>
+      <p>Your data is used to operate your account, display search history, prevent abuse, and improve the Service. We do not sell your personal data.</p>
+      <h4>3. Data Storage</h4>
+      <p>Data is stored in Google Sheets on a Google account controlled by the Service operator. Your password is hashed before storage — we never store plain-text passwords.</p>
+      <h4>4. Email Communications</h4>
+      <p>We send transactional emails only: account verification codes and password reset codes. We do not send marketing emails without your explicit opt-in.</p>
+      <h4>5. Cookies &amp; Local Storage</h4>
+      <p>We use localStorage to store your session token and device ID. We do not use tracking cookies or third-party advertising trackers.</p>
+      <h4>6. Third-Party Services</h4>
+      <p>We use Gumroad for payment processing. Gumroad's own privacy policy governs data collected during payment. We use the NHTSA public API for vehicle data; no personal data is sent to NHTSA.</p>
+      <h4>7. Data Retention</h4>
+      <p>We retain your data for as long as your account is active. You may request deletion by contacting us at the support email listed in the app footer.</p>
+      <h4>8. Your Rights</h4>
+      <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us.</p>
+      <h4>9. Changes</h4>
+      <p>We may update this Policy. We will notify you of significant changes by email.</p>
+      <p style="margin-top:12px;font-style:italic;color:var(--ink-muted);">Last updated: 2025. These are placeholder terms intended for a small-launch MVP. Consult a qualified attorney before commercial launch.</p>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="closeModal('modal-privacy')">Got it</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <p>
+    CarClarity uses publicly available official government data from the U.S. National Highway Traffic Safety Administration (NHTSA).
+    Results are informational only and <strong>do not replace a professional inspection or a complete vehicle history review.</strong>
+    Always have a used car inspected by a certified mechanic before purchase.
+    &nbsp;·&nbsp; <a href="#" onclick="openModal('modal-terms'); return false;">Terms</a>
+    &nbsp;·&nbsp; <a href="#" onclick="openModal('modal-privacy'); return false;">Privacy</a>
+    &nbsp;·&nbsp; <a href="#" onclick="openModal('modal-message'); return false;">Support</a>
+    &nbsp;·&nbsp; <span id="footer-support-email"><!-- FILL IN: your support email --></span>
+  </p>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ============================================================
+   CONFIG — FILL IN THESE VALUES BEFORE LAUNCH
+   ============================================================ */
+const CONFIG = {
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyj1u-0j1rT2F28mDV5Kw5ny-JK_4HYb-AyHF04_e_6s61gzz2YfuE-Oep7XXw-5D0A/exec', // ← FILL IN
+  GUMROAD_PRODUCTS: {
+    basic:    'https://gumroad.com/l/svduwa',    // ← FILL IN (5 tokens, $4.99)
+    standard: 'https://gumroad.com/l/lysrix', // ← FILL IN (15 tokens, $11.99)
+    pro:      'https://gumroad.com/l/fvwvp',      // ← FILL IN (40 tokens, $24.99)
+  },
+  SUPPORT_EMAIL: 'carclarityonline@gmail.com', // ← FILL IN
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  sessionToken: null,
+  userId: null,
+  email: null,
+  tokens: 0,
+  searchCount: 0,
+  ratingShown: false,
+  currentPage: 'page-landing',
+  pendingEmail: null,  // for verify flow
+  resetEmail: null,    // for reset flow
+  searchTab: 'vin',
+  selectedPack: 'basic',
+  currentRating: 0,
+  history: [],
+  rateLimitTimers: {},
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  initDeviceId();
+  setFooterEmail();
+  tryAutoLogin();
+});
+
+function initDeviceId() {
+  if (!localStorage.getItem('cc_device_id')) {
+    localStorage.setItem('cc_device_id', 'dev_' + Math.random().toString(36).slice(2) + Date.now().toString(36));
+  }
+}
+
+function setFooterEmail() {
+  const el = document.getElementById('footer-support-email');
+  if (el) el.innerHTML = `<a href="mailto:${CONFIG.SUPPORT_EMAIL}">${CONFIG.SUPPORT_EMAIL}</a>`;
+}
+
+function tryAutoLogin() {
+  const token = localStorage.getItem('cc_session');
+  const uid   = localStorage.getItem('cc_uid');
+  const email = localStorage.getItem('cc_email');
+  if (token && uid) {
+    state.sessionToken = token;
+    state.userId = uid;
+    state.email  = email;
+    apiCall('getSession', {})
+      .then(r => {
+        if (r.ok) {
+          state.tokens      = r.tokens;
+          state.searchCount = r.searchCount;
+          updateTokenChip();
+          showAuthed();
+        } else {
+          clearSession();
+          showPage('page-landing');
+        }
+      })
+      .catch(() => showPage('page-landing'));
+  } else {
+    showPage('page-landing');
+  }
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById(pageId);
+  if (page) page.classList.add('active');
+  state.currentPage = pageId;
+  window.scrollTo(0, 0);
+}
+
+function showAuthed() {
+  document.getElementById('navbar').classList.remove('hidden');
+  showPage('page-dashboard');
+}
+
+function showUnauthed() {
+  document.getElementById('navbar').classList.add('hidden');
+  clearAlerts();
+  showPage('page-landing');
+}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+function openModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.classList.remove('hidden');
+}
+
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.classList.add('hidden');
+}
+
+function overlayClose(event, id) {
+  if (event.target === event.currentTarget) closeModal(id);
+}
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+function showAlert(containerId, type, message) {
+  const icons = { error: '⚠️', success: '✅', info: 'ℹ️' };
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = `
+    <div class="alert alert-${type}">
+      <span class="alert-icon">${icons[type] || 'ℹ️'}</span>
+      <span>${message}</span>
+    </div>`;
+}
+
+function clearAlerts() {
+  document.querySelectorAll('[id$="-alert"]').forEach(el => el.innerHTML = '');
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+function progressStart() {
+  const bar = document.getElementById('progress-bar');
+  bar.style.width = '35%';
+  bar.classList.add('active');
+}
+
+function progressDone() {
+  const bar = document.getElementById('progress-bar');
+  bar.style.width = '100%';
+  setTimeout(() => {
+    bar.classList.remove('active');
+    bar.style.width = '0';
+  }, 400);
+}
+
+/* ============================================================
+   BUTTON LOADING STATE
+   ============================================================ */
+function setBtnLoading(btnId, loading, text) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.disabled = loading;
+  if (loading) {
+    btn.dataset.origText = btn.innerHTML;
+    btn.innerHTML = (text || 'Loading') + '<span class="btn-loading"></span>';
+  } else {
+    btn.innerHTML = btn.dataset.origText || btn.innerHTML;
+  }
+}
+
+/* ============================================================
+   API CALL (JSONP-SAFE)
+   Sends params via URL query string for GET (doGet in Apps Script)
+   Uses fetch with no-cors workaround via script tag for safety.
+   
+   We use a Promise-based JSONP approach so GitHub Pages can
+   communicate with Apps Script without CORS issues.
+   ============================================================ */
+let _jsonpCallbackCounter = 0;
+
+function apiCall(action, params) {
+  progressStart();
+  const deviceId = localStorage.getItem('cc_device_id') || '';
+  const allParams = Object.assign({ action, deviceId }, params);
+  if (state.sessionToken) allParams.sessionToken = state.sessionToken;
+
+  const qs = Object.keys(allParams)
+    .filter(k => allParams[k] !== undefined && allParams[k] !== null)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(allParams[k]))
+    .join('&');
+
+  const callbackName = '_cc_cb_' + (++_jsonpCallbackCounter);
+  const url = CONFIG.APPS_SCRIPT_URL + '?' + qs + '&callback=' + callbackName;
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    const timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error('Request timed out. Please check your connection.'));
+    }, 20000);
+
+    window[callbackName] = (data) => {
+      cleanup();
+      progressDone();
+      resolve(data);
+    };
+
+    function cleanup() {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    script.onerror = () => {
+      cleanup();
+      progressDone();
+      reject(new Error('Network error. Please check your connection.'));
+    };
+
+    script.src = url;
+    document.head.appendChild(script);
+  });
+}
+
+/* ============================================================
+   DEVICE ID
+   ============================================================ */
+function getDeviceId() {
+  return localStorage.getItem('cc_device_id') || '';
+}
+
+/* ============================================================
+   SESSION MANAGEMENT
+   ============================================================ */
+function saveSession(token, userId, email) {
+  state.sessionToken = token;
+  state.userId = userId;
+  state.email  = email;
+  localStorage.setItem('cc_session', token);
+  localStorage.setItem('cc_uid',     userId);
+  localStorage.setItem('cc_email',   email);
+}
+
+function clearSession() {
+  state.sessionToken = null;
+  state.userId = null;
+  state.email  = null;
+  localStorage.removeItem('cc_session');
+  localStorage.removeItem('cc_uid');
+  localStorage.removeItem('cc_email');
+}
+
+/* ============================================================
+   TOKEN CHIP
+   ============================================================ */
+function updateTokenChip() {
+  document.getElementById('nav-token-count').textContent = state.tokens;
+}
+
+/* ============================================================
+   COUNTRY CHECK
+   ============================================================ */
+document.getElementById('su-country').addEventListener('change', function() {
+  const unsupported = document.getElementById('unsupported-country');
+  const suBtn = document.getElementById('su-btn');
+  if (this.value === 'OTHER') {
+    unsupported.classList.remove('hidden');
+    suBtn.disabled = true;
+  } else {
+    unsupported.classList.add('hidden');
+    suBtn.disabled = false;
+  }
+});
+
+/* ============================================================
+   SIGNUP
+   ============================================================ */
+async function doSignup() {
+  clearAlerts();
+  const email    = document.getElementById('su-email').value.trim().toLowerCase();
+  const country  = document.getElementById('su-country').value;
+  const pass     = document.getElementById('su-pass').value;
+  const pass2    = document.getElementById('su-pass2').value;
+  const terms    = document.getElementById('su-terms').checked;
+
+  if (!email)               return showAlert('signup-alert', 'error', 'Please enter your email address.');
+  if (!validateEmail(email)) return showAlert('signup-alert', 'error', 'Please enter a valid email address.');
+  if (country === 'OTHER')  return showAlert('signup-alert', 'error', 'We currently support the United States only.');
+  if (!pass)                return showAlert('signup-alert', 'error', 'Please create a password.');
+  if (pass.length < 8)      return showAlert('signup-alert', 'error', 'Password must be at least 8 characters.');
+  if (pass !== pass2)       return showAlert('signup-alert', 'error', 'Passwords do not match.');
+  if (!terms)               return showAlert('signup-alert', 'error', 'You must accept the Terms & Conditions and Privacy Policy.');
+
+  setBtnLoading('su-btn', true, 'Creating account');
+
+  try {
+    const r = await apiCall('signup', { email, password: hashClient(pass), country });
+    if (r.ok) {
+      state.pendingEmail = email;
+      document.getElementById('verify-email-hint').textContent =
+        `We sent a 6-digit code to ${email}. Enter it below to verify your account and unlock your 3 free searches.`;
+      showPage('page-verify');
+    } else {
+      showAlert('signup-alert', 'error', r.error || 'Signup failed. Please try again.');
+    }
+  } catch (e) {
+    showAlert('signup-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('su-btn', false);
+  }
+}
+
+/* ============================================================
+   VERIFY EMAIL
+   ============================================================ */
+function codeInput(el, idx) {
+  const val = el.value.replace(/\D/g, '');
+  el.value = val.slice(-1);
+  if (val && idx < 5) document.getElementById('vc' + (idx + 1)).focus();
+}
+
+function codeBack(e, idx) {
+  if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+    document.getElementById('vc' + (idx - 1)).focus();
+  }
+}
+
+function getVerifyCode() {
+  return [0,1,2,3,4,5].map(i => document.getElementById('vc' + i).value).join('');
+}
+
+async function doVerifyEmail() {
+  const code = getVerifyCode();
+  if (code.length !== 6) return showAlert('verify-alert', 'error', 'Please enter the full 6-digit code.');
+
+  setBtnLoading('verify-btn', true, 'Verifying');
+  try {
+    const r = await apiCall('verifyEmail', { email: state.pendingEmail, code });
+    if (r.ok) {
+      saveSession(r.sessionToken, r.userId, state.pendingEmail);
+      state.tokens      = r.tokens;
+      state.searchCount = 0;
+      updateTokenChip();
+      showAuthed();
+      showAlert('search-alert', 'success', '🎉 Account verified! You have 3 free searches ready.');
+    } else {
+      showAlert('verify-alert', 'error', r.error || 'Invalid or expired code.');
+    }
+  } catch (e) {
+    showAlert('verify-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('verify-btn', false);
+  }
+}
+
+async function resendVerification() {
+  try {
+    const r = await apiCall('resendVerification', { email: state.pendingEmail });
+    showAlert('verify-alert', r.ok ? 'success' : 'error',
+      r.ok ? 'A new code has been sent.' : (r.error || 'Could not resend. Try again shortly.'));
+  } catch (e) {
+    showAlert('verify-alert', 'error', e.message);
+  }
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+async function doLogin() {
+  clearAlerts();
+  const email = document.getElementById('li-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('li-pass').value;
+
+  if (!email || !validateEmail(email)) return showAlert('login-alert', 'error', 'Please enter a valid email.');
+  if (!pass)  return showAlert('login-alert', 'error', 'Please enter your password.');
+
+  setBtnLoading('li-btn', true, 'Signing in');
+  try {
+    const r = await apiCall('login', { email, password: hashClient(pass) });
+    if (r.ok) {
+      saveSession(r.sessionToken, r.userId, email);
+      state.tokens      = r.tokens;
+      state.searchCount = r.searchCount;
+      updateTokenChip();
+      showAuthed();
+    } else {
+      showAlert('login-alert', 'error', r.error || 'Login failed. Check your email and password.');
+    }
+  } catch (e) {
+    showAlert('login-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('li-btn', false);
+  }
+}
+
+// Enter key on login
+document.getElementById('li-pass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+/* ============================================================
+   LOGOUT
+   ============================================================ */
+async function doLogout() {
+  try { await apiCall('logout', {}); } catch {}
+  clearSession();
+  state.tokens = 0;
+  state.searchCount = 0;
+  state.history = [];
+  document.getElementById('results-area').innerHTML = '';
+  document.getElementById('history-card').style.display = 'none';
+  showUnauthed();
+}
+
+/* ============================================================
+   PASSWORD RESET
+   ============================================================ */
+async function doRequestReset() {
+  const email = document.getElementById('rr-email').value.trim().toLowerCase();
+  if (!email || !validateEmail(email)) return showAlert('reset-req-alert', 'error', 'Please enter a valid email.');
+
+  setBtnLoading('rr-btn', true, 'Sending code');
+  try {
+    const r = await apiCall('requestPasswordReset', { email });
+    if (r.ok) {
+      state.resetEmail = email;
+      showAlert('reset-req-alert', 'success', 'Reset code sent! Check your inbox (and spam folder).');
+      setTimeout(() => showPage('page-reset-confirm'), 1800);
+    } else {
+      showAlert('reset-req-alert', 'error', r.error || 'Could not send reset code. Try again.');
+    }
+  } catch (e) {
+    showAlert('reset-req-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('rr-btn', false);
+  }
+}
+
+async function doConfirmReset() {
+  const code  = document.getElementById('rc-code').value.trim();
+  const pass  = document.getElementById('rc-pass').value;
+  const pass2 = document.getElementById('rc-pass2').value;
+
+  if (!code || code.length < 6) return showAlert('reset-conf-alert', 'error', 'Enter the 6-digit reset code.');
+  if (!pass || pass.length < 8) return showAlert('reset-conf-alert', 'error', 'Password must be at least 8 characters.');
+  if (pass !== pass2)           return showAlert('reset-conf-alert', 'error', 'Passwords do not match.');
+
+  setBtnLoading('rc-btn', true, 'Resetting password');
+  try {
+    const r = await apiCall('confirmPasswordReset', {
+      email: state.resetEmail,
+      code,
+      newPassword: hashClient(pass)
+    });
+    if (r.ok) {
+      showAlert('reset-conf-alert', 'success', 'Password updated! You can now sign in.');
+      setTimeout(() => showPage('page-login'), 2000);
+    } else {
+      showAlert('reset-conf-alert', 'error', r.error || 'Reset failed. Check your code and try again.');
+    }
+  } catch (e) {
+    showAlert('reset-conf-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('rc-btn', false);
+  }
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+function switchTab(tab) {
+  state.searchTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.search-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+async function doSearch() {
+  clearAlerts();
+
+  if (state.tokens <= 0) {
+    showPage('page-paywall');
+    return;
+  }
+
+  let searchData = { searchType: state.searchTab };
+  if (state.searchTab === 'vin') {
+    const vin = document.getElementById('search-vin').value.trim().toUpperCase();
+    if (!vin || vin.length !== 17) return showAlert('search-alert', 'error', 'Please enter a valid 17-character VIN.');
+    if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)) return showAlert('search-alert', 'error', 'VIN contains invalid characters. VINs use letters A–Z (except I, O, Q) and digits 0–9.');
+    searchData.vin = vin;
+  } else {
+    const year  = document.getElementById('search-year').value.trim();
+    const make  = document.getElementById('search-make').value.trim();
+    const model = document.getElementById('search-model').value.trim();
+    if (!year || !make || !model) return showAlert('search-alert', 'error', 'Please fill in Year, Make, and Model.');
+    const yearNum = parseInt(year);
+    if (isNaN(yearNum) || yearNum < 1981 || yearNum > new Date().getFullYear() + 1)
+      return showAlert('search-alert', 'error', 'Please enter a valid model year (1981 to present).');
+    searchData.year = year; searchData.make = make; searchData.model = model;
+  }
+
+  setBtnLoading('search-btn', true, 'Searching NHTSA records');
+  document.getElementById('results-area').innerHTML = `
+    <div class="result-card"><div class="loader">
+      <div class="spinner"></div>
+      <p>Fetching official NHTSA records…</p>
+    </div></div>`;
+
+  try {
+    const r = await apiCall('searchCar', searchData);
+    if (r.ok) {
+      state.tokens = r.tokensRemaining;
+      state.searchCount = r.searchCount;
+      updateTokenChip();
+      renderResults(r);
+      addToHistory(r, searchData);
+      checkRatingTrigger();
+    } else if (r.noTokens) {
+      document.getElementById('results-area').innerHTML = '';
+      showPage('page-paywall');
+    } else {
+      showAlert('search-alert', 'error', r.error || 'Search failed. Please try again.');
+      document.getElementById('results-area').innerHTML = '';
+    }
+  } catch (e) {
+    showAlert('search-alert', 'error', e.message);
+    document.getElementById('results-area').innerHTML = '';
+  } finally {
+    setBtnLoading('search-btn', false);
+  }
+}
+
+function renderResults(r) {
+  const riskClass = { 'HIGH RISK': 'risk-high', 'CAUTION': 'risk-caution', 'LOW RISK': 'risk-low' };
+  const numClass  = { 'HIGH RISK': 'red',       'CAUTION': 'amber',        'LOW RISK': 'green'   };
+  const rc = riskClass[r.riskLevel] || 'risk-low';
+  const nc = numClass[r.riskLevel]  || 'green';
+
+  const identifier = r.vin ? `VIN: ${r.vin}` : `${r.year} ${r.make} ${r.model}`;
+
+  document.getElementById('results-area').innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <div>
+          <div class="result-car-id">${escapeHtml(identifier)}</div>
+        </div>
+        <div class="result-risk-badge ${rc}">${escapeHtml(r.riskLevel)}</div>
+      </div>
+
+      <div class="result-stats">
+        <div class="stat-cell">
+          <div class="stat-num ${nc}">${r.recallCount}</div>
+          <div class="stat-label">Recalls</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num ${nc}">${r.complaintCount}</div>
+          <div class="stat-label">Complaints</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">${r.tsbCount}</div>
+          <div class="stat-label">Service Bulletins</div>
+        </div>
+      </div>
+
+      <div class="result-verdict">
+        <p>${escapeHtml(r.verdict)}</p>
+        ${r.recallCount > 0 ? `
+          <div style="margin-top:12px;padding:10px 14px;background:var(--red-lt);border-radius:var(--radius);font-size:.84rem;color:var(--red);">
+            ⚠️ <strong>Open recalls may still apply.</strong> Visit
+            <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener">nhtsa.gov/recalls</a>
+            to check the current status and find dealers who can fix them free of charge.
+          </div>` : ''}
+      </div>
+
+      <div class="result-cta">
+        <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+          View on NHTSA.gov ↗
+        </a>
+        <button class="btn btn-ghost btn-sm" onclick="doSearch()">Search another</button>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:8px;">
+      <small>Token balance: <strong>${r.tokensRemaining}</strong> remaining</small>
+    </div>`;
+}
+
+/* ============================================================
+   SEARCH HISTORY (local session only)
+   ============================================================ */
+function addToHistory(result, searchData) {
+  const entry = {
+    id: result.searchId || Date.now(),
+    identifier: result.vin || `${result.year} ${result.make} ${result.model}`,
+    riskLevel: result.riskLevel,
+    recallCount: result.recallCount,
+    date: new Date().toLocaleDateString(),
+  };
+  state.history.unshift(entry);
+  if (state.history.length > 10) state.history.pop();
+  renderHistory();
+}
+
+function renderHistory() {
+  if (state.history.length === 0) return;
+  const card = document.getElementById('history-card');
+  card.style.display = 'block';
+  document.getElementById('history-count').textContent = `${state.history.length} recent`;
+  const riskEmoji = { 'HIGH RISK': '🔴', 'CAUTION': '🟡', 'LOW RISK': '🟢' };
+  document.getElementById('history-list').innerHTML = state.history.map(h => `
+    <div class="history-item">
+      <span class="hi-id">${riskEmoji[h.riskLevel] || '⚪'} ${escapeHtml(h.identifier)}</span>
+      <span class="hi-date">${h.date}</span>
+    </div>`).join('');
+}
+
+/* ============================================================
+   RATING POPUP (after 10 searches)
+   ============================================================ */
+function checkRatingTrigger() {
+  if (state.searchCount >= 10 && !state.ratingShown) {
+    state.ratingShown = true;
+    setTimeout(() => openModal('modal-rating'), 800);
+  }
+}
+
+function setRating(n) {
+  state.currentRating = n;
+  document.querySelectorAll('.star').forEach((s, i) => {
+    s.classList.toggle('active', i < n);
+  });
+}
+
+async function doSubmitRating() {
+  if (!state.currentRating) return showAlert('rating-alert', 'error', 'Please select a star rating.');
+  const comment = document.getElementById('rating-comment').value.trim();
+  try {
+    await apiCall('rateExperience', {
+      rating: state.currentRating,
+      comment,
+      searchCount: state.searchCount,
+    });
+  } catch {}
+  closeModal('modal-rating');
+  showAlert('search-alert', 'success', 'Thanks for your feedback! ❤️');
+}
+
+/* ============================================================
+   MESSAGES
+   ============================================================ */
+async function doSendMessage() {
+  const subject = document.getElementById('msg-subject').value.trim();
+  const message = document.getElementById('msg-body').value.trim();
+  if (!subject) return showAlert('message-alert', 'error', 'Please add a subject.');
+  if (!message || message.length < 5) return showAlert('message-alert', 'error', 'Please write a message.');
+
+  try {
+    const r = await apiCall('submitMessage', { subject, message, page: state.currentPage });
+    if (r.ok) {
+      document.getElementById('msg-subject').value = '';
+      document.getElementById('msg-body').value = '';
+      closeModal('modal-message');
+      showAlert('search-alert', 'success', 'Message sent! We\'ll get back to you soon.');
+    } else {
+      showAlert('message-alert', 'error', r.error || 'Could not send message. Try again.');
+    }
+  } catch (e) {
+    showAlert('message-alert', 'error', e.message);
+  }
+}
+
+/* ============================================================
+   BUY TOKENS / GUMROAD
+   ============================================================ */
+function showBuyTokens() {
+  showPage('page-paywall');
+}
+
+function selectPack(el, pack) {
+  document.querySelectorAll('.token-pack').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  state.selectedPack = pack;
+}
+
+function goToGumroad() {
+  const url = CONFIG.GUMROAD_PRODUCTS[state.selectedPack];
+  if (!url || url.includes('YOUR_')) {
+    showAlert('verify-license-alert', 'error', 'Gumroad product URL not configured yet. Please check back soon.');
+    return;
+  }
+  window.open(url, '_blank', 'noopener');
+}
+
+async function doVerifyLicense() {
+  const key = document.getElementById('license-key-input').value.trim();
+  if (!key) return showAlert('verify-license-alert', 'error', 'Please enter your Gumroad license key.');
+
+  try {
+    const r = await apiCall('verifyPurchase', { licenseKey: key });
+    if (r.ok) {
+      state.tokens = r.tokensRemaining;
+      updateTokenChip();
+      showAlert('verify-license-alert', 'success', `✅ ${r.tokensAdded} tokens added! Balance: ${r.tokensRemaining}`);
+      setTimeout(() => showPage('page-dashboard'), 2000);
+    } else {
+      showAlert('verify-license-alert', 'error', r.error || 'License key not recognised. Please check and try again.');
+    }
+  } catch (e) {
+    showAlert('verify-license-alert', 'error', e.message);
+  }
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function escapeHtml(str) {
+  if (!str && str !== 0) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * Client-side pre-hash of passwords before sending.
+ * The backend applies a second, salted server-side hash.
+ * This reduces exposure if the connection is somehow intercepted.
+ * 
+ * Uses a simple FNV-1a + base64-like encoding as a lightweight
+ * client-side obfuscation. NOT a substitute for server-side hashing.
+ */
+function hashClient(password) {
+  // Simple but consistent client-side hash (FNV-1a 32-bit)
+  let hash = 2166136261;
+  for (let i = 0; i < password.length; i++) {
+    hash ^= password.charCodeAt(i);
+    hash = (hash * 16777619) >>> 0;
+  }
+  return 'ch_' + hash.toString(16).padStart(8, '0') + '_' + btoa(password.slice(0, 4)).replace(/=/g, '');
+}
+
+/* ============================================================
+   KEYBOARD SHORTCUTS
+   ============================================================ */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    ['modal-message','modal-rating','modal-terms','modal-privacy'].forEach(id => closeModal(id));
+  }
+});
+</script>
+</body>
+</html>
