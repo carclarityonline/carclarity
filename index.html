@@ -125,6 +125,9 @@ small { font-size: .8rem; color: var(--ink-muted); }
 .btn-ghost:hover { background: var(--border); }
 .btn-green { background: var(--green); color: #fff; }
 .btn-green:hover { background: #165f3c; }
+/* ── NEW: btn-danger for destructive actions ── */
+.btn-danger { background: var(--red); color: #fff; }
+.btn-danger:hover { background: var(--accent-dk); }
 .btn-lg { padding: 14px 30px; font-size: 1rem; border-radius: 12px; }
 .btn-sm { padding: 7px 14px; font-size: .82rem; }
 .btn-full { width: 100%; }
@@ -475,21 +478,11 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 /* ── PREMIUM REPORT ── */
 .premium-report { display: flex; flex-direction: column; gap: 16px; animation: fadeIn .3s ease; }
 
-/* ────────────────────────────────────────────────────────────
-   READ MORE / SHOW LESS — FIXED STRUCTURE
-   ──────────────────────────────────────────────────────────── */
-.read-more-block {
-  display: inline;
-}
-.rm-short {
-  display: inline;
-}
-.rm-dots {
-  display: inline;
-}
-.rm-long {
-  display: none;
-}
+/* ── READ MORE / SHOW LESS ── */
+.read-more-block { display: inline; }
+.rm-short { display: inline; }
+.rm-dots { display: inline; }
+.rm-long { display: none; }
 .rm-toggle {
   display: inline;
   color: var(--accent);
@@ -505,9 +498,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   text-underline-offset: 2px;
   transition: color var(--transition);
 }
-.rm-toggle:hover {
-  color: var(--accent-dk);
-}
+.rm-toggle:hover { color: var(--accent-dk); }
 
 .red-flag-alert {
   background: #fff0ee;
@@ -571,7 +562,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .section-label-icon { font-size: .95rem; }
 .report-summary p { font-size: .95rem; line-height: 1.7; color: var(--ink-soft); }
 
-/* EDIT 1: Changed from repeat(3, 1fr) to repeat(2, 1fr) — TSB card removed */
 .metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .metric-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center; box-shadow: var(--shadow-sm); }
 .metric-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
@@ -702,7 +692,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .trust-text h3 { font-size: .95rem; margin-bottom: 6px; }
 .trust-text p  { font-size: .84rem; line-height: 1.6; }
 
-/* ── LEGAL DISCLAIMER — ALL CAPS as required ── */
+/* ── LEGAL DISCLAIMER ── */
 .disclaimer-section {
   background: var(--white);
   border: 2px solid var(--border);
@@ -758,8 +748,115 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   cursor: pointer;
   transition: var(--transition);
 }
-.zero-data-notice-vin-cta:hover {
-  background: rgba(184,111,0,.18);
+.zero-data-notice-vin-cta:hover { background: rgba(184,111,0,.18); }
+
+/* ============================================================
+   ACCOUNT PAGE — NEW
+   ============================================================ */
+#page-account {
+  background: var(--surface);
+  min-height: calc(100vh - 56px);
+}
+
+/* Reuse dashboard-layout but cap width for the account page */
+.account-layout {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  display: grid;
+  gap: 20px;
+}
+
+/* Account page back link */
+.account-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .85rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  transition: color var(--transition);
+  margin-bottom: 4px;
+}
+.account-back:hover { color: var(--accent); }
+
+/* Account section cards */
+.account-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+.account-section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.account-section-subtitle {
+  font-size: .85rem;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+}
+
+/* Profile details grid */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.profile-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.profile-stat-label {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink-muted);
+  margin-bottom: 5px;
+}
+.profile-stat-value {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--ink);
+  word-break: break-all;
+}
+/* Email stat takes full width */
+.profile-stat.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Danger zone styling */
+.danger-zone {
+  background: var(--white);
+  border: 2px solid #f3bdb5;
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.danger-zone-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--red);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.danger-zone-desc {
+  font-size: .87rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  line-height: 1.6;
 }
 
 /* @media print */
@@ -776,57 +873,19 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   #progress-bar {
     display: none !important;
   }
-
-  body, html {
-    background: #fff !important;
-  }
-
-  .premium-report {
-    animation: none !important;
-    padding: 16px !important;
-  }
-
-  .dashboard-layout {
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-
-  .rm-long {
-    display: inline !important;
-  }
-  .rm-dots {
-    display: none !important;
-  }
-  .rm-toggle {
-    display: none !important;
-  }
-
-  .metric-card {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-  .problem-item {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .report-header,
-  .report-summary,
-  .metrics-grid,
-  .risk-score-card,
-  .problem-areas,
-  .specs-section,
-  .safety-section,
-  .reliability-section,
-  .market-context,
-  .maintenance-section,
-  .issues-section,
-  .guidance-grid,
-  .warnings-section,
-  .trust-section,
-  .disclaimer-section,
-  .red-flag-alert,
-  .zero-data-notice {
+  body, html { background: #fff !important; }
+  .premium-report { animation: none !important; padding: 16px !important; }
+  .dashboard-layout { padding: 0 !important; max-width: 100% !important; }
+  .rm-long { display: inline !important; }
+  .rm-dots { display: none !important; }
+  .rm-toggle { display: none !important; }
+  .metric-card { break-inside: avoid; page-break-inside: avoid; }
+  .problem-item { break-inside: avoid; page-break-inside: avoid; }
+  .report-header, .report-summary, .metrics-grid, .risk-score-card,
+  .problem-areas, .specs-section, .safety-section, .reliability-section,
+  .market-context, .maintenance-section, .issues-section, .guidance-grid,
+  .warnings-section, .trust-section, .disclaimer-section,
+  .red-flag-alert, .zero-data-notice {
     box-shadow: none !important;
     border: 1px solid #ddd !important;
     break-inside: avoid;
@@ -869,6 +928,9 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   .payment-processing-card { padding: 20px 16px; }
   .zero-data-notice { flex-direction: column; gap: 10px; }
   .report-header-footer { flex-direction: column; align-items: flex-start; }
+  .account-section { padding: 20px 18px; }
+  .danger-zone { padding: 20px 18px; }
+  .profile-grid { grid-template-columns: 1fr 1fr; }
 }
 
 #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 9999; transition: width .3s ease, opacity .4s ease; opacity: 0; }
@@ -889,7 +951,9 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 
 <div id="progress-bar"></div>
 
-<!-- COOKIE CONSENT BANNER -->
+<!-- ============================================================
+     COOKIE CONSENT BANNER
+     ============================================================ -->
 <div id="cookie-consent" class="hidden">
   <p>
     CarClarity uses session tokens to keep you logged in and remember your searches. No advertising trackers are used.
@@ -901,7 +965,10 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   </div>
 </div>
 
-<!-- NAVBAR -->
+<!-- ============================================================
+     NAVBAR
+     — Added: ⚙️ Account button next to Sign out
+     ============================================================ -->
 <nav id="navbar" class="hidden">
   <div class="navbar-inner">
     <div class="brand">CarClarity<span class="brand-dot">.</span></div>
@@ -909,6 +976,8 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
       <span class="token-chip" id="nav-token-chip" onclick="showBuyTokens()" title="Buy more tokens">
         🪙 <span id="nav-token-count">–</span> tokens
       </span>
+      <!-- NEW: Account management button -->
+      <button class="btn btn-ghost btn-sm" onclick="showPage('page-account')">⚙️ Account</button>
       <button class="btn btn-ghost btn-sm" onclick="doLogout()">Sign out</button>
     </div>
   </div>
@@ -1301,13 +1370,101 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   </div>
 </div>
 
-<!-- FEEDBACK FAB -->
+<!-- ============================================================
+     ACCOUNT PAGE — NEW
+     Sections: Profile Details, Change Password, Danger Zone
+     ============================================================ -->
+<div id="page-account" class="page">
+  <div class="account-layout">
+
+    <!-- Back button -->
+    <button class="account-back" onclick="showPage('page-dashboard')">
+      ← Back to Dashboard
+    </button>
+
+    <!-- ── Profile Details ─────────────────────────────────── -->
+    <div class="account-section">
+      <div class="account-section-title">👤 Profile Details</div>
+      <div class="account-section-subtitle">Your account information at a glance.</div>
+      <div class="profile-grid">
+        <!-- Email takes full row width -->
+        <div class="profile-stat full-width">
+          <div class="profile-stat-label">Email Address</div>
+          <div class="profile-stat-value" id="acc-email">—</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-label">🪙 Token Balance</div>
+          <div class="profile-stat-value" id="acc-tokens">—</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-label">🔍 Total Searches</div>
+          <div class="profile-stat-value" id="acc-searches">—</div>
+        </div>
+      </div>
+      <!-- Quick buy tokens link -->
+      <div style="margin-top:14px;">
+        <button class="btn btn-outline btn-sm" onclick="showBuyTokens()">🛒 Buy More Tokens</button>
+      </div>
+    </div>
+
+    <!-- ── Change Password ─────────────────────────────────── -->
+    <div class="account-section">
+      <div class="account-section-title">🔑 Change Password</div>
+      <div class="account-section-subtitle">Update your password. You'll need to enter your current password to confirm.</div>
+
+      <div id="acc-pass-alert"></div>
+
+      <div class="form-group">
+        <label class="form-label">Current Password</label>
+        <div class="pass-wrap">
+          <input type="password" class="form-input" id="acc-old-pass"
+            placeholder="Your current password"
+            autocomplete="current-password" />
+          <button class="pass-toggle" type="button" onclick="togglePass('acc-old-pass',this)" tabindex="-1">👁</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <div class="pass-wrap">
+          <input type="password" class="form-input" id="acc-new-pass"
+            placeholder="At least 8 characters"
+            autocomplete="new-password" />
+          <button class="pass-toggle" type="button" onclick="togglePass('acc-new-pass',this)" tabindex="-1">👁</button>
+        </div>
+        <div class="form-hint">Must be at least 8 characters.</div>
+      </div>
+
+      <button class="btn btn-primary" id="acc-pass-btn" onclick="doChangePassword()">
+        Update Password
+      </button>
+    </div>
+
+    <!-- ── Danger Zone ─────────────────────────────────────── -->
+    <div class="danger-zone">
+      <div class="danger-zone-title">
+        ⚠️ Danger Zone
+      </div>
+      <div class="danger-zone-desc">
+        Permanently delete your account and all associated data. Any remaining token balance will be forfeited. <strong>This action cannot be undone.</strong>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="openModal('modal-delete-account')">
+        🗑️ Delete My Account
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     FEEDBACK FAB
+     ============================================================ -->
 <button id="feedback-fab" onclick="openModal('modal-message')" title="Send us a message">
   <span class="fab-icon">💬</span> Send us a message
 </button>
 
 <!-- ============================================================
-     MODALS
+     MODAL: SEND MESSAGE
      ============================================================ -->
 <div id="modal-message" class="modal-overlay hidden" onclick="overlayClose(event,'modal-message')">
   <div class="modal">
@@ -1321,6 +1478,12 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   </div>
 </div>
 
+<!-- ============================================================
+     MODAL: RATING
+     — FIX: "Maybe later" now calls dismissRating() instead of
+       closeModal() so it sets the localStorage flag and never
+       loops on page reload.
+     ============================================================ -->
 <div id="modal-rating" class="modal-overlay hidden">
   <div class="modal text-center">
     <div style="font-size:2.2rem;margin-bottom:8px;">🎉</div>
@@ -1336,12 +1499,49 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     <div class="form-group"><textarea class="form-textarea" id="rating-comment" placeholder="Any comments? (optional)"></textarea></div>
     <div id="rating-alert"></div>
     <button class="btn btn-primary btn-full" onclick="doSubmitRating()">Submit Feedback</button>
-    <button class="btn btn-ghost btn-full" style="margin-top:8px;" onclick="closeModal('modal-rating')">Maybe later</button>
+    <!-- FIXED: calls dismissRating() to persist the dismiss state in localStorage -->
+    <button class="btn btn-ghost btn-full" style="margin-top:8px;" onclick="dismissRating()">Maybe later</button>
   </div>
 </div>
 
 <!-- ============================================================
-     TERMS & CONDITIONS
+     MODAL: DELETE ACCOUNT — NEW
+     Two-step warning before soft-delete.
+     ============================================================ -->
+<div id="modal-delete-account" class="modal-overlay hidden" onclick="overlayClose(event,'modal-delete-account')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-delete-account')">✕</button>
+    <div style="font-size:2.2rem;margin-bottom:10px;text-align:center;">🗑️</div>
+    <h2 style="text-align:center;color:var(--red);">Delete Your Account?</h2>
+    <p style="text-align:center;">This is permanent and cannot be undone.</p>
+
+    <!-- Consequences list -->
+    <div style="background:var(--red-lt);border:1.5px solid #f3bdb5;border-radius:var(--radius-lg);padding:16px 20px;margin:16px 0;text-align:left;">
+      <p style="font-size:.87rem;color:var(--ink);font-weight:600;margin-bottom:10px;">If you delete your account:</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:.85rem;color:var(--ink-soft);display:flex;gap:8px;"><span>🪙</span> All remaining tokens will be permanently forfeited</li>
+        <li style="font-size:.85rem;color:var(--ink-soft);display:flex;gap:8px;"><span>🔍</span> Your search history will be erased</li>
+        <li style="font-size:.85rem;color:var(--ink-soft);display:flex;gap:8px;"><span>📧</span> You will be immediately signed out</li>
+        <li style="font-size:.85rem;color:var(--ink-soft);display:flex;gap:8px;"><span>🚫</span> You will not be able to reactivate this account</li>
+      </ul>
+    </div>
+
+    <div id="delete-acc-alert"></div>
+
+    <!-- Confirm delete button -->
+    <button class="btn btn-danger btn-full" id="delete-acc-btn" onclick="doDeleteAccount()" style="margin-bottom:10px;">
+      Yes, permanently delete my account
+    </button>
+
+    <!-- Safe cancel button -->
+    <button class="btn btn-outline btn-full" onclick="closeModal('modal-delete-account')">
+      Cancel — Keep My Account
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL: TERMS & CONDITIONS
      ============================================================ -->
 <div id="modal-terms" class="modal-overlay hidden" onclick="overlayClose(event,'modal-terms')">
   <div class="modal">
@@ -1395,7 +1595,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 </div>
 
 <!-- ============================================================
-     PRIVACY POLICY
+     MODAL: PRIVACY POLICY
      ============================================================ -->
 <div id="modal-privacy" class="modal-overlay hidden" onclick="overlayClose(event,'modal-privacy')">
   <div class="modal">
@@ -1470,7 +1670,7 @@ const CONFIG = {
     pro:      { permalink: 'fvwvp',  tokens: 40, price: '$24.99', name: 'Pro',      label: '40 Tokens — Pro Pack' },
   },
 
-  PAYMENT_POLL_INTERVAL_MS: 4000,
+  PAYMENT_POLL_INTERVAL_MS:  4000,
   PAYMENT_POLL_MAX_ATTEMPTS: 22,
 };
 
@@ -1483,7 +1683,7 @@ const state = {
   email:               null,
   tokens:              0,
   searchCount:         0,
-  ratingShown:         false,
+  /* NOTE: ratingShown is now backed by localStorage — see checkRatingTrigger() */
   currentPage:         'page-landing',
   pendingEmail:        null,
   resetEmail:          null,
@@ -1595,6 +1795,8 @@ function declineCookies() {
 
 /* ============================================================
    NAVIGATION
+   — Updated to populate account page when navigating to it,
+     and clear its password fields / alerts.
    ============================================================ */
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1606,6 +1808,40 @@ function showPage(pageId) {
   if (pageId === 'page-paywall') {
     initPaywallPage();
   }
+
+  /* ── NEW: Populate account page whenever it's shown ── */
+  if (pageId === 'page-account') {
+    populateAccountPage();
+  }
+}
+
+/**
+ * Populate the account page with live state values and clear
+ * any stale inputs / alerts from a previous visit.
+ */
+function populateAccountPage() {
+  // Profile stats
+  const emailEl    = document.getElementById('acc-email');
+  const tokensEl   = document.getElementById('acc-tokens');
+  const searchesEl = document.getElementById('acc-searches');
+  if (emailEl)    emailEl.textContent    = state.email        || '—';
+  if (tokensEl)   tokensEl.textContent   = state.tokens       ?? '—';
+  if (searchesEl) searchesEl.textContent = state.searchCount  ?? '—';
+
+  // Clear password inputs
+  const oldPassEl = document.getElementById('acc-old-pass');
+  const newPassEl = document.getElementById('acc-new-pass');
+  if (oldPassEl) { oldPassEl.value = ''; oldPassEl.type = 'password'; }
+  if (newPassEl) { newPassEl.value = ''; newPassEl.type = 'password'; }
+
+  // Reset password toggle button labels
+  document.querySelectorAll('#page-account .pass-toggle').forEach(btn => {
+    btn.textContent = '👁';
+  });
+
+  // Clear any existing alerts
+  const passAlertEl = document.getElementById('acc-pass-alert');
+  if (passAlertEl) passAlertEl.innerHTML = '';
 }
 
 function showAuthed() {
@@ -2200,6 +2436,96 @@ async function doConfirmReset() {
 }
 
 /* ============================================================
+   CHANGE PASSWORD — NEW
+   Calls the new 'changePassword' backend action.
+   Validates old password and new password locally first.
+   ============================================================ */
+async function doChangePassword() {
+  // Clear any existing alert
+  document.getElementById('acc-pass-alert').innerHTML = '';
+
+  const oldPass = document.getElementById('acc-old-pass').value;
+  const newPass = document.getElementById('acc-new-pass').value;
+
+  // Client-side validation
+  if (!oldPass)              return showAlert('acc-pass-alert', 'error', 'Please enter your current password.');
+  if (!newPass)              return showAlert('acc-pass-alert', 'error', 'Please enter a new password.');
+  if (newPass.length < 8)   return showAlert('acc-pass-alert', 'error', 'New password must be at least 8 characters.');
+  if (oldPass === newPass)   return showAlert('acc-pass-alert', 'error', 'New password must be different from your current password.');
+
+  setBtnLoading('acc-pass-btn', true, 'Updating');
+
+  try {
+    const r = await apiCall('changePassword', {
+      oldPassword: hashClient(oldPass),
+      newPassword: hashClient(newPass),
+    });
+
+    if (r.ok) {
+      // Clear both inputs on success
+      document.getElementById('acc-old-pass').value = '';
+      document.getElementById('acc-new-pass').value = '';
+      showAlert('acc-pass-alert', 'success', '✅ Password updated successfully!');
+    } else {
+      showAlert('acc-pass-alert', 'error', r.error || 'Password update failed. Please try again.');
+    }
+  } catch (e) {
+    showAlert('acc-pass-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('acc-pass-btn', false);
+  }
+}
+
+/* ============================================================
+   DELETE ACCOUNT — NEW
+   Soft-deletes the account on the backend, then clears the
+   local session and returns the user to the login page with
+   a confirmation message.
+   ============================================================ */
+async function doDeleteAccount() {
+  // Clear any existing alert inside the modal
+  document.getElementById('delete-acc-alert').innerHTML = '';
+
+  setBtnLoading('delete-acc-btn', true, 'Deleting account…');
+
+  try {
+    const r = await apiCall('deleteAccount', {});
+
+    if (r.ok) {
+      // Close the modal first
+      closeModal('modal-delete-account');
+
+      // Clear all local session data
+      clearSession();
+      cancelPaymentPoll();
+      removeFocusListener();
+      state.tokens = 0;
+      state.searchCount = 0;
+      state.history = [];
+
+      // Clear search history from localStorage
+      try { localStorage.removeItem('cc_history_' + (state.userId || 'anon')); } catch (_) {}
+
+      // Hide navbar and show landing
+      document.getElementById('navbar').classList.add('hidden');
+      document.getElementById('results-area').innerHTML = '';
+      document.getElementById('history-card').style.display = 'none';
+
+      // Show login page with deletion confirmation message
+      showPage('page-login');
+      showAlert('login-alert', 'info', 'Your account has been permanently deleted. We\'re sorry to see you go.');
+    } else {
+      // Show error inside the modal, keep it open
+      showAlert('delete-acc-alert', 'error', r.error || 'Account deletion failed. Please try again or contact support.');
+    }
+  } catch (e) {
+    showAlert('delete-acc-alert', 'error', e.message);
+  } finally {
+    setBtnLoading('delete-acc-btn', false);
+  }
+}
+
+/* ============================================================
    SEARCH
    ============================================================ */
 function switchTab(tab) {
@@ -2360,7 +2686,7 @@ function detectVehicleClass(specs) {
 function detectIsEV(specs) {
   if (!specs) return false;
   const fuel = (specs.fuelType || '').toLowerCase();
-  return fuel.includes('electric') || fuel.includes('ev') || fuel.includes('battery');
+  return fuel.includes('electric') || fuel.includes(' ev') || fuel.includes('battery');
 }
 
 function detectIsHybrid(specs) {
@@ -2680,7 +3006,6 @@ function renderPremiumReport(r) {
       <p>${dynamicVerdict}</p>
     </div>
 
-    <!-- EDIT 1: TSB metric card removed — only Safety Recalls and Consumer Complaints remain -->
     <div class="metrics-grid">
       <div class="metric-card">
         <span class="metric-icon">🔔</span>
@@ -2729,7 +3054,6 @@ function renderPremiumReport(r) {
         </div>
         <div class="market-bar-item">
           <div class="market-bar-label"><span>${vehicleClass === 'default' ? 'Vehicle' : vehicleClass.charAt(0).toUpperCase()+vehicleClass.slice(1)} Class Average</span><span>${marketCtx.classRatePerYear} complaints/yr</span></div>
-          <!-- EDIT 2: Changed background from var(--border) to var(--ink-muted) for solid filled baseline bar -->
           <div class="market-bar-track"><div class="market-bar-fill" style="width:100%;background:var(--ink-muted);"></div></div>
         </div>
       </div>
@@ -2855,7 +3179,6 @@ function renderPremiumReport(r) {
       </div>
     </div>
 
-    <!-- LEGAL DISCLAIMER — ALL CAPS as required for conspicuousness -->
     <div class="disclaimer-section">
       <strong>⚠️ Disclaimer:</strong> THIS REPORT IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. CARCLARITY MAKES NO REPRESENTATIONS ABOUT THE ACCURACY, COMPLETENESS, OR RELIABILITY OF THE DATA PROVIDED. THIS REPORT IS FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT REPLACE A PROFESSIONAL MECHANICAL INSPECTION, A FULL VEHICLE HISTORY REPORT (CARFAX/AUTOCHECK), OR ANY OTHER PROFESSIONAL DUE DILIGENCE. CARCLARITY SHALL NOT BE LIABLE FOR ANY PURCHASING DECISIONS MADE IN RELIANCE ON THIS REPORT. CLASS AVERAGES USED FOR COMPARISON ARE APPROXIMATIONS — EXACT SALES VOLUMES ARE NOT PUBLICLY AVAILABLE. MAINTENANCE FORECASTS ARE ESTIMATES BASED ON TYPICAL INTERVALS AND MAY NOT REFLECT THIS VEHICLE'S ACTUAL HISTORY. ALL RISK ASSOCIATED WITH USE OF THIS INFORMATION IS ASSUMED ENTIRELY BY THE USER. ALWAYS HAVE ANY USED CAR INSPECTED BY A CERTIFIED MECHANIC BEFORE PURCHASING.
     </div>
@@ -3040,11 +3363,26 @@ function renderHistory() {
 }
 
 /* ============================================================
-   RATING
+   RATING — FIXED infinite loop bug
+   
+   BEFORE (buggy):
+     checkRatingTrigger() used state.ratingShown (in-memory only).
+     On page reload, state.ratingShown resets to false, so the
+     modal would re-appear on every subsequent search ≥ 10.
+   
+   AFTER (fixed):
+     Uses localStorage key 'cc_rating_done'. Once set (either by
+     submitting or by dismissing), the popup never appears again
+     across page reloads for this browser.
+   
+   dismissRating() is a new function called by the "Maybe later"
+   button. It persists the dismiss state to localStorage so the
+   modal doesn't loop. Previously the button called closeModal()
+   directly, which only hid the overlay without persisting state.
    ============================================================ */
 function checkRatingTrigger() {
-  if (state.searchCount >= 10 && !state.ratingShown) {
-    state.ratingShown = true;
+  // FIX: Use localStorage instead of in-memory state.ratingShown
+  if (state.searchCount >= 10 && !localStorage.getItem('cc_rating_done')) {
     setTimeout(() => openModal('modal-rating'), 800);
   }
 }
@@ -3058,8 +3396,21 @@ async function doSubmitRating() {
   if (!state.currentRating) return showAlert('rating-alert', 'error', 'Please select a star rating.');
   const comment = document.getElementById('rating-comment').value.trim();
   try { await apiCall('rateExperience', { rating: state.currentRating, comment, searchCount: state.searchCount }); } catch {}
+  // FIX: Persist completion to localStorage so modal never loops
+  localStorage.setItem('cc_rating_done', 'true');
   closeModal('modal-rating');
   showAlert('search-alert', 'success', 'Thanks for your feedback! ❤️');
+}
+
+/**
+ * dismissRating — NEW FUNCTION
+ * Called by the "Maybe later" button in #modal-rating.
+ * Sets cc_rating_done in localStorage so the modal will NOT
+ * re-appear on future page loads or searches.
+ */
+function dismissRating() {
+  localStorage.setItem('cc_rating_done', 'true');
+  closeModal('modal-rating');
 }
 
 /* ============================================================
@@ -3095,12 +3446,12 @@ function escapeHtml(str) {
 
 function hashClient(password) {
   let hash = 2166136261;
-  for (let i = 0; i < password.length; i++) { hash ^= password.charCodeAt(i); hash = (hash * 16777619) >>> 0; }
+  for (let i = 0; i < password.length; i++) { hash ^= password.charCodeAt(i); hash = (hash * 16777219) >>> 0; }
   return 'ch_' + hash.toString(16).padStart(8, '0') + '_' + btoa(password.slice(0, 4)).replace(/=/g, '');
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') ['modal-message','modal-rating','modal-terms','modal-privacy'].forEach(id => closeModal(id));
+  if (e.key === 'Escape') ['modal-message','modal-rating','modal-terms','modal-privacy','modal-delete-account'].forEach(id => closeModal(id));
 });
 </script>
 </body>
