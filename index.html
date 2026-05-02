@@ -477,18 +477,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 
 /* ────────────────────────────────────────────────────────────
    READ MORE / SHOW LESS — FIXED STRUCTURE
-   
-   New structure (FIX 2A):
-   - .rm-short    : first N chars — ALWAYS visible, even in print
-   - .rm-dots     : the "…" separator — hidden when expanded
-   - .rm-long     : continuation text — hidden by default
-   - .rm-toggle   : [Read More] / [Show Less] button
-   
-   On expand: show .rm-long, hide .rm-dots, leave .rm-short alone.
-   On collapse: hide .rm-long, show .rm-dots.
-   
-   Print fix: .rm-long forced to inline, .rm-dots and .rm-toggle hidden.
-   This stitches short+long seamlessly in PDF without gaps.
    ──────────────────────────────────────────────────────────── */
 .read-more-block {
   display: inline;
@@ -502,7 +490,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .rm-long {
   display: none;
 }
-/* FIX 2C: .rm-toggle styled as a clean inline hyperlink */
 .rm-toggle {
   display: inline;
   color: var(--accent);
@@ -584,7 +571,8 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .section-label-icon { font-size: .95rem; }
 .report-summary p { font-size: .95rem; line-height: 1.7; color: var(--ink-soft); }
 
-.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+/* EDIT 1: Changed from repeat(3, 1fr) to repeat(2, 1fr) — TSB card removed */
+.metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .metric-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center; box-shadow: var(--shadow-sm); }
 .metric-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
 .metric-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; line-height: 1; margin-bottom: 4px; }
@@ -774,19 +762,8 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   background: rgba(184,111,0,.18);
 }
 
-/* ────────────────────────────────────────────────────────────
-   @media print — FIXED (FIX 2A, 2B)
-   
-   Key fixes:
-   - .rm-long forced to display:inline (shows continuation text)
-   - .rm-dots forced to display:none (removes the "…")
-   - .rm-toggle forced to display:none (removes the button)
-   - .rm-short is NOT hidden — it stays visible so short+long stitch
-   - .premium-report gets clean padding
-   - .metric-card and .problem-item get break-inside:avoid
-   ──────────────────────────────────────────────────────────── */
+/* @media print */
 @media print {
-  /* Hide everything that is not the report */
   #navbar,
   .search-card,
   #history-card,
@@ -800,7 +777,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     display: none !important;
   }
 
-  /* Force white background */
   body, html {
     background: #fff !important;
   }
@@ -810,13 +786,11 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     padding: 16px !important;
   }
 
-  /* Clean dashboard layout for print */
   .dashboard-layout {
     padding: 0 !important;
     max-width: 100% !important;
   }
 
-  /* FIX 2A: Read More print fix — stitch short + long seamlessly */
   .rm-long {
     display: inline !important;
   }
@@ -826,9 +800,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   .rm-toggle {
     display: none !important;
   }
-  /* .rm-short is intentionally NOT listed here — it must stay visible */
 
-  /* FIX 2B: Prevent metric cards and problem items from splitting across pages */
   .metric-card {
     break-inside: avoid;
     page-break-inside: avoid;
@@ -838,7 +810,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     page-break-inside: avoid;
   }
 
-  /* Ensure cards look clean when printed */
   .report-header,
   .report-summary,
   .metrics-grid,
@@ -1775,43 +1746,13 @@ document.getElementById('su-country').addEventListener('change', function() {
 });
 
 /* ============================================================
-   READ MORE / SHOW LESS  —  FIXED IMPLEMENTATION (FIX 2A + FIX 1)
-   
-   buildReadMore(text, threshold):
-     Generates an HTML block with:
-       - .rm-short   : first `threshold` chars — ALWAYS visible
-       - .rm-dots    : "…" — shown when collapsed, hidden when expanded
-       - .rm-long    : remainder of text — hidden by default
-       - .rm-toggle  : [Read More] / [Show Less] button
-     
-     If text ≤ threshold, returns plain escaped text directly.
-   
-   toggleReadMore(uid):
-     FIX 1 — Corrected toggle logic:
-       EXPAND:  show rm-long, hide rm-dots. Do NOT touch rm-short.
-       COLLAPSE: hide rm-long, show rm-dots. Do NOT touch rm-short.
-     This ensures the excerpt is always visible and the continuation
-     simply appends to it — no disjointed sentence fragments.
-   
-   Print behaviour (via @media print CSS):
-     .rm-long  → display:inline  (continuation shown)
-     .rm-dots  → display:none    (ellipsis hidden)
-     .rm-toggle→ display:none    (button hidden)
-     .rm-short stays visible → short + long stitch seamlessly
+   READ MORE / SHOW LESS
    ============================================================ */
-
-/**
- * Builds an expandable Read More HTML block.
- * @param {string} text       Full text from the server — never pre-sliced
- * @param {number} threshold  Chars to show before collapsing. Default 200.
- * @returns {string}          HTML string ready for innerHTML injection
- */
 function buildReadMore(text, threshold) {
   threshold = threshold || 200;
   if (!text) return '';
   const full = String(text);
 
-  // Short enough to show entirely — no toggle needed
   if (full.length <= threshold) {
     return escapeHtml(full);
   }
@@ -1830,11 +1771,6 @@ function buildReadMore(text, threshold) {
   );
 }
 
-/**
- * Toggles the expanded/collapsed state of a Read More block.
- * FIX 1: rm-short is never hidden. Only rm-long and rm-dots are toggled.
- * @param {string} uid  The unique ID assigned by buildReadMore
- */
 function toggleReadMore(uid) {
   const fullEl  = document.getElementById(uid + '_full');
   const dotsEl  = document.getElementById(uid + '_dots');
@@ -1844,13 +1780,10 @@ function toggleReadMore(uid) {
   const isExpanded = fullEl.style.display !== 'none';
 
   if (isExpanded) {
-    // COLLAPSE: hide continuation, show dots again
     fullEl.style.display = 'none';
     dotsEl.style.display = 'inline';
     btn.textContent = '[Read More]';
   } else {
-    // EXPAND: show continuation, hide dots
-    // rm-short is intentionally left alone — it stays visible always
     fullEl.style.display = 'inline';
     dotsEl.style.display = 'none';
     btn.textContent = '[Show Less]';
@@ -2593,8 +2526,6 @@ function buildMarketContext(r, normRate, vehicleClass) {
 
 /* ============================================================
    MAIN REPORT RENDERER
-   FIX 2 — Early abort for no_data (fake car guard)
-   FIX 3 — Lifespan title updated to show "Industry Benchmark"
    ============================================================ */
 function renderPremiumReport(r) {
   const mileageInput = parseInt(document.getElementById('search-mileage').value.trim()) || 0;
@@ -2603,10 +2534,6 @@ function renderPremiumReport(r) {
   const vehicleModel = r.vehicleModel || r.model || '';
   const carName      = r.vehicleName  || `${vehicleYear} ${vehicleMake} ${vehicleModel}`.trim() || r.vin || 'Vehicle';
 
-  /* ─────────────────────────────────────────────────────────
-     FIX 2: Zero-data notice (always build it first so we can
-     use it both in the early-abort path and the full report).
-  ───────────────────────────────────────────────────────── */
   const zeroDataNotice = (r.dataQuality === 'no_data' || (r.complaintCount === 0 && r.recallCount === 0)) ? `
     <div class="zero-data-notice">
       <div class="zero-data-notice-icon">⚠️</div>
@@ -2630,11 +2557,6 @@ function renderPremiumReport(r) {
       </div>
     </div>` : '';
 
-  /* ─────────────────────────────────────────────────────────
-     FIX 2: If dataQuality === 'no_data', render ONLY the
-     warning notice + a "Run Another Search" button, then STOP.
-     The user sees no empty charts, no 1/10 risk score, nothing.
-  ───────────────────────────────────────────────────────── */
   if (r.dataQuality === 'no_data') {
     document.getElementById('results-area').innerHTML = `
       <div class="premium-report">
@@ -2647,12 +2569,9 @@ function renderPremiumReport(r) {
           <small>Token balance: <strong>${r.tokensRemaining}</strong> remaining</small>
         </div>
       </div>`;
-    return; // ← ABORT: do not render the full report
+    return;
   }
 
-  /* ─────────────────────────────────────────────────────────
-     Full report path (data exists)
-  ───────────────────────────────────────────────────────── */
   const identifier   = r.vin ? `VIN: ${r.vin}` : `${vehicleYear} ${vehicleMake} ${vehicleModel}`.trim();
   const modelYear    = vehicleYear || null;
   const now          = r.generatedAt
@@ -2696,7 +2615,6 @@ function renderPremiumReport(r) {
 
   const recallDetails = r.recallDetails || [];
 
-  /* Recall warnings HTML — uses buildReadMore for full summary text */
   const recallWarningsHTML = recallCount > 0 ? `
     <div class="warnings-section">
       <div class="section-label"><span class="section-label-icon">⚠️</span> Recall Warnings</div>
@@ -2762,6 +2680,7 @@ function renderPremiumReport(r) {
       <p>${dynamicVerdict}</p>
     </div>
 
+    <!-- EDIT 1: TSB metric card removed — only Safety Recalls and Consumer Complaints remain -->
     <div class="metrics-grid">
       <div class="metric-card">
         <span class="metric-icon">🔔</span>
@@ -2772,11 +2691,6 @@ function renderPremiumReport(r) {
         <span class="metric-icon">📣</span>
         <div class="metric-num ${numColorClass}">${complaintCount.toLocaleString()}</div>
         <div class="metric-label">Consumer Complaints</div>
-      </div>
-      <div class="metric-card">
-        <span class="metric-icon">📄</span>
-        <div class="metric-num c-ink">${r.tsbCount || 0}</div>
-        <div class="metric-label">Service Bulletins</div>
       </div>
     </div>
 
@@ -2815,7 +2729,8 @@ function renderPremiumReport(r) {
         </div>
         <div class="market-bar-item">
           <div class="market-bar-label"><span>${vehicleClass === 'default' ? 'Vehicle' : vehicleClass.charAt(0).toUpperCase()+vehicleClass.slice(1)} Class Average</span><span>${marketCtx.classRatePerYear} complaints/yr</span></div>
-          <div class="market-bar-track"><div class="market-bar-fill" style="width:100%;background:var(--border);"></div></div>
+          <!-- EDIT 2: Changed background from var(--border) to var(--ink-muted) for solid filled baseline bar -->
+          <div class="market-bar-track"><div class="market-bar-fill" style="width:100%;background:var(--ink-muted);"></div></div>
         </div>
       </div>
       <p class="market-footnote">${escapeHtml(marketCtx.compareText)}</p>
@@ -2900,7 +2815,6 @@ function renderPremiumReport(r) {
       <div class="reliability-badge ${relClass}">${relEmoji} ${escapeHtml(relSignal)}</div>
       <p style="font-size:.88rem;">${buildReliabilityExplanation(relSignal, r, normRate)}</p>
       <div class="lifespan-block">
-        <!-- FIX 3: Title updated to clarify this is an industry benchmark, not NHTSA data -->
         <div class="lifespan-title">🗓️ Industry Lifespan Benchmark (Est.) <span style="text-transform:none;font-weight:400;opacity:0.7;">— Not NHTSA Data</span></div>
         <div class="lifespan-value">${lifespan.range}</div>
         <div class="lifespan-note">${lifespan.note}</div>
