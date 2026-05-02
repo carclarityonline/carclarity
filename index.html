@@ -475,6 +475,48 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 /* ── PREMIUM REPORT ── */
 .premium-report { display: flex; flex-direction: column; gap: 16px; animation: fadeIn .3s ease; }
 
+/* ────────────────────────────────────────────────────────────
+   UPGRADE 2A — "Read More / Show Less" expandable text blocks
+   
+   How it works:
+   - .read-more-block wraps any long text
+   - .read-more-excerpt shows the first N chars + ellipsis
+   - .read-more-full is hidden by default (display:none)
+   - [Read More] / [Show Less] toggles visibility via JS
+   - No truncation happens on the backend — full strings always
+     come from the server and are toggled client-side
+   ──────────────────────────────────────────────────────────── */
+.read-more-block {
+  display: inline;
+}
+.read-more-excerpt {
+  display: inline;
+}
+.read-more-full {
+  display: none; /* hidden by default */
+}
+.read-more-full.expanded {
+  display: inline;
+}
+.read-more-toggle {
+  display: inline;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .82rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 0 0 4px;
+  font-family: inherit;
+  line-height: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition);
+}
+.read-more-toggle:hover {
+  color: var(--accent-dk);
+}
+
 .red-flag-alert {
   background: #fff0ee;
   border: 2px solid var(--red);
@@ -488,6 +530,9 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .red-flag-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
 .red-flag-desc  { font-size: .87rem; color: var(--ink-soft); line-height: 1.6; }
 
+/* ────────────────────────────────────────────────────────────
+   UPGRADE 2B — Report header row with Print button
+   ──────────────────────────────────────────────────────────── */
 .report-header { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
 .report-header-top { padding: 28px 28px 22px; border-bottom: 1px solid var(--border); }
 .report-meta { display: flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
@@ -499,9 +544,38 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .report-risk-badge.caution { background: var(--amber-lt); color: var(--amber); border: 1.5px solid #ffd68f; }
 .report-risk-badge.low     { background: var(--green-lt); color: var(--green); border: 1.5px solid #a8d9c1; }
 .report-recommendation { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; padding: 6px 14px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-soft); }
-.report-header-footer { padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.report-header-footer {
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 .report-generated { font-size: .75rem; color: var(--ink-muted); }
 .report-source { font-size: .75rem; color: var(--ink-muted); display: flex; align-items: center; gap: 5px; }
+
+/* Print / Save PDF button — shown in header, hidden during print */
+.btn-print-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius);
+  font-size: .8rem;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-print-pdf:hover {
+  background: var(--white);
+  border-color: #c0bdb5;
+  color: var(--ink);
+}
 
 .report-summary { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; }
 .section-label { display: flex; align-items: center; gap: 8px; font-size: .72rem; font-weight: 700; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
@@ -653,15 +727,124 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 }
 .disclaimer-section strong { color: var(--ink); }
 
-.data-quality-notice {
+/* ────────────────────────────────────────────────────────────
+   UPGRADE 2C — Zero-data notice (replaces generic yellow box)
+   The model name is injected dynamically by JS in renderPremiumReport.
+   ──────────────────────────────────────────────────────────── */
+.zero-data-notice {
   background: var(--amber-lt);
-  border: 1px solid #ffd68f;
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  font-size: .8rem;
+  border: 2px solid #ffd68f;
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.zero-data-notice-icon { font-size: 1.8rem; flex-shrink: 0; }
+.zero-data-notice-body { flex: 1; }
+.zero-data-notice-title {
+  font-size: .82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
   color: var(--amber);
-  margin-top: 8px;
-  display: flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 6px;
+}
+.zero-data-notice-text {
+  font-size: .87rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.zero-data-notice-text strong { color: var(--ink); }
+.zero-data-notice-vin-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--amber);
+  background: rgba(184,111,0,.1);
+  border: 1.5px solid #ffd68f;
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.zero-data-notice-vin-cta:hover {
+  background: rgba(184,111,0,.18);
+}
+
+/* ────────────────────────────────────────────────────────────
+   UPGRADE 2B — @media print styles
+   
+   When the user clicks "Print / Save PDF":
+   - Only the premium report is visible
+   - All navigation, inputs, buy-tokens UI, footer hidden
+   - White background enforced
+   - Print button itself hidden
+   ──────────────────────────────────────────────────────────── */
+@media print {
+  /* Hide everything that is not the report */
+  #navbar,
+  .search-card,
+  #history-card,
+  #feedback-fab,
+  #cookie-consent,
+  footer,
+  .report-cta-row,
+  .btn-print-pdf,
+  .page-paywall,
+  #progress-bar {
+    display: none !important;
+  }
+
+  /* Force white background for clean printing */
+  body, html {
+    background: #fff !important;
+  }
+
+  .premium-report {
+    animation: none !important;
+  }
+
+  /* Make sure the report fills the page and has good print margins */
+  .dashboard-layout {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Ensure cards look clean when printed */
+  .report-header,
+  .report-summary,
+  .metrics-grid,
+  .risk-score-card,
+  .problem-areas,
+  .specs-section,
+  .safety-section,
+  .reliability-section,
+  .market-context,
+  .maintenance-section,
+  .issues-section,
+  .guidance-grid,
+  .warnings-section,
+  .trust-section,
+  .disclaimer-section,
+  .red-flag-alert,
+  .zero-data-notice {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+    break-inside: avoid;
+  }
+
+  /* Expand any "Read More" blocks so full text prints */
+  .read-more-full {
+    display: inline !important;
+  }
+  .read-more-excerpt,
+  .read-more-toggle {
+    display: none !important;
+  }
 }
 
 @keyframes spin    { to { transform: rotate(360deg); } }
@@ -698,6 +881,8 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   #cookie-consent .cookie-actions { width: 100%; }
   .btn-cookie-accept, .btn-cookie-decline { flex: 1; text-align: center; }
   .payment-processing-card { padding: 20px 16px; }
+  .zero-data-notice { flex-direction: column; gap: 10px; }
+  .report-header-footer { flex-direction: column; align-items: flex-start; }
 }
 
 #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 9999; transition: width .3s ease, opacity .4s ease; opacity: 0; }
@@ -1301,14 +1486,6 @@ const CONFIG = {
   SUPPORT_EMAIL:   'carclarityonline@gmail.com',
   TERMS_VERSION:   '2026-v2',
 
-  /* ── GUMROAD CONFIG ──────────────────────────────────────────
-   * 1. Create a Gumroad account at gumroad.com
-   * 2. Create 3 products (Starter / Standard / Pro)
-   * 3. In each product's Settings → add a Custom Field named "user_id" (pre-filled from URL)
-   * 4. Paste each product's permalink (the slug after gumroad.com/l/) below
-   * 5. Replace YOURNAME with your Gumroad username/subdomain
-   * 6. In Gumroad → Settings → Advanced → Ping URL: paste your Apps Script /exec URL
-   * ──────────────────────────────────────────────────────────── */
   GUMROAD_BASE_URL: 'https://carzmood.gumroad.com/l/',
   GUMROAD_PRODUCTS: {
     basic:    { permalink: 'svduwa',  tokens: 5,  price: '$4.99',  name: 'Starter',  label: '5 Tokens — Starter Pack' },
@@ -1316,9 +1493,8 @@ const CONFIG = {
     pro:      { permalink: 'fvwvp',  tokens: 40, price: '$24.99', name: 'Pro',      label: '40 Tokens — Pro Pack' },
   },
 
-  /* Payment polling config */
-  PAYMENT_POLL_INTERVAL_MS: 4000,   // check every 4 seconds
-  PAYMENT_POLL_MAX_ATTEMPTS: 22,    // ~88 seconds total
+  PAYMENT_POLL_INTERVAL_MS: 4000,
+  PAYMENT_POLL_MAX_ATTEMPTS: 22,
 };
 
 /* ============================================================
@@ -1338,7 +1514,6 @@ const state = {
   selectedPack:        'standard',
   currentRating:       0,
   history:             [],
-  /* Payment state */
   waitingForPayment:   false,
   prePaymentTokens:    0,
   _paymentPollTimer:   null,
@@ -1436,7 +1611,6 @@ function acceptCookies() {
 }
 
 function declineCookies() {
-  // Functional/essential cookies only — we still need session for login
   localStorage.setItem('cc_cookie_consent', 'essential_' + Date.now());
   document.getElementById('cookie-consent').classList.add('hidden');
   document.body.classList.remove('cookie-visible');
@@ -1452,7 +1626,6 @@ function showPage(pageId) {
   state.currentPage = pageId;
   window.scrollTo(0, 0);
 
-  // Init paywall when shown
   if (pageId === 'page-paywall') {
     initPaywallPage();
   }
@@ -1596,34 +1769,100 @@ document.getElementById('su-country').addEventListener('change', function() {
 });
 
 /* ============================================================
-   GUMROAD PAYMENT INTEGRATION
+   ════════════════════════════════════════════════════════════
+   UPGRADE 2A — "Read More / Show Less" global function
+   
+   buildReadMore(text, threshold):
+     - text      : the full string from the server (never pre-sliced)
+     - threshold : how many chars to show before collapsing (default 200)
+   
+   Returns an HTML string with:
+     - .read-more-excerpt  : first `threshold` chars + "…"
+     - .read-more-full     : remaining chars (hidden by default)
+     - .read-more-toggle   : clickable [Read More] / [Show Less]
+   
+   toggleReadMore(btn):
+     - Called by the toggle button's onclick
+     - Flips the expanded class on .read-more-full
+     - Swaps button label between [Read More] and [Show Less]
+   ════════════════════════════════════════════════════════════
    ============================================================ */
 
 /**
- * Build the full Gumroad checkout URL for a pack.
- * Appends user_id so the webhook can identify who paid.
- * &wanted=true skips the product page and goes straight to checkout.
+ * Builds an expandable "Read More" HTML block for long text.
+ * If text is shorter than threshold, returns the plain escaped text.
+ * IMPORTANT: Never slice text from the backend — always pass the full string here.
+ *
+ * @param {string} text       Full text string from the server
+ * @param {number} threshold  Chars to show before collapsing. Default 200.
+ * @returns {string}          HTML string ready for innerHTML injection
  */
+function buildReadMore(text, threshold) {
+  threshold = threshold || 200;
+  if (!text) return '';
+  const full = String(text);
+
+  // If text is short enough, just escape and return it directly
+  if (full.length <= threshold) {
+    return escapeHtml(full);
+  }
+
+  // Split: visible portion + hidden continuation
+  const excerpt     = escapeHtml(full.slice(0, threshold));
+  const continuation = escapeHtml(full.slice(threshold));
+
+  // Unique ID for targeting via JS (supports multiple blocks per page)
+  const uid = 'rm_' + Math.random().toString(36).slice(2, 8);
+
+  return `<span class="read-more-block" id="${uid}">` +
+    `<span class="read-more-excerpt">${excerpt}&hellip;</span>` +
+    `<span class="read-more-full" id="${uid}_full">${continuation}</span>` +
+    `<button class="read-more-toggle" id="${uid}_btn" onclick="toggleReadMore('${uid}')">[Read More]</button>` +
+  `</span>`;
+}
+
+/**
+ * Toggles expanded/collapsed state for a Read More block.
+ * Called from inline onclick="toggleReadMore('uid')" on the button.
+ *
+ * @param {string} uid  The unique ID assigned by buildReadMore
+ */
+function toggleReadMore(uid) {
+  const fullEl   = document.getElementById(uid + '_full');
+  const excerptEl = document.querySelector(`#${uid} .read-more-excerpt`);
+  const btn       = document.getElementById(uid + '_btn');
+  if (!fullEl || !btn) return;
+
+  const isExpanded = fullEl.classList.contains('expanded');
+
+  if (isExpanded) {
+    // Collapse: hide full text, show excerpt again
+    fullEl.classList.remove('expanded');
+    if (excerptEl) excerptEl.style.display = 'inline';
+    btn.textContent = '[Read More]';
+  } else {
+    // Expand: show full text, hide excerpt (so there's no duplicate text)
+    fullEl.classList.add('expanded');
+    if (excerptEl) excerptEl.style.display = 'none';
+    btn.textContent = '[Show Less]';
+  }
+}
+
+/* ============================================================
+   GUMROAD PAYMENT INTEGRATION
+   ============================================================ */
 function buildGumroadUrl(pack) {
   const product = CONFIG.GUMROAD_PRODUCTS[pack];
   if (!product) return '#';
-
-  // Check if base URL has been configured
   if (CONFIG.GUMROAD_BASE_URL.includes('YOURNAME')) {
-    console.warn('CarClarity: GUMROAD_BASE_URL is not configured. Update CONFIG.GUMROAD_BASE_URL.');
+    console.warn('CarClarity: GUMROAD_BASE_URL is not configured.');
     return '#';
   }
-
   const userId = encodeURIComponent(state.userId || '');
   return `${CONFIG.GUMROAD_BASE_URL}${product.permalink}?user_id=${userId}&wanted=true`;
 }
 
-/**
- * Called when the paywall page is shown.
- * Resets state and sets up the initial button.
- */
 function initPaywallPage() {
-  // Reset payment states
   state.waitingForPayment = false;
   cancelPaymentPoll();
   removeFocusListener();
@@ -1637,30 +1876,22 @@ function initPaywallPage() {
   document.getElementById('paywall-terms-check').checked = false;
   document.getElementById('paywall-alert').innerHTML = '';
 
-  // Set initial pack summary
   updatePackSummary(state.selectedPack);
   updatePayButton();
   updateGumroadLink();
 }
 
-/**
- * Update the Gumroad link href when pack or userId changes.
- */
 function updateGumroadLink() {
   const btn = document.getElementById('gumroad-pay-btn');
   if (!btn) return;
   const url = buildGumroadUrl(state.selectedPack);
   btn.href = url;
-  // Update the text
   const product = CONFIG.GUMROAD_PRODUCTS[state.selectedPack];
   if (product) {
     btn.innerHTML = `🛒 Pay ${product.price} with Gumroad`;
   }
 }
 
-/**
- * Update the selected pack summary box.
- */
 function updatePackSummary(pack) {
   const product = CONFIG.GUMROAD_PRODUCTS[pack];
   const el = document.getElementById('pack-summary-title');
@@ -1669,25 +1900,14 @@ function updatePackSummary(pack) {
   }
 }
 
-/**
- * Enable / disable the pay button based on terms checkbox.
- */
 function updatePayButton() {
   const checked = document.getElementById('paywall-terms-check')?.checked;
   const btn = document.getElementById('gumroad-pay-btn');
   if (!btn) return;
-
-  if (checked) {
-    btn.classList.remove('pay-locked');
-  } else {
-    btn.classList.add('pay-locked');
-  }
+  if (checked) { btn.classList.remove('pay-locked'); }
+  else { btn.classList.add('pay-locked'); }
 }
 
-/**
- * Handle the Gumroad pay button click.
- * Validates terms acceptance, logs it, then lets Gumroad overlay open.
- */
 function handleGumroadClick(event) {
   const termsChecked = document.getElementById('paywall-terms-check')?.checked;
 
@@ -1699,7 +1919,6 @@ function handleGumroadClick(event) {
     return false;
   }
 
-  // Check if URL is configured
   const url = buildGumroadUrl(state.selectedPack);
   if (url === '#') {
     event.preventDefault();
@@ -1707,40 +1926,28 @@ function handleGumroadClick(event) {
     return false;
   }
 
-  // Make sure href is up-to-date
   event.currentTarget.href = url;
-
-  // Log terms acceptance (fire-and-forget — does not block checkout)
   logTermsAcceptance(state.selectedPack);
 
-  // Set payment waiting state
   state.waitingForPayment  = true;
   state.prePaymentTokens   = state.tokens;
   state._paymentPollCount  = 0;
 
-  // Watch for when the Gumroad overlay closes (window regains focus)
   watchForPaymentReturn();
-
-  return true; // Let Gumroad JS handle the overlay
+  return true;
 }
 
-/**
- * Watch for window focus events — fires when Gumroad overlay is closed.
- */
 function watchForPaymentReturn() {
   removeFocusListener();
-
   state._focusListener = () => {
     if (state.waitingForPayment) {
       removeFocusListener();
-      // Small delay for webhook to process
       setTimeout(() => {
         showPaymentProcessingUI();
         startPaymentPoll();
       }, 1500);
     }
   };
-
   window.addEventListener('focus', state._focusListener);
 }
 
@@ -1751,9 +1958,6 @@ function removeFocusListener() {
   }
 }
 
-/**
- * Show the processing UI (spinner + poll steps).
- */
 function showPaymentProcessingUI() {
   document.getElementById('gumroad-pay-wrapper').classList.add('hidden');
   if (document.getElementById('gumroad-how-it-works')) {
@@ -1763,9 +1967,6 @@ function showPaymentProcessingUI() {
   setPollStep(0);
 }
 
-/**
- * Start polling getSession to detect token increase.
- */
 function startPaymentPoll() {
   cancelPaymentPoll();
   state._paymentPollCount = 0;
@@ -1773,7 +1974,6 @@ function startPaymentPoll() {
 
   state._paymentPollTimer = setInterval(async () => {
     state._paymentPollCount++;
-    const attemptsLeft = CONFIG.PAYMENT_POLL_MAX_ATTEMPTS - state._paymentPollCount;
     const el = document.getElementById('poll-attempt-text');
     if (el) el.textContent = `Checking… (attempt ${state._paymentPollCount} of ${CONFIG.PAYMENT_POLL_MAX_ATTEMPTS})`;
 
@@ -1803,9 +2003,6 @@ function cancelPaymentPoll() {
   }
 }
 
-/**
- * Set visual step in the poll UI.
- */
 function setPollStep(idx) {
   [0,1,2].forEach(i => {
     const el = document.getElementById('poll-step-' + i);
@@ -1816,13 +2013,9 @@ function setPollStep(idx) {
   });
 }
 
-/**
- * Handle successful payment confirmation.
- */
 function handlePaymentSuccess(tokensAdded, newBalance) {
   state.waitingForPayment = false;
   setPollStep(2);
-
   setTimeout(() => {
     document.getElementById('payment-processing-state').classList.add('hidden');
     document.getElementById('payment-success-state').classList.remove('hidden');
@@ -1831,9 +2024,6 @@ function handlePaymentSuccess(tokensAdded, newBalance) {
   }, 600);
 }
 
-/**
- * Show timeout message if polling exhausted.
- */
 function showPaymentTimeout() {
   state.waitingForPayment = false;
   document.getElementById('payment-processing-state').classList.add('hidden');
@@ -1845,13 +2035,9 @@ function showPaymentTimeout() {
     '⏱ Payment not detected yet. If you completed checkout, tokens may take a few more minutes. Use the <strong>Manual Recovery</strong> option below if tokens don\'t arrive within 10 minutes. Contact <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '">' + CONFIG.SUPPORT_EMAIL + '</a> for help.');
 }
 
-/**
- * Manual token check — "I've paid" button.
- */
 async function manualTokenCheck() {
   const attemptsEl = document.getElementById('poll-attempt-text');
   if (attemptsEl) attemptsEl.textContent = 'Checking now…';
-
   try {
     const r = await apiCall('getSession', {});
     if (r.ok && r.tokens > state.prePaymentTokens) {
@@ -1868,9 +2054,6 @@ async function manualTokenCheck() {
   }
 }
 
-/**
- * Cancel the payment wait entirely.
- */
 function cancelPaymentWait() {
   state.waitingForPayment = false;
   cancelPaymentPoll();
@@ -1878,10 +2061,6 @@ function cancelPaymentWait() {
   initPaywallPage();
 }
 
-/**
- * Log terms acceptance to backend (creates audit trail in purchases sheet).
- * Fire-and-forget — does not block the checkout flow.
- */
 async function logTermsAcceptance(pack) {
   try {
     await apiCall('logTermsAcceptance', {
@@ -1890,7 +2069,6 @@ async function logTermsAcceptance(pack) {
       timestamp:    new Date().toISOString(),
     });
   } catch (e) {
-    // Silently fail — does not block payment
     console.log('Terms acceptance log failed (non-critical):', e.message);
   }
 }
@@ -1898,9 +2076,7 @@ async function logTermsAcceptance(pack) {
 /* ============================================================
    PAYWALL — PACK SELECTION
    ============================================================ */
-function showBuyTokens() {
-  showPage('page-paywall');
-}
+function showBuyTokens() { showPage('page-paywall'); }
 
 function selectPack(el, pack) {
   document.querySelectorAll('.token-pack').forEach(p => p.classList.remove('selected'));
@@ -1921,7 +2097,7 @@ async function doVerifyLicense() {
     if (r.ok) {
       state.tokens = r.tokensRemaining;
       updateTokenChip();
-      state.prePaymentTokens = 0; // reset so success state shows
+      state.prePaymentTokens = 0;
       handlePaymentSuccess(r.tokensAdded, r.tokensRemaining);
     } else {
       showAlert('verify-license-alert', 'error', r.error || 'License key not recognised. Please check your Gumroad receipt.');
@@ -2034,11 +2210,9 @@ document.getElementById('li-pass').addEventListener('keydown', e => { if (e.key 
    LOGOUT
    ============================================================ */
 async function doLogout() {
-  // Clean up payment state
   cancelPaymentPoll();
   removeFocusListener();
   state.waitingForPayment = false;
-
   try { await apiCall('logout', {}); } catch {}
   clearSession();
   state.tokens = 0; state.searchCount = 0; state.history = [];
@@ -2084,7 +2258,7 @@ async function doConfirmReset() {
 }
 
 /* ============================================================
-   SEARCH — with model normalization
+   SEARCH
    ============================================================ */
 function switchTab(tab) {
   state.searchTab = tab;
@@ -2349,8 +2523,9 @@ function buildRedFlag(r, normRate, weightedRecall) {
     return {
       show:  true,
       title: `Safety-Critical Recall: ${highRecall ? (highRecall.component || 'See NHTSA') : 'High-Severity Recall on Record'}`,
+      // UPGRADE 1E: No slice — full summary from backend (backend now sends full strings)
       desc:  highRecall && highRecall.summary
-        ? highRecall.summary.slice(0, 200) + (highRecall.summary.length > 200 ? '…' : '')
+        ? highRecall.summary
         : `This vehicle has ${r.recallCount} recall(s) involving safety-critical components. Visit nhtsa.gov/recalls to check resolution status immediately.`,
     };
   }
@@ -2457,12 +2632,49 @@ function renderPremiumReport(r) {
   const maintForecast   = buildMaintenanceForecast(mileageInput, modelYear, specs);
   const lifespan        = computeLifespanEstimate(specs, modelYear);
   const commonIssues    = r.commonIssues || extractCommonIssues(breakdownObj, []);
-  const zeroDataNotice  = (complaintCount === 0 && recallCount === 0) ? `
-    <div class="data-quality-notice">
-      ⚠️ <strong>Data Note:</strong> Zero complaints and recalls were returned from NHTSA. This can happen when: (1) the base model name doesn't exactly match NHTSA's database (try a VIN search for guaranteed accuracy), or (2) this vehicle genuinely has no NHTSA records — check nhtsa.gov directly to confirm.
+
+  /* ──────────────────────────────────────────────────────────
+     UPGRADE 2C — Smarter zero-data notice
+     
+     Previously this was a plain amber <div class="data-quality-notice">.
+     Now it's a rich card that:
+       1. Names the exact model string that returned zero results
+       2. Explains WHY zero data happens (model name mismatch vs. genuine no data)
+       3. Gives a concrete example ("Bolt" vs "Bolt EV")
+       4. Offers a direct CTA to switch to VIN search
+     The vehicleModel and vehicleMake are interpolated into the message.
+  ────────────────────────────────────────────────────────── */
+  const zeroDataNotice = (complaintCount === 0 && recallCount === 0) ? `
+    <div class="zero-data-notice">
+      <div class="zero-data-notice-icon">⚠️</div>
+      <div class="zero-data-notice-body">
+        <div class="zero-data-notice-title">NHTSA Returned Zero Records — Action May Be Needed</div>
+        <div class="zero-data-notice-text">
+          NHTSA returned <strong>zero complaints and zero recalls</strong> for
+          "<strong>${escapeHtml(vehicleMake)} ${escapeHtml(vehicleModel)}</strong>."
+          This usually means the model name entered does <strong>not exactly match</strong>
+          the government database — for example, typing <em>"Bolt"</em> when NHTSA requires
+          <em>"Bolt EV"</em>, or <em>"F150"</em> instead of <em>"F-150."</em>
+          It can also occur for very old vehicles (pre-1994) or models with extremely low complaint volume.
+          <br><br>
+          For <strong>guaranteed accuracy</strong>, re-run this search using the vehicle's
+          <strong>17-character VIN</strong> — the VIN bypasses model name matching entirely
+          and queries NHTSA directly by vehicle identifier.
+        </div>
+        <button class="zero-data-notice-vin-cta" onclick="switchTab('vin'); window.scrollTo(0,0);">
+          🔍 Switch to VIN Search →
+        </button>
+      </div>
     </div>` : '';
 
-  const recallDetails      = r.recallDetails || [];
+  const recallDetails = r.recallDetails || [];
+
+  /* ──────────────────────────────────────────────────────────
+     UPGRADE 2A applied: Recall warnings now use buildReadMore()
+     instead of .slice(0,220). Full summary text is passed from
+     the server (backend upgrade 1E removes the slice there too).
+     The user sees the first 200 chars then [Read More].
+  ────────────────────────────────────────────────────────── */
   const recallWarningsHTML = recallCount > 0 ? `
     <div class="warnings-section">
       <div class="section-label"><span class="section-label-icon">⚠️</span> Recall Warnings</div>
@@ -2471,7 +2683,7 @@ function renderPremiumReport(r) {
           <span>🔔</span>
           <div>
             <strong>${escapeHtml(rec.component || 'Recall')}</strong>
-            ${rec.summary ? ` — ${escapeHtml(rec.summary.slice(0,220))}${rec.summary.length > 220 ? '…' : ''}` : ''}
+            ${rec.summary ? ` — <span>${buildReadMore(rec.summary, 200)}</span>` : ''}
             <span style="display:inline-block;margin-left:6px;font-size:.75rem;font-weight:700;padding:1px 7px;border-radius:99px;background:${weightedRecallSeverityForItem(rec) === 'high' ? 'var(--red-lt);color:var(--red)' : 'var(--surface);color:var(--ink-muted)'};">${weightedRecallSeverityForItem(rec).toUpperCase()}</span>
           </div>
         </div>`).join('')
@@ -2489,7 +2701,10 @@ function renderPremiumReport(r) {
       <div class="red-flag-body">
         <div class="red-flag-label">⚠️ #1 Red Flag — Read First</div>
         <div class="red-flag-title">${escapeHtml(redFlag.title)}</div>
-        <div class="red-flag-desc">${redFlag.desc}</div>
+        <div class="red-flag-desc">
+          <!-- UPGRADE 2A: Red flag description uses buildReadMore — no manual slice -->
+          ${buildReadMore(redFlag.desc, 200)}
+        </div>
       </div>
     </div>` : ''}
 
@@ -2510,9 +2725,24 @@ function renderPremiumReport(r) {
           ${isHybrid ? '<span class="badge badge-purple" style="font-size:.78rem;padding:5px 11px;">🔋 Hybrid</span>' : ''}
         </div>
       </div>
+      <!-- ────────────────────────────────────────────────────
+           UPGRADE 2B — Print / Save PDF button in report header
+           
+           The button sits in the header footer row alongside the
+           report date and data source note. Clicking it calls
+           window.print() — the browser's native print dialog
+           allows "Save as PDF" on all major operating systems.
+           The @media print CSS block (see styles above) ensures
+           only the report content is printed cleanly.
+      ──────────────────────────────────────────────────────── -->
       <div class="report-header-footer">
         <span class="report-generated">🕐 Report generated: ${now}</span>
-        <span class="report-source">🏛️ Source: National Highway Traffic Safety Administration</span>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span class="report-source">🏛️ Source: National Highway Traffic Safety Administration</span>
+          <button class="btn-print-pdf" onclick="window.print()" title="Save or print this report as a PDF">
+            🖨️ Print / Save PDF
+          </button>
+        </div>
       </div>
     </div>
 
