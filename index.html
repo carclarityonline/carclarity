@@ -476,29 +476,34 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .premium-report { display: flex; flex-direction: column; gap: 16px; animation: fadeIn .3s ease; }
 
 /* ────────────────────────────────────────────────────────────
-   UPGRADE 2A — "Read More / Show Less" expandable text blocks
+   READ MORE / SHOW LESS — FIXED STRUCTURE
    
-   How it works:
-   - .read-more-block wraps any long text
-   - .read-more-excerpt shows the first N chars + ellipsis
-   - .read-more-full is hidden by default (display:none)
-   - [Read More] / [Show Less] toggles visibility via JS
-   - No truncation happens on the backend — full strings always
-     come from the server and are toggled client-side
+   New structure (FIX 2A):
+   - .rm-short    : first N chars — ALWAYS visible, even in print
+   - .rm-dots     : the "…" separator — hidden when expanded
+   - .rm-long     : continuation text — hidden by default
+   - .rm-toggle   : [Read More] / [Show Less] button
+   
+   On expand: show .rm-long, hide .rm-dots, leave .rm-short alone.
+   On collapse: hide .rm-long, show .rm-dots.
+   
+   Print fix: .rm-long forced to inline, .rm-dots and .rm-toggle hidden.
+   This stitches short+long seamlessly in PDF without gaps.
    ──────────────────────────────────────────────────────────── */
 .read-more-block {
   display: inline;
 }
-.read-more-excerpt {
+.rm-short {
   display: inline;
 }
-.read-more-full {
-  display: none; /* hidden by default */
-}
-.read-more-full.expanded {
+.rm-dots {
   display: inline;
 }
-.read-more-toggle {
+.rm-long {
+  display: none;
+}
+/* FIX 2C: .rm-toggle styled as a clean inline hyperlink */
+.rm-toggle {
   display: inline;
   color: var(--accent);
   font-weight: 600;
@@ -513,7 +518,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   text-underline-offset: 2px;
   transition: color var(--transition);
 }
-.read-more-toggle:hover {
+.rm-toggle:hover {
   color: var(--accent-dk);
 }
 
@@ -530,9 +535,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .red-flag-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
 .red-flag-desc  { font-size: .87rem; color: var(--ink-soft); line-height: 1.6; }
 
-/* ────────────────────────────────────────────────────────────
-   UPGRADE 2B — Report header row with Print button
-   ──────────────────────────────────────────────────────────── */
+/* ── Report header row with Print button ── */
 .report-header { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
 .report-header-top { padding: 28px 28px 22px; border-bottom: 1px solid var(--border); }
 .report-meta { display: flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
@@ -555,7 +558,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 .report-generated { font-size: .75rem; color: var(--ink-muted); }
 .report-source { font-size: .75rem; color: var(--ink-muted); display: flex; align-items: center; gap: 5px; }
 
-/* Print / Save PDF button — shown in header, hidden during print */
 .btn-print-pdf {
   display: inline-flex;
   align-items: center;
@@ -727,10 +729,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 }
 .disclaimer-section strong { color: var(--ink); }
 
-/* ────────────────────────────────────────────────────────────
-   UPGRADE 2C — Zero-data notice (replaces generic yellow box)
-   The model name is injected dynamically by JS in renderPremiumReport.
-   ──────────────────────────────────────────────────────────── */
+/* ── ZERO DATA NOTICE ── */
 .zero-data-notice {
   background: var(--amber-lt);
   border: 2px solid #ffd68f;
@@ -776,13 +775,15 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 }
 
 /* ────────────────────────────────────────────────────────────
-   UPGRADE 2B — @media print styles
+   @media print — FIXED (FIX 2A, 2B)
    
-   When the user clicks "Print / Save PDF":
-   - Only the premium report is visible
-   - All navigation, inputs, buy-tokens UI, footer hidden
-   - White background enforced
-   - Print button itself hidden
+   Key fixes:
+   - .rm-long forced to display:inline (shows continuation text)
+   - .rm-dots forced to display:none (removes the "…")
+   - .rm-toggle forced to display:none (removes the button)
+   - .rm-short is NOT hidden — it stays visible so short+long stitch
+   - .premium-report gets clean padding
+   - .metric-card and .problem-item get break-inside:avoid
    ──────────────────────────────────────────────────────────── */
 @media print {
   /* Hide everything that is not the report */
@@ -799,19 +800,42 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     display: none !important;
   }
 
-  /* Force white background for clean printing */
+  /* Force white background */
   body, html {
     background: #fff !important;
   }
 
   .premium-report {
     animation: none !important;
+    padding: 16px !important;
   }
 
-  /* Make sure the report fills the page and has good print margins */
+  /* Clean dashboard layout for print */
   .dashboard-layout {
     padding: 0 !important;
     max-width: 100% !important;
+  }
+
+  /* FIX 2A: Read More print fix — stitch short + long seamlessly */
+  .rm-long {
+    display: inline !important;
+  }
+  .rm-dots {
+    display: none !important;
+  }
+  .rm-toggle {
+    display: none !important;
+  }
+  /* .rm-short is intentionally NOT listed here — it must stay visible */
+
+  /* FIX 2B: Prevent metric cards and problem items from splitting across pages */
+  .metric-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .problem-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   /* Ensure cards look clean when printed */
@@ -835,15 +859,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
     box-shadow: none !important;
     border: 1px solid #ddd !important;
     break-inside: avoid;
-  }
-
-  /* Expand any "Read More" blocks so full text prints */
-  .read-more-full {
-    display: inline !important;
-  }
-  .read-more-excerpt,
-  .read-more-toggle {
-    display: none !important;
   }
 }
 
@@ -1191,12 +1206,10 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
   <div class="dashboard-layout" style="display:flex;align-items:flex-start;justify-content:center;min-height:60vh;">
     <div class="paywall-card" style="max-width:540px;width:100%;">
 
-      <!-- Header -->
       <span class="icon-big">🪙</span>
       <h2>Get more searches</h2>
       <p>Tokens apply to your account automatically after payment via Gumroad. Usually within 1–3 minutes.</p>
 
-      <!-- Pack selector -->
       <div class="token-packs">
         <div class="token-pack" onclick="selectPack(this,'basic')" data-pack="basic">
           <div class="pack-tokens">5</div>
@@ -1216,7 +1229,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         </div>
       </div>
 
-      <!-- Selected pack summary -->
       <div class="pack-summary-box" id="pack-summary-box">
         <div class="pack-summary-icon">🛒</div>
         <div class="pack-summary-text">
@@ -1225,7 +1237,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         </div>
       </div>
 
-      <!-- Terms agreement — REQUIRED before payment -->
       <div class="terms-agreement-box">
         <div class="checkbox-group">
           <input type="checkbox" id="paywall-terms-check" onchange="updatePayButton()" />
@@ -1241,7 +1252,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 
       <div id="paywall-alert"></div>
 
-      <!-- Gumroad payment button -->
       <div class="gumroad-pay-wrapper" id="gumroad-pay-wrapper">
         <a id="gumroad-pay-btn"
            href="#"
@@ -1255,7 +1265,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         </p>
       </div>
 
-      <!-- Payment processing state (shown after checkout opens) -->
       <div id="payment-processing-state" class="hidden">
         <div class="payment-processing-card">
           <div class="spinner" style="margin:0 auto 14px;"></div>
@@ -1276,7 +1285,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         </div>
       </div>
 
-      <!-- Payment success banner (replaces processing state) -->
       <div id="payment-success-state" class="hidden">
         <div class="payment-success-banner">
           <div style="font-size:2.5rem;margin-bottom:8px;">🎉</div>
@@ -1288,7 +1296,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         </div>
       </div>
 
-      <!-- How it works -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:16px 0;font-size:.82rem;color:var(--ink-soft);text-align:left;" id="gumroad-how-it-works">
         <strong style="color:var(--ink);display:block;margin-bottom:6px;">How automatic delivery works:</strong>
         1. Click "Pay with Gumroad" → complete your purchase<br>
@@ -1297,7 +1304,6 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
         4. If tokens don't appear within 5 minutes, use Manual Recovery below
       </div>
 
-      <!-- Manual Recovery (hidden, for edge cases) -->
       <div class="legacy-section">
         <button class="legacy-toggle" onclick="toggleLegacy()">
           Tokens not arrived after 5 minutes? Click here for manual recovery.
@@ -1364,7 +1370,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 </div>
 
 <!-- ============================================================
-     TERMS & CONDITIONS — Legal Fortress Edition
+     TERMS & CONDITIONS
      ============================================================ -->
 <div id="modal-terms" class="modal-overlay hidden" onclick="overlayClose(event,'modal-terms')">
   <div class="modal">
@@ -1418,7 +1424,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 </div>
 
 <!-- ============================================================
-     PRIVACY POLICY — GDPR/CCPA Compliant Edition
+     PRIVACY POLICY
      ============================================================ -->
 <div id="modal-privacy" class="modal-overlay hidden" onclick="overlayClose(event,'modal-privacy')">
   <div class="modal">
@@ -1479,7 +1485,7 @@ footer a { color: var(--ink-muted); text-decoration: underline; }
 
 <script>
 /* ============================================================
-   CONFIG — Gumroad Edition (Stripe completely removed)
+   CONFIG — Gumroad Edition
    ============================================================ */
 const CONFIG = {
   APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyj1u-0j1rT2F28mDV5Kw5ny-JK_4HYb-AyHF04_e_6s61gzz2YfuE-Oep7XXw-5D0A/exec',
@@ -1769,31 +1775,34 @@ document.getElementById('su-country').addEventListener('change', function() {
 });
 
 /* ============================================================
-   ════════════════════════════════════════════════════════════
-   UPGRADE 2A — "Read More / Show Less" global function
+   READ MORE / SHOW LESS  —  FIXED IMPLEMENTATION (FIX 2A + FIX 1)
    
    buildReadMore(text, threshold):
-     - text      : the full string from the server (never pre-sliced)
-     - threshold : how many chars to show before collapsing (default 200)
+     Generates an HTML block with:
+       - .rm-short   : first `threshold` chars — ALWAYS visible
+       - .rm-dots    : "…" — shown when collapsed, hidden when expanded
+       - .rm-long    : remainder of text — hidden by default
+       - .rm-toggle  : [Read More] / [Show Less] button
+     
+     If text ≤ threshold, returns plain escaped text directly.
    
-   Returns an HTML string with:
-     - .read-more-excerpt  : first `threshold` chars + "…"
-     - .read-more-full     : remaining chars (hidden by default)
-     - .read-more-toggle   : clickable [Read More] / [Show Less]
+   toggleReadMore(uid):
+     FIX 1 — Corrected toggle logic:
+       EXPAND:  show rm-long, hide rm-dots. Do NOT touch rm-short.
+       COLLAPSE: hide rm-long, show rm-dots. Do NOT touch rm-short.
+     This ensures the excerpt is always visible and the continuation
+     simply appends to it — no disjointed sentence fragments.
    
-   toggleReadMore(btn):
-     - Called by the toggle button's onclick
-     - Flips the expanded class on .read-more-full
-     - Swaps button label between [Read More] and [Show Less]
-   ════════════════════════════════════════════════════════════
+   Print behaviour (via @media print CSS):
+     .rm-long  → display:inline  (continuation shown)
+     .rm-dots  → display:none    (ellipsis hidden)
+     .rm-toggle→ display:none    (button hidden)
+     .rm-short stays visible → short + long stitch seamlessly
    ============================================================ */
 
 /**
- * Builds an expandable "Read More" HTML block for long text.
- * If text is shorter than threshold, returns the plain escaped text.
- * IMPORTANT: Never slice text from the backend — always pass the full string here.
- *
- * @param {string} text       Full text string from the server
+ * Builds an expandable Read More HTML block.
+ * @param {string} text       Full text from the server — never pre-sliced
  * @param {number} threshold  Chars to show before collapsing. Default 200.
  * @returns {string}          HTML string ready for innerHTML injection
  */
@@ -1802,48 +1811,48 @@ function buildReadMore(text, threshold) {
   if (!text) return '';
   const full = String(text);
 
-  // If text is short enough, just escape and return it directly
+  // Short enough to show entirely — no toggle needed
   if (full.length <= threshold) {
     return escapeHtml(full);
   }
 
-  // Split: visible portion + hidden continuation
-  const excerpt     = escapeHtml(full.slice(0, threshold));
+  const excerpt      = escapeHtml(full.slice(0, threshold));
   const continuation = escapeHtml(full.slice(threshold));
+  const uid          = 'rm_' + Math.random().toString(36).slice(2, 8);
 
-  // Unique ID for targeting via JS (supports multiple blocks per page)
-  const uid = 'rm_' + Math.random().toString(36).slice(2, 8);
-
-  return `<span class="read-more-block" id="${uid}">` +
-    `<span class="read-more-excerpt">${excerpt}&hellip;</span>` +
-    `<span class="read-more-full" id="${uid}_full">${continuation}</span>` +
-    `<button class="read-more-toggle" id="${uid}_btn" onclick="toggleReadMore('${uid}')">[Read More]</button>` +
-  `</span>`;
+  return (
+    `<span class="read-more-block" id="${uid}">` +
+      `<span class="rm-short">${excerpt}</span>` +
+      `<span class="rm-dots" id="${uid}_dots">&hellip;</span>` +
+      `<span class="rm-long" id="${uid}_full" style="display:none;">${continuation}</span>` +
+      `<button class="rm-toggle" id="${uid}_btn" onclick="toggleReadMore('${uid}')">[Read More]</button>` +
+    `</span>`
+  );
 }
 
 /**
- * Toggles expanded/collapsed state for a Read More block.
- * Called from inline onclick="toggleReadMore('uid')" on the button.
- *
+ * Toggles the expanded/collapsed state of a Read More block.
+ * FIX 1: rm-short is never hidden. Only rm-long and rm-dots are toggled.
  * @param {string} uid  The unique ID assigned by buildReadMore
  */
 function toggleReadMore(uid) {
-  const fullEl   = document.getElementById(uid + '_full');
-  const excerptEl = document.querySelector(`#${uid} .read-more-excerpt`);
-  const btn       = document.getElementById(uid + '_btn');
-  if (!fullEl || !btn) return;
+  const fullEl  = document.getElementById(uid + '_full');
+  const dotsEl  = document.getElementById(uid + '_dots');
+  const btn     = document.getElementById(uid + '_btn');
+  if (!fullEl || !dotsEl || !btn) return;
 
-  const isExpanded = fullEl.classList.contains('expanded');
+  const isExpanded = fullEl.style.display !== 'none';
 
   if (isExpanded) {
-    // Collapse: hide full text, show excerpt again
-    fullEl.classList.remove('expanded');
-    if (excerptEl) excerptEl.style.display = 'inline';
+    // COLLAPSE: hide continuation, show dots again
+    fullEl.style.display = 'none';
+    dotsEl.style.display = 'inline';
     btn.textContent = '[Read More]';
   } else {
-    // Expand: show full text, hide excerpt (so there's no duplicate text)
-    fullEl.classList.add('expanded');
-    if (excerptEl) excerptEl.style.display = 'none';
+    // EXPAND: show continuation, hide dots
+    // rm-short is intentionally left alone — it stays visible always
+    fullEl.style.display = 'inline';
+    dotsEl.style.display = 'none';
     btn.textContent = '[Show Less]';
   }
 }
@@ -2523,7 +2532,6 @@ function buildRedFlag(r, normRate, weightedRecall) {
     return {
       show:  true,
       title: `Safety-Critical Recall: ${highRecall ? (highRecall.component || 'See NHTSA') : 'High-Severity Recall on Record'}`,
-      // UPGRADE 1E: No slice — full summary from backend (backend now sends full strings)
       desc:  highRecall && highRecall.summary
         ? highRecall.summary
         : `This vehicle has ${r.recallCount} recall(s) involving safety-critical components. Visit nhtsa.gov/recalls to check resolution status immediately.`,
@@ -2585,14 +2593,67 @@ function buildMarketContext(r, normRate, vehicleClass) {
 
 /* ============================================================
    MAIN REPORT RENDERER
+   FIX 2 — Early abort for no_data (fake car guard)
+   FIX 3 — Lifespan title updated to show "Industry Benchmark"
    ============================================================ */
 function renderPremiumReport(r) {
   const mileageInput = parseInt(document.getElementById('search-mileage').value.trim()) || 0;
   const vehicleYear  = r.vehicleYear  || r.year  || '';
   const vehicleMake  = r.vehicleMake  || r.make  || '';
   const vehicleModel = r.vehicleModel || r.model || '';
-  const identifier   = r.vin ? `VIN: ${r.vin}` : `${vehicleYear} ${vehicleMake} ${vehicleModel}`.trim();
   const carName      = r.vehicleName  || `${vehicleYear} ${vehicleMake} ${vehicleModel}`.trim() || r.vin || 'Vehicle';
+
+  /* ─────────────────────────────────────────────────────────
+     FIX 2: Zero-data notice (always build it first so we can
+     use it both in the early-abort path and the full report).
+  ───────────────────────────────────────────────────────── */
+  const zeroDataNotice = (r.dataQuality === 'no_data' || (r.complaintCount === 0 && r.recallCount === 0)) ? `
+    <div class="zero-data-notice">
+      <div class="zero-data-notice-icon">⚠️</div>
+      <div class="zero-data-notice-body">
+        <div class="zero-data-notice-title">NHTSA Returned Zero Records — Action May Be Needed</div>
+        <div class="zero-data-notice-text">
+          NHTSA returned <strong>zero complaints and zero recalls</strong> for
+          "<strong>${escapeHtml(vehicleMake)} ${escapeHtml(vehicleModel)}</strong>."
+          This usually means the model name entered does <strong>not exactly match</strong>
+          the government database — for example, typing <em>"Bolt"</em> when NHTSA requires
+          <em>"Bolt EV"</em>, or <em>"F150"</em> instead of <em>"F-150."</em>
+          It can also occur for very old vehicles (pre-1994) or models with extremely low complaint volume.
+          <br><br>
+          For <strong>guaranteed accuracy</strong>, re-run this search using the vehicle's
+          <strong>17-character VIN</strong> — the VIN bypasses model name matching entirely
+          and queries NHTSA directly by vehicle identifier.
+        </div>
+        <button class="zero-data-notice-vin-cta" onclick="switchTab('vin'); window.scrollTo(0,0);">
+          🔍 Switch to VIN Search →
+        </button>
+      </div>
+    </div>` : '';
+
+  /* ─────────────────────────────────────────────────────────
+     FIX 2: If dataQuality === 'no_data', render ONLY the
+     warning notice + a "Run Another Search" button, then STOP.
+     The user sees no empty charts, no 1/10 risk score, nothing.
+  ───────────────────────────────────────────────────────── */
+  if (r.dataQuality === 'no_data') {
+    document.getElementById('results-area').innerHTML = `
+      <div class="premium-report">
+        ${zeroDataNotice}
+        <div class="report-cta-row" style="display:flex;gap:10px;flex-wrap:wrap;padding:4px 0;">
+          <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">View on NHTSA.gov ↗</a>
+          <button class="btn btn-ghost btn-sm" onclick="window.scrollTo(0,0)">Run Another Search ↑</button>
+        </div>
+        <div style="text-align:right;margin-bottom:4px;">
+          <small>Token balance: <strong>${r.tokensRemaining}</strong> remaining</small>
+        </div>
+      </div>`;
+    return; // ← ABORT: do not render the full report
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     Full report path (data exists)
+  ───────────────────────────────────────────────────────── */
+  const identifier   = r.vin ? `VIN: ${r.vin}` : `${vehicleYear} ${vehicleMake} ${vehicleModel}`.trim();
   const modelYear    = vehicleYear || null;
   const now          = r.generatedAt
     ? new Date(r.generatedAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
@@ -2633,48 +2694,9 @@ function renderPremiumReport(r) {
   const lifespan        = computeLifespanEstimate(specs, modelYear);
   const commonIssues    = r.commonIssues || extractCommonIssues(breakdownObj, []);
 
-  /* ──────────────────────────────────────────────────────────
-     UPGRADE 2C — Smarter zero-data notice
-     
-     Previously this was a plain amber <div class="data-quality-notice">.
-     Now it's a rich card that:
-       1. Names the exact model string that returned zero results
-       2. Explains WHY zero data happens (model name mismatch vs. genuine no data)
-       3. Gives a concrete example ("Bolt" vs "Bolt EV")
-       4. Offers a direct CTA to switch to VIN search
-     The vehicleModel and vehicleMake are interpolated into the message.
-  ────────────────────────────────────────────────────────── */
-  const zeroDataNotice = (complaintCount === 0 && recallCount === 0) ? `
-    <div class="zero-data-notice">
-      <div class="zero-data-notice-icon">⚠️</div>
-      <div class="zero-data-notice-body">
-        <div class="zero-data-notice-title">NHTSA Returned Zero Records — Action May Be Needed</div>
-        <div class="zero-data-notice-text">
-          NHTSA returned <strong>zero complaints and zero recalls</strong> for
-          "<strong>${escapeHtml(vehicleMake)} ${escapeHtml(vehicleModel)}</strong>."
-          This usually means the model name entered does <strong>not exactly match</strong>
-          the government database — for example, typing <em>"Bolt"</em> when NHTSA requires
-          <em>"Bolt EV"</em>, or <em>"F150"</em> instead of <em>"F-150."</em>
-          It can also occur for very old vehicles (pre-1994) or models with extremely low complaint volume.
-          <br><br>
-          For <strong>guaranteed accuracy</strong>, re-run this search using the vehicle's
-          <strong>17-character VIN</strong> — the VIN bypasses model name matching entirely
-          and queries NHTSA directly by vehicle identifier.
-        </div>
-        <button class="zero-data-notice-vin-cta" onclick="switchTab('vin'); window.scrollTo(0,0);">
-          🔍 Switch to VIN Search →
-        </button>
-      </div>
-    </div>` : '';
-
   const recallDetails = r.recallDetails || [];
 
-  /* ──────────────────────────────────────────────────────────
-     UPGRADE 2A applied: Recall warnings now use buildReadMore()
-     instead of .slice(0,220). Full summary text is passed from
-     the server (backend upgrade 1E removes the slice there too).
-     The user sees the first 200 chars then [Read More].
-  ────────────────────────────────────────────────────────── */
+  /* Recall warnings HTML — uses buildReadMore for full summary text */
   const recallWarningsHTML = recallCount > 0 ? `
     <div class="warnings-section">
       <div class="section-label"><span class="section-label-icon">⚠️</span> Recall Warnings</div>
@@ -2702,7 +2724,6 @@ function renderPremiumReport(r) {
         <div class="red-flag-label">⚠️ #1 Red Flag — Read First</div>
         <div class="red-flag-title">${escapeHtml(redFlag.title)}</div>
         <div class="red-flag-desc">
-          <!-- UPGRADE 2A: Red flag description uses buildReadMore — no manual slice -->
           ${buildReadMore(redFlag.desc, 200)}
         </div>
       </div>
@@ -2725,16 +2746,6 @@ function renderPremiumReport(r) {
           ${isHybrid ? '<span class="badge badge-purple" style="font-size:.78rem;padding:5px 11px;">🔋 Hybrid</span>' : ''}
         </div>
       </div>
-      <!-- ────────────────────────────────────────────────────
-           UPGRADE 2B — Print / Save PDF button in report header
-           
-           The button sits in the header footer row alongside the
-           report date and data source note. Clicking it calls
-           window.print() — the browser's native print dialog
-           allows "Save as PDF" on all major operating systems.
-           The @media print CSS block (see styles above) ensures
-           only the report content is printed cleanly.
-      ──────────────────────────────────────────────────────── -->
       <div class="report-header-footer">
         <span class="report-generated">🕐 Report generated: ${now}</span>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -2889,7 +2900,8 @@ function renderPremiumReport(r) {
       <div class="reliability-badge ${relClass}">${relEmoji} ${escapeHtml(relSignal)}</div>
       <p style="font-size:.88rem;">${buildReliabilityExplanation(relSignal, r, normRate)}</p>
       <div class="lifespan-block">
-        <div class="lifespan-title">🗓️ Expected Lifespan Estimate</div>
+        <!-- FIX 3: Title updated to clarify this is an industry benchmark, not NHTSA data -->
+        <div class="lifespan-title">🗓️ Industry Lifespan Benchmark (Est.) <span style="text-transform:none;font-weight:400;opacity:0.7;">— Not NHTSA Data</span></div>
         <div class="lifespan-value">${lifespan.range}</div>
         <div class="lifespan-note">${lifespan.note}</div>
       </div>
